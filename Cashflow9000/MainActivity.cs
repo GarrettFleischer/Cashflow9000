@@ -23,6 +23,13 @@ namespace Cashflow9000
                 Intent i = new Intent(this, typeof(TransactionActivity));
                 StartActivity(i);
             };
+
+            Button milestone = FindViewById<Button>(Resource.Id.buttonMilestone);
+            milestone.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(MilestoneActivity));
+                StartActivity(i);
+            };
         }
     }
 }

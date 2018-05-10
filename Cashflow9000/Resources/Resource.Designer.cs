@@ -44,32 +44,47 @@ namespace Cashflow9000
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040002
-			public const int buttonSave = 2130968578;
+			// aapt resource value: 0x7f040001
+			public const int buttonMilestone = 2130968577;
+			
+			// aapt resource value: 0x7f040003
+			public const int buttonSave = 2130968579;
 			
 			// aapt resource value: 0x7f040000
 			public const int buttonTransaction = 2130968576;
 			
-			// aapt resource value: 0x7f040006
-			public const int spinCategory = 2130968582;
+			// aapt resource value: 0x7f040007
+			public const int editCurrency1 = 2130968583;
 			
-			// aapt resource value: 0x7f040008
-			public const int textNote = 2130968584;
-			
-			// aapt resource value: 0x7f040003
-			public const int textValue = 2130968579;
-			
-			// aapt resource value: 0x7f040001
-			public const int textView1 = 2130968577;
+			// aapt resource value: 0x7f04000d
+			public const int editNote = 2130968589;
 			
 			// aapt resource value: 0x7f040005
-			public const int textView2 = 2130968581;
+			public const int editText1 = 2130968581;
 			
-			// aapt resource value: 0x7f040007
-			public const int textView3 = 2130968583;
+			// aapt resource value: 0x7f040008
+			public const int editValue = 2130968584;
+			
+			// aapt resource value: 0x7f04000a
+			public const int spinCategory = 2130968586;
+			
+			// aapt resource value: 0x7f04000c
+			public const int spinMilestone = 2130968588;
+			
+			// aapt resource value: 0x7f040002
+			public const int textView1 = 2130968578;
 			
 			// aapt resource value: 0x7f040004
-			public const int toggleType = 2130968580;
+			public const int textView2 = 2130968580;
+			
+			// aapt resource value: 0x7f040006
+			public const int textView3 = 2130968582;
+			
+			// aapt resource value: 0x7f04000b
+			public const int textView4 = 2130968587;
+			
+			// aapt resource value: 0x7f040009
+			public const int toggleType = 2130968585;
 			
 			static Id()
 			{
@@ -88,7 +103,10 @@ namespace Cashflow9000
 			public const int Main = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int Transaction = 2130837505;
+			public const int Milestone = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int Transaction = 2130837506;
 			
 			static Layout()
 			{
@@ -103,6 +121,9 @@ namespace Cashflow9000
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f030009
+			public const int amount = 2130903049;
+			
 			// aapt resource value: 0x7f030000
 			public const int app_name = 2130903040;
 			
@@ -114,6 +135,12 @@ namespace Cashflow9000
 			
 			// aapt resource value: 0x7f030003
 			public const int income = 2130903043;
+			
+			// aapt resource value: 0x7f030007
+			public const int milestone = 2130903047;
+			
+			// aapt resource value: 0x7f030008
+			public const int name = 2130903048;
 			
 			// aapt resource value: 0x7f030006
 			public const int note = 2130903046;

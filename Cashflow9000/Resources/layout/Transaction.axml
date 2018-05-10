@@ -15,13 +15,10 @@
     <Button
         p1:text="@string/save"
         p1:id="@+id/buttonSave" />
-    <EditText
-        p1:inputType="number"
-        p1:id="@+id/textValue"
-        p1:layout_columnSpan="2"
-        p1:layout_height="wrap_content"
+    <Cashflow9000.EditCurrency
+        p1:id="@+id/editValue"
         p1:layout_gravity="fill_horizontal"
-        p1:layout_columnWeight="2"
+        p1:layout_columnSpan="2"
         p1:layout_marginTop="20dp" />
     <ToggleButton
         p1:id="@+id/toggleType"
@@ -42,13 +39,24 @@
         p1:layout_marginLeft="15dp"
         p1:layout_marginTop="20dp" />
     <TextView
+        p1:text="@string/milestone"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:id="@+id/textView4"
+        p1:layout_marginTop="20dp" />
+    <Spinner
+        p1:id="@+id/spinMilestone"
+        p1:layout_gravity="fill_horizontal"
+        p1:layout_columnSpan="2"
+        p1:layout_marginLeft="15dp"
+        p1:layout_marginTop="20dp" />
+    <TextView
         p1:text="@string/note"
         p1:textAppearance="?android:attr/textAppearanceMedium"
         p1:id="@+id/textView3"
-        p1:layout_marginTop="20dp" />
+        p1:layout_marginTop="15dp" />
     <EditText
-        p1:id="@+id/textNote"
-        p1:layout_marginTop="20dp"
+        p1:id="@+id/editNote"
+        p1:layout_marginTop="15dp"
         p1:layout_columnSpan="2"
         p1:layout_columnWeight="2" />
 </GridLayout>

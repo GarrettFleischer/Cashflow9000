@@ -10,4 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonTransaction" />
+    <Button
+        android:text="Milestone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonMilestone" />
 </LinearLayout>

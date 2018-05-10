@@ -12,39 +12,57 @@ using Android.Runtime;
 using Android.Text;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 
 namespace Cashflow9000
 {
     [Activity(Label = "Transaction")]
     public class TransactionActivity : Activity
     {
-        private Button _ButtonSave;
-        private EditText _TextValue;
-        private ToggleButton _ToggleType;
-        private Spinner _SpinCategory;
-        private EditText _TextNote;
+        private Button ButtonSave;
+        private EditText EditValue;
+        private ToggleButton ToggleType;
+        private Spinner SpinCategory;
+        private EditText EditNote;
 
-        private ICollection<Category> _Categories;
+        private Transaction Transaction;
+
+        //private ICollection<Category> Categories;
+
+        public const string ExtraTransaction = "TransactionActivity.Transaction";
+
+        // use case for both category and milestone is paying off a mortgage, it is both a recurring budget item and a long term goal
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            // Init view
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Transaction);
 
-            _ButtonSave = FindViewById<Button>(Resource.Id.buttonSave);
-            _TextValue = FindViewById<EditText>(Resource.Id.textValue);
-            _ToggleType = FindViewById<ToggleButton>(Resource.Id.toggleType);
-            _SpinCategory = FindViewById<Spinner>(Resource.Id.spinCategory);
-            _TextNote = FindViewById<EditText>(Resource.Id.textNote);
+            // Load data from intent
+            Transaction =  JsonConvert.DeserializeObject<Transaction>(Intent.GetStringExtra(ExtraTransaction) ?? "") ?? new Transaction();
 
-            _TextValue.TextChanged += TextValueOnTextChanged;
-            _TextValue.Text = "0";
+            // Find UI views
+            ButtonSave = FindViewById<Button>(Resource.Id.buttonSave);
+            EditValue = FindViewById<EditText>(Resource.Id.editValue);
+            ToggleType = FindViewById<ToggleButton>(Resource.Id.toggleType);
+            SpinCategory = FindViewById<Spinner>(Resource.Id.spinCategory);
+            EditNote = FindViewById<EditText>(Resource.Id.editNote);
 
-            _ToggleType.CheckedChange += ToggleTypeOnCheckedChange;
+
+            // View logic
+            EditValue.AfterTextChanged += EditValueOnAfterTextChanged;
+
+            ToggleType.CheckedChange += ToggleTypeOnCheckedChange;
             UpdateToggleTypeColor();
             
             //_SpinCategory.Adapter = new ArrayAdapter<Category>(this, Resource.Layout.);
+        }
+
+        private void EditValueOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
+        {
+
         }
 
         private void ToggleTypeOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs checkedChangeEventArgs)
@@ -52,35 +70,24 @@ namespace Cashflow9000
             UpdateToggleTypeColor();
         }
 
-        private void TextValueOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
-        {
-            _TextValue.TextChanged -= TextValueOnTextChanged;
-            var cleanString = Regex.Replace(_TextValue.Text, "[^0-9a-zA-Z]+", "");
-            var parsed = Double.Parse(cleanString);
-            var formatted = NumberFormat.CurrencyInstance.Format((parsed / 100));
-            _TextValue.Text = formatted;
-            _TextValue.TextChanged += TextValueOnTextChanged;
-            _TextValue.SetSelection(formatted.Length);
-        }
-
         private void UpdateToggleTypeColor()
         {
-            _ToggleType.SetBackgroundColor(_ToggleType.Checked ? Color.DarkGreen : Color.DarkRed);
+            ToggleType.SetBackgroundColor(ToggleType.Checked ? Color.DarkGreen : Color.DarkRed);
         }
 
         private ICollection<Category> GetCategories()
         {
             var list = new List<Category>
             {
-                new Category {Name = "Rent", Type = Category.EType.Expense},
-                new Category {Name = "Groceries", Type = Category.EType.Expense},
-                new Category {Name = "Fuel", Type = Category.EType.Expense},
-                new Category {Name = "Utilities", Type = Category.EType.Expense},
-                new Category {Name = "Wages", Type = Category.EType.Income},
-                new Category {Name = "Investments", Type = Category.EType.Income},
+                new Category {Name = "Rent", Type = TransactionType.Expense},
+                new Category {Name = "Groceries", Type = TransactionType.Expense},
+                new Category {Name = "Fuel", Type = TransactionType.Expense},
+                new Category {Name = "Utilities", Type = TransactionType.Expense},
+                new Category {Name = "Wages", Type = TransactionType.Income},
+                new Category {Name = "Investments", Type = TransactionType.Income},
             };
 
-            var type = _ToggleType.Checked ? Category.EType.Income : Category.EType.Expense;
+            var type = ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
             return list.Where(e => e.Type == type).OrderBy(x => x.Name).ToList();
         }
     }

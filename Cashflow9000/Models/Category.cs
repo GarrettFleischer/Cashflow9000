@@ -12,17 +12,9 @@ using Android.Widget;
 
 namespace Cashflow9000
 {
-    class Category
+    public class Category
     {
-        public enum EType { Expense, Income }
-
         public string Name { get; set; }
-        public EType Type { get; set; }
-
-
-        public override string ToString()
-        {
-            return Name;
-        }
+        public TransactionType Type { get; set; }
     }
 }
