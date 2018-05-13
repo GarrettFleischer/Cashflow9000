@@ -19,22 +19,34 @@ namespace Cashflow9000
         private static readonly string DBPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "cashflow.db3");
         private static readonly SQLiteConnection DB = new SQLiteConnection(DBPath);
 
+        public static bool TableExists<T>(SQLiteConnection connection)
+        {
+            const string cmdText = "SELECT name FROM sqlite_master WHERE type='table' AND name=?";
+            var cmd = connection.CreateCommand(cmdText, typeof(T).Name);
+            return cmd.ExecuteScalar<string>() != null;
+        }
+
         public static void Initialize()
         {
-            DB.CreateTable<Transaction>();
-            DB.CreateTable<Category>();
-            DB.CreateTable<Milestone>();
+            if (!TableExists<Transaction>(DB)) DB.CreateTable<Transaction>();
+            if (!TableExists<Milestone>(DB)) DB.CreateTable<Milestone>();
 
-            if (!DB.Table<Category>().Any())
+            // ReSharper disable once InvertIf
+            if (!TableExists<Category>(DB))
             {
-                DB.InsertAll(new List<Category>{
-                    new Category { Name = "Rent", Type = TransactionType.Expense },
-                    new Category { Name = "Groceries", Type = TransactionType.Expense },
-                    new Category { Name = "Fuel", Type = TransactionType.Expense },
-                    new Category { Name = "Utilities", Type = TransactionType.Expense },
-                    new Category { Name = "Wages", Type = TransactionType.Income },
-                    new Category { Name = "Investments", Type = TransactionType.Income },
-                });
+                DB.CreateTable<Category>();
+                if (!DB.Table<Category>().Any())
+                {
+                    DB.InsertAll(new List<Category>
+                    {
+                        new Category {Name = "Rent", Type = TransactionType.Expense},
+                        new Category {Name = "Groceries", Type = TransactionType.Expense},
+                        new Category {Name = "Fuel", Type = TransactionType.Expense},
+                        new Category {Name = "Utilities", Type = TransactionType.Expense},
+                        new Category {Name = "Wages", Type = TransactionType.Income},
+                        new Category {Name = "Investments", Type = TransactionType.Income},
+                    });
+                }
             }
         }
 
