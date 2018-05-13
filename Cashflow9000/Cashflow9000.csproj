@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\CategoryAdapter.cs" />
     <Compile Include="CashflowData.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Milestone.cs" />

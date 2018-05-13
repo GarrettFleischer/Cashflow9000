@@ -70,8 +70,8 @@ namespace Cashflow9000
 
         private void SpinCategoryOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            Transaction.CategoryId = (int)e.Id;
             Transaction.Category = ((CategoryAdapter)((Spinner)sender).Adapter)[e.Position];
+            Transaction.CategoryId = (int)e.Id;
         }
 
         private void ButtonSaveOnClick(object sender, EventArgs eventArgs)
