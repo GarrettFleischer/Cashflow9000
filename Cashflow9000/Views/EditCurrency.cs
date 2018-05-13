@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using Android.Content;
-using Android.Icu.Text;
 using Android.Text;
 using Android.Util;
 using Android.Widget;
+using Java.Text;
+using NumberFormat = Android.Icu.Text.NumberFormat;
 
 namespace Cashflow9000
 {
     public class EditCurrency : EditText
     {
+        public decimal Value => (decimal)NumberFormat.CurrencyInstance.ParseCurrency(Text, new ParsePosition(0)).Number.DoubleValue();
+
         public EditCurrency(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
@@ -33,8 +36,7 @@ namespace Cashflow9000
         {
             TextChanged -= OnTextChanged;
             var cleanString = Regex.Replace(Text, "[^0-9a-zA-Z]+", "");
-            var parsed = Double.Parse(cleanString);
-            var formatted = NumberFormat.CurrencyInstance.Format(parsed / 100);
+            var formatted = NumberFormat.CurrencyInstance.Format(Double.Parse(cleanString) / 100);
             Text = formatted;
             TextChanged += OnTextChanged;
             SetSelection(formatted.Length);

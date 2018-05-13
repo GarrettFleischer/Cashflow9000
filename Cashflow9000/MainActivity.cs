@@ -13,9 +13,9 @@ namespace Cashflow9000
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
-
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+
+            CashflowData.Initialize();
 
             Button transaction = FindViewById<Button>(Resource.Id.buttonTransaction);
             transaction.Click += delegate

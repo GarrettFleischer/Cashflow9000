@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,6 +13,8 @@ using Android.Runtime;
 using Android.Text;
 using Android.Views;
 using Android.Widget;
+using Cashflow9000.Adapters;
+using Cashflow9000.Models;
 using Newtonsoft.Json;
 
 namespace Cashflow9000
@@ -20,7 +23,7 @@ namespace Cashflow9000
     public class TransactionActivity : Activity
     {
         private Button ButtonSave;
-        private EditText EditValue;
+        private EditCurrency EditAmount;
         private ToggleButton ToggleType;
         private Spinner SpinCategory;
         private EditText EditNote;
@@ -41,28 +44,45 @@ namespace Cashflow9000
             SetContentView(Resource.Layout.Transaction);
 
             // Load data from intent
-            Transaction =  JsonConvert.DeserializeObject<Transaction>(Intent.GetStringExtra(ExtraTransaction) ?? "") ?? new Transaction();
+            int id = Intent.GetIntExtra(ExtraTransaction, -1);
+            Transaction = ((id == -1) ? new Transaction() : CashflowData.Transaction(id));
 
             // Find UI views
             ButtonSave = FindViewById<Button>(Resource.Id.buttonSave);
-            EditValue = FindViewById<EditText>(Resource.Id.editValue);
+            EditAmount = FindViewById<EditCurrency>(Resource.Id.editValue);
             ToggleType = FindViewById<ToggleButton>(Resource.Id.toggleType);
             SpinCategory = FindViewById<Spinner>(Resource.Id.spinCategory);
             EditNote = FindViewById<EditText>(Resource.Id.editNote);
 
-
             // View logic
-            EditValue.AfterTextChanged += EditValueOnAfterTextChanged;
+            ButtonSave.Click += ButtonSaveOnClick;
 
+            EditAmount.Text = Transaction.Amount.ToString(CultureInfo.CurrentCulture);
+            EditAmount.AfterTextChanged += EditAmountOnAfterTextChanged;
+
+            ToggleType.Checked = Transaction.Type == TransactionType.Income;
             ToggleType.CheckedChange += ToggleTypeOnCheckedChange;
             UpdateToggleTypeColor();
-            
-            //_SpinCategory.Adapter = new ArrayAdapter<Category>(this, Resource.Layout.);
+
+            SpinCategory.Adapter = new CategoryAdapter(this, GetCategories());
+            SpinCategory.ItemSelected += SpinCategoryOnItemSelected;
         }
 
-        private void EditValueOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
+        private void SpinCategoryOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
+            Transaction.CategoryId = (int)e.Id;
+            Transaction.Category = ((CategoryAdapter)((Spinner)sender).Adapter)[e.Position];
+        }
 
+        private void ButtonSaveOnClick(object sender, EventArgs eventArgs)
+        {
+            CashflowData.Update(Transaction);
+            Finish();
+        }
+
+        private void EditAmountOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
+        {
+            Transaction.Amount = EditAmount.Value;
         }
 
         private void ToggleTypeOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs checkedChangeEventArgs)
@@ -75,20 +95,10 @@ namespace Cashflow9000
             ToggleType.SetBackgroundColor(ToggleType.Checked ? Color.DarkGreen : Color.DarkRed);
         }
 
-        private ICollection<Category> GetCategories()
+        private List<Category> GetCategories()
         {
-            var list = new List<Category>
-            {
-                new Category {Name = "Rent", Type = TransactionType.Expense},
-                new Category {Name = "Groceries", Type = TransactionType.Expense},
-                new Category {Name = "Fuel", Type = TransactionType.Expense},
-                new Category {Name = "Utilities", Type = TransactionType.Expense},
-                new Category {Name = "Wages", Type = TransactionType.Income},
-                new Category {Name = "Investments", Type = TransactionType.Income},
-            };
-
             var type = ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
-            return list.Where(e => e.Type == type).OrderBy(x => x.Name).ToList();
+            return CashflowData.Categories.Where(e => e.Type == type).OrderBy(x => x.Name).ToList();
         }
     }
 }
