@@ -54,13 +54,13 @@ namespace Cashflow9000
 			public const int buttonTransaction = 2130968576;
 			
 			// aapt resource value: 0x7f040007
-			public const int editCurrency1 = 2130968583;
+			public const int editAmount = 2130968583;
+			
+			// aapt resource value: 0x7f040005
+			public const int editName = 2130968581;
 			
 			// aapt resource value: 0x7f04000d
 			public const int editNote = 2130968589;
-			
-			// aapt resource value: 0x7f040005
-			public const int editText1 = 2130968581;
 			
 			// aapt resource value: 0x7f040008
 			public const int editValue = 2130968584;

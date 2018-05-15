@@ -22,7 +22,7 @@
         android:text="@string/name"
         android:layout_marginTop="20dp" />
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/editName"
         android:layout_gravity="fill_horizontal"
         android:layout_marginTop="20dp" />
     <TextView
@@ -31,7 +31,7 @@
         android:id="@+id/textView3"
         android:layout_marginTop="20dp" />
     <Cashflow9000.EditCurrency
-        android:id="@+id/editCurrency1"
+        android:id="@+id/editAmount"
         android:layout_marginTop="20dp"
         android:layout_gravity="fill_horizontal" />
 </GridLayout>

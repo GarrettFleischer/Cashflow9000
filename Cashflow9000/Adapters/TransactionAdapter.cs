@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,33 +10,32 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cashflow9000.Models;
-using Object = Java.Lang.Object;
 
 namespace Cashflow9000.Adapters
 {
-    class CategoryAdapter : BaseAdapter<Category>
+    class TransactionAdapter : BaseAdapter<Transaction>
     {
         private readonly Activity Context;
-        private readonly List<Category> Categories;
+        private readonly List<Transaction> Transactions;
 
-        public CategoryAdapter(Activity context, List<Category> categories)
+        public TransactionAdapter(Activity context, List<Transaction> transactions)
         {
             Context = context;
-            Categories = categories;
+            Transactions = transactions;
         }
 
-        public override Category this[int position] => Categories[position];
-        public override long GetItemId(int position) => Categories[position].Id ?? -1;
-        public override int Count => Categories.Count;
-        
+        public override Transaction this[int position] => Transactions[position];
+        public override long GetItemId(int position) => Transactions[position].Id ?? -1;
+        public override int Count => Transactions.Count;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
+            // Get our object for position
+            Transaction item = Transactions[position];
+
             var view = (convertView ??
                         Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
-            // Get our object for position
-            Category item = Categories[position];
             view?.SetText(item.ToString(), TextView.BufferType.Normal);
 
             //Finally return the view

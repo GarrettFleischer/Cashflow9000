@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,33 +10,32 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cashflow9000.Models;
-using Object = Java.Lang.Object;
 
 namespace Cashflow9000.Adapters
 {
-    class CategoryAdapter : BaseAdapter<Category>
+    class MilestoneAdapter : BaseAdapter<Milestone>
     {
         private readonly Activity Context;
-        private readonly List<Category> Categories;
+        private readonly List<Milestone> Milestones;
 
-        public CategoryAdapter(Activity context, List<Category> categories)
+        public MilestoneAdapter(Activity context, List<Milestone> milestones)
         {
             Context = context;
-            Categories = categories;
+            Milestones = milestones;
         }
 
-        public override Category this[int position] => Categories[position];
-        public override long GetItemId(int position) => Categories[position].Id ?? -1;
-        public override int Count => Categories.Count;
-        
+        public override Milestone this[int position] => Milestones[position];
+        public override long GetItemId(int position) => Milestones[position].Id ?? -1;
+        public override int Count => Milestones.Count;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
+            // Get our object for position
+            Milestone item = Milestones[position];
+
             var view = (convertView ??
                         Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
-            // Get our object for position
-            Category item = Categories[position];
             view?.SetText(item.ToString(), TextView.BufferType.Normal);
 
             //Finally return the view

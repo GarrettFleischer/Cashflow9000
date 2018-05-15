@@ -85,6 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\CategoryAdapter.cs" />
+    <Compile Include="Adapters\MilestoneAdapter.cs" />
+    <Compile Include="Adapters\TransactionAdapter.cs" />
     <Compile Include="CashflowData.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Milestone.cs" />

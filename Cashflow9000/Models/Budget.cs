@@ -11,23 +11,25 @@ using Android.Views;
 using Android.Widget;
 using SQLite;
 using SQLiteNetExtensions.Attributes;
-using TeixeiraSoftware.Finance;
 
 namespace Cashflow9000.Models
 {
-    public class Milestone
+    public enum Recurrance { None, Daily, Weekly, Biweekly, Monthly, Quarterly, Annually}
+
+    public class Budget
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int? Id { get; set; }
 
         public string Name { get; set; }
 
-        public decimal Amount { get; set; }
+        public Recurrance Recurrance { get; set; }
+        
+        [ForeignKey(typeof(Category))]
+        private int? CategoryId { get; set; }
 
-        public string Note { get; set; }
-
-        [OneToMany]
-        public List<Transaction> Transactions { get; set; }
+        [ManyToOne]
+        public Category Category { get; set; }
 
         public override string ToString()
         {

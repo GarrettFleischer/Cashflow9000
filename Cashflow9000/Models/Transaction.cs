@@ -12,30 +12,33 @@ namespace Cashflow9000.Models
     public class Transaction
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-
-        public decimal Amount { get; set; }
+        public int? Id { get; set; }
 
         public TransactionType Type { get; set; }
 
+        public decimal Amount { get; set; }
+
+        public Recurrance Recurrance { get; set; }
+
+        public string Note { get; set; }
+
         [ForeignKey(typeof(Category))]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         [ManyToOne]
         public Category Category { get; set; }
 
         [ForeignKey(typeof(Milestone))]
-        public int MilestoneId { get; set; }
+        public int? MilestoneId { get; set; }
 
         [ManyToOne]
         public Milestone Milestone { get; set; }
 
-        public string Note { get; set; }
 
 
         public override string ToString()
         {
-            return $"{NumberFormat.CurrencyInstance.Format((double) Amount)} : {Note}";
+            return $"{Category} {NumberFormat.CurrencyInstance.Format((double)Amount)} : {Note}";
         }
     }
 }

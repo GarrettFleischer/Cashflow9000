@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SQLite;
 using SQLiteNetExtensions.Attributes;
 
@@ -7,7 +8,7 @@ namespace Cashflow9000.Models
     public class Category
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string Name { get; set; }
 
@@ -15,6 +16,9 @@ namespace Cashflow9000.Models
 
         [OneToMany]
         public List<Transaction> Transactions { get; set; }
+
+        [OneToMany]
+        public List<Budget> Budgets { get; set; }
 
         public override string ToString()
         {
