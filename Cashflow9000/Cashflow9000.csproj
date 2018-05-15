@@ -88,6 +88,7 @@
     <Compile Include="Adapters\MilestoneAdapter.cs" />
     <Compile Include="Adapters\TransactionAdapter.cs" />
     <Compile Include="CashflowData.cs" />
+    <Compile Include="Models\Budget.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Milestone.cs" />
     <Compile Include="Views\EditCurrency.cs" />
