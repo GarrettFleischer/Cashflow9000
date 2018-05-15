@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.Icu.Text;
 using Java.Util.Jar;
+using Javax.Crypto;
 using SQLite;
 using SQLiteNetExtensions.Attributes;
 using TeixeiraSoftware.Finance;
@@ -18,7 +19,7 @@ namespace Cashflow9000.Models
 
         public decimal Amount { get; set; }
 
-        public Recurrance Recurrance { get; set; }
+        public Recurrence Recurrence { get; set; }
 
         public string Note { get; set; }
 

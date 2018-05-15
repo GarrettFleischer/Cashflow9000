@@ -76,6 +76,13 @@ namespace Cashflow9000
             UpdateUI();
         }
 
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (data == null) return;
+            //Cheater = data.GetBooleanExtra(CheatActivity.ExtraAnswerShown, false);
+        }
+
         private void EditNoteOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
             Transaction.Note = EditNote.Text;

@@ -29,6 +29,11 @@ namespace Cashflow9000
 
         public static void Initialize()
         {
+            DB.DropTable<Budget>();
+            DB.DropTable<Transaction>();
+            DB.DropTable<Milestone>();
+            DB.DropTable<Category>();
+
             if (!TableExists<Budget>(DB)) DB.CreateTable<Budget>();
             if (!TableExists<Transaction>(DB)) DB.CreateTable<Transaction>();
             if (!TableExists<Milestone>(DB)) DB.CreateTable<Milestone>();

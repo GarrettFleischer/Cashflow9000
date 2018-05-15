@@ -15,4 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonMilestone" />
+    <Button
+        android:text="Categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonCategories" />
 </LinearLayout>

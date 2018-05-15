@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content;
 using Android.Widget;
 using Android.OS;
@@ -28,6 +29,13 @@ namespace Cashflow9000
             milestone.Click += delegate
             {
                 Intent i = new Intent(this, typeof(MilestoneActivity));
+                StartActivity(i);
+            };
+
+            Button categories = FindViewById<Button>(Resource.Id.buttonCategories);
+            categories.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(CategoryListActivity));
                 StartActivity(i);
             };
         }

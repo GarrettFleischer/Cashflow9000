@@ -10,4 +10,11 @@
   <string name="milestone">Milestone</string>
   <string name="name">Name</string>
   <string name="amount">Amount</string>
+  <string name="recurrence">Recurrence</string>
+  <string name="daily">Daily</string>
+  <string name="weekly">Weekly</string>
+  <string name="biweekly">Bi-Weekly</string>
+  <string name="monthly">Monthly</string>
+  <string name="quarterly">Quarterly</string>
+  <string name="annually">Annually</string>
 </resources>
