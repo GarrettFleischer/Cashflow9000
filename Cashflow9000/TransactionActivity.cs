@@ -33,19 +33,18 @@ namespace Cashflow9000
 
         //private ICollection<Category> Categories;
 
-        public const string ExtraTransaction = "TransactionActivity.Transaction";
+        public const string ExtraTransactionId = "TransactionActivity.TransactionId";
 
         // use case for both category and milestone is paying off a mortgage, it is both a recurring budget item and a long term goal
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             // Init view
-            RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Transaction);
             
             // Load data from intent
-            int id = Intent.GetIntExtra(ExtraTransaction, -1);
+            int id = Intent.GetIntExtra(ExtraTransactionId, -1);
             Transaction = ((id == -1) ? new Transaction() : CashflowData.Transaction(id));
 
             // Find UI views

@@ -7,16 +7,19 @@ using Android.Views;
 
 namespace Cashflow9000
 {
-    [Activity(Label = "Cashflow9000", MainLauncher = true)]
+    [Activity(Label = "Cashflow9000", MainLauncher = true, Theme = "@style/MyTheme")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main);
 
             CashflowData.Initialize();
+
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+            ActionBar.Title = "My Toolbar";
 
             Button transaction = FindViewById<Button>(Resource.Id.buttonTransaction);
             transaction.Click += delegate

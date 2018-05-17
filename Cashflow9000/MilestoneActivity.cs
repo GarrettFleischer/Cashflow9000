@@ -71,7 +71,7 @@ namespace Cashflow9000
 
         private void UpdateUI()
         {
-            ButtonSave.Enabled = Milestone.Name.Length > 0;
+            //ButtonSave.Enabled = Milestone.Name.Length > 0;
         }
     }
 }

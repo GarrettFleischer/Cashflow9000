@@ -5,6 +5,9 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
+  <include
+    android:id="@+id/toolbar"
+    layout="@layout/Toolbar" />
     <Button
         android:text="Transaction"
         android:layout_width="match_parent"
