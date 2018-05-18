@@ -90,6 +90,7 @@
     <Compile Include="Adapters\TransactionAdapter.cs" />
     <Compile Include="Adapters\TransactionTypeAdapter.cs" />
     <Compile Include="BudgetActivity.cs" />
+    <Compile Include="BudgetListActivity.cs" />
     <Compile Include="CashflowData.cs" />
     <Compile Include="CategoryActivity.cs" />
     <Compile Include="CategoryListActivity.cs" />

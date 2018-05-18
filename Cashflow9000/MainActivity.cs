@@ -45,7 +45,7 @@ namespace Cashflow9000
             Button budgets = FindViewById<Button>(Resource.Id.buttonBudgets);
             budgets.Click += delegate
             {
-                Intent i = new Intent(this, typeof(BudgetActivity));
+                Intent i = new Intent(this, typeof(BudgetListActivity));
                 StartActivity(i);
             };
         }
