@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\BudgetAdapter.cs" />
     <Compile Include="Adapters\CategoryAdapter.cs" />
     <Compile Include="Adapters\MilestoneAdapter.cs" />
     <Compile Include="Adapters\RecurrenceAdapter.cs" />
