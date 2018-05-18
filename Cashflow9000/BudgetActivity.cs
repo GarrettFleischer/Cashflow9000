@@ -21,17 +21,16 @@ namespace Cashflow9000
     class BudgetActivity : Activity
     {
         private Button ButtonSave;
+        private EditText EditName;
         private EditCurrency EditAmount;
         private Spinner SpinCategory;
         private Spinner SpinRecurrence;
 
         private Budget Budget;
 
-        //private ICollection<Category> Categories;
 
-        public const string ExtraTransactionId = "TransactionActivity.TransactionId";
+        public const string ExtraBudgetId = "BudgetActivity.ExtraBudgetId";
 
-        // use case for both category and milestone is paying off a mortgage, it is both a recurring budget item and a long term goal
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,17 +39,21 @@ namespace Cashflow9000
             SetContentView(Resource.Layout.Budget);
 
             // Load data from intent
-            int id = Intent.GetIntExtra(ExtraTransactionId, -1);
+            int id = Intent.GetIntExtra(ExtraBudgetId, -1);
             Budget = ((id == -1) ? new Budget() : CashflowData.Budget(id));
 
             // Find UI views
             ButtonSave = FindViewById<Button>(Resource.Id.buttonSave);
-            EditAmount = FindViewById<EditCurrency>(Resource.Id.editValue);
+            EditName = FindViewById<EditText>(Resource.Id.editName);
+            EditAmount = FindViewById<EditCurrency>(Resource.Id.editAmount);
             SpinCategory = FindViewById<Spinner>(Resource.Id.spinCategory);
             SpinRecurrence = FindViewById<Spinner>(Resource.Id.spinRecurrence);
 
             // View logic
             ButtonSave.Click += ButtonSaveOnClick;
+
+            EditName.Text = Budget.Name;
+            EditName.TextChanged += EditNameOnTextChanged;
 
             EditAmount.Text = Budget.Amount.ToString(CultureInfo.CurrentCulture);
             EditAmount.AfterTextChanged += EditAmountOnAfterTextChanged;
@@ -62,14 +65,11 @@ namespace Cashflow9000
             SpinRecurrence.ItemSelected += SpinRecurrenceOnItemSelected;
         }
 
-
-        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        private void EditNameOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            base.OnActivityResult(requestCode, resultCode, data);
-            if (data == null) return;
-            //Cheater = data.GetBooleanExtra(CheatActivity.ExtraAnswerShown, false);
+            Budget.Name = EditName.Text;
         }
-
+        
         private void SpinCategoryOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Budget.Category = ((CategoryAdapter)SpinCategory.Adapter)[e.Position];
