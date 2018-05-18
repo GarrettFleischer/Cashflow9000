@@ -44,59 +44,59 @@ namespace Cashflow9000
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050004
-			public const int buttonCategories = 2131034116;
-			
-			// aapt resource value: 0x7f050003
-			public const int buttonMilestone = 2131034115;
-			
-			// aapt resource value: 0x7f050006
-			public const int buttonSave = 2131034118;
-			
-			// aapt resource value: 0x7f050002
-			public const int buttonTransaction = 2131034114;
+			// aapt resource value: 0x7f05000b
+			public const int buttonCategories = 2131034123;
 			
 			// aapt resource value: 0x7f05000a
-			public const int editAmount = 2131034122;
+			public const int buttonMilestone = 2131034122;
 			
-			// aapt resource value: 0x7f050008
-			public const int editName = 2131034120;
+			// aapt resource value: 0x7f050001
+			public const int buttonSave = 2131034113;
+			
+			// aapt resource value: 0x7f050009
+			public const int buttonTransaction = 2131034121;
+			
+			// aapt resource value: 0x7f05000d
+			public const int editAmount = 2131034125;
+			
+			// aapt resource value: 0x7f050007
+			public const int editName = 2131034119;
 			
 			// aapt resource value: 0x7f050011
 			public const int editNote = 2131034129;
 			
-			// aapt resource value: 0x7f05000b
-			public const int editValue = 2131034123;
+			// aapt resource value: 0x7f05000e
+			public const int editValue = 2131034126;
 			
-			// aapt resource value: 0x7f050000
-			public const int gridLayout1 = 2131034112;
+			// aapt resource value: 0x7f050006
+			public const int gridLayout1 = 2131034118;
 			
-			// aapt resource value: 0x7f05000d
-			public const int spinCategory = 2131034125;
-			
-			// aapt resource value: 0x7f05000f
-			public const int spinMilestone = 2131034127;
+			// aapt resource value: 0x7f050003
+			public const int spinCategory = 2131034115;
 			
 			// aapt resource value: 0x7f050010
-			public const int spinRecurrence = 2131034128;
+			public const int spinMilestone = 2131034128;
 			
 			// aapt resource value: 0x7f050005
-			public const int textView1 = 2131034117;
+			public const int spinRecurrence = 2131034117;
 			
-			// aapt resource value: 0x7f050007
-			public const int textView2 = 2131034119;
+			// aapt resource value: 0x7f050000
+			public const int textView1 = 2131034112;
 			
-			// aapt resource value: 0x7f050009
-			public const int textView3 = 2131034121;
-			
-			// aapt resource value: 0x7f05000e
-			public const int textView4 = 2131034126;
+			// aapt resource value: 0x7f050002
+			public const int textView2 = 2131034114;
 			
 			// aapt resource value: 0x7f05000c
-			public const int toggleType = 2131034124;
+			public const int textView3 = 2131034124;
 			
-			// aapt resource value: 0x7f050001
-			public const int toolbar = 2131034113;
+			// aapt resource value: 0x7f050004
+			public const int textView4 = 2131034116;
+			
+			// aapt resource value: 0x7f05000f
+			public const int toggleType = 2131034127;
+			
+			// aapt resource value: 0x7f050008
+			public const int toolbar = 2131034120;
 			
 			static Id()
 			{
@@ -112,19 +112,22 @@ namespace Cashflow9000
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Category = 2130837504;
+			public const int Budget = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int Main = 2130837505;
+			public const int Category = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int Milestone = 2130837506;
+			public const int Main = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int Toolbar = 2130837507;
+			public const int Milestone = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int Transaction = 2130837508;
+			public const int Toolbar = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int Transaction = 2130837509;
 			
 			static Layout()
 			{
@@ -139,56 +142,62 @@ namespace Cashflow9000
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f030009
-			public const int amount = 2130903049;
+			// aapt resource value: 0x7f03000a
+			public const int amount = 2130903050;
 			
-			// aapt resource value: 0x7f030010
-			public const int annually = 2130903056;
+			// aapt resource value: 0x7f030012
+			public const int annually = 2130903058;
 			
 			// aapt resource value: 0x7f030000
 			public const int app_name = 2130903040;
 			
-			// aapt resource value: 0x7f03000d
-			public const int biweekly = 2130903053;
+			// aapt resource value: 0x7f03000f
+			public const int biweekly = 2130903055;
+			
+			// aapt resource value: 0x7f030003
+			public const int budget = 2130903043;
 			
 			// aapt resource value: 0x7f030002
 			public const int category = 2130903042;
 			
-			// aapt resource value: 0x7f03000b
-			public const int daily = 2130903051;
-			
-			// aapt resource value: 0x7f030004
-			public const int expense = 2130903044;
-			
-			// aapt resource value: 0x7f030003
-			public const int income = 2130903043;
-			
-			// aapt resource value: 0x7f030007
-			public const int milestone = 2130903047;
-			
-			// aapt resource value: 0x7f03000e
-			public const int monthly = 2130903054;
-			
-			// aapt resource value: 0x7f030008
-			public const int name = 2130903048;
-			
-			// aapt resource value: 0x7f030006
-			public const int note = 2130903046;
-			
-			// aapt resource value: 0x7f03000f
-			public const int quarterly = 2130903055;
-			
-			// aapt resource value: 0x7f03000a
-			public const int recurrence = 2130903050;
+			// aapt resource value: 0x7f03000d
+			public const int daily = 2130903053;
 			
 			// aapt resource value: 0x7f030005
-			public const int save = 2130903045;
+			public const int expense = 2130903045;
+			
+			// aapt resource value: 0x7f030004
+			public const int income = 2130903044;
+			
+			// aapt resource value: 0x7f030008
+			public const int milestone = 2130903048;
+			
+			// aapt resource value: 0x7f030010
+			public const int monthly = 2130903056;
+			
+			// aapt resource value: 0x7f030009
+			public const int name = 2130903049;
+			
+			// aapt resource value: 0x7f03000c
+			public const int none = 2130903052;
+			
+			// aapt resource value: 0x7f030007
+			public const int note = 2130903047;
+			
+			// aapt resource value: 0x7f030011
+			public const int quarterly = 2130903057;
+			
+			// aapt resource value: 0x7f03000b
+			public const int recurrence = 2130903051;
+			
+			// aapt resource value: 0x7f030006
+			public const int save = 2130903046;
 			
 			// aapt resource value: 0x7f030001
 			public const int transaction = 2130903041;
 			
-			// aapt resource value: 0x7f03000c
-			public const int weekly = 2130903052;
+			// aapt resource value: 0x7f03000e
+			public const int weekly = 2130903054;
 			
 			static String()
 			{

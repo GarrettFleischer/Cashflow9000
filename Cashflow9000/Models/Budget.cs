@@ -14,7 +14,6 @@ using SQLiteNetExtensions.Attributes;
 
 namespace Cashflow9000.Models
 {
-    public enum Recurrence { None, Daily, Weekly, Biweekly, Monthly, Quarterly, Annually}
 
     public class Budget
     {
@@ -23,6 +22,10 @@ namespace Cashflow9000.Models
 
         public string Name { get; set; }
 
+        [ForeignKey(typeof(Recurrence))]
+        public int? RecurrenceId { get; set; }
+
+        [ManyToOne]
         public Recurrence Recurrence { get; set; }
         
         [ForeignKey(typeof(Category))]

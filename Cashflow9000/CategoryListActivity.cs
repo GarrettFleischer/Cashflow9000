@@ -74,7 +74,7 @@ namespace Cashflow9000
             else
             {
                 var i = new Intent(this, typeof(CategoryActivity));
-                i.PutExtra(CategoryActivity.ExtraTransactionId, e.Id);
+                i.PutExtra(CategoryActivity.ExtraCategoryId, (int)e.Id);
                 StartActivity(i);
             }
         }

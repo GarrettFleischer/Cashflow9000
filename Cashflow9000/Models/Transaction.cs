@@ -19,7 +19,6 @@ namespace Cashflow9000.Models
 
         public decimal Amount { get; set; }
 
-        public Recurrence Recurrence { get; set; }
 
         public string Note { get; set; }
 
@@ -36,6 +35,11 @@ namespace Cashflow9000.Models
         public Milestone Milestone { get; set; }
 
 
+        [ForeignKey(typeof(Recurrence))]
+        public int? RecurrenceId { get; set; }
+
+        [ManyToOne]
+        public Recurrence Recurrence { get; set; }
 
         public override string ToString()
         {

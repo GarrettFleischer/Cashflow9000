@@ -27,6 +27,7 @@ namespace Cashflow9000
         private ToggleButton ToggleType;
         private Spinner SpinCategory;
         private Spinner SpinMilestone;
+        private Spinner SpinRecurrence;
         private EditText EditNote;
 
         private Transaction Transaction;
@@ -53,6 +54,7 @@ namespace Cashflow9000
             ToggleType = FindViewById<ToggleButton>(Resource.Id.toggleType);
             SpinCategory = FindViewById<Spinner>(Resource.Id.spinCategory);
             SpinMilestone = FindViewById<Spinner>(Resource.Id.spinMilestone);
+            SpinRecurrence = FindViewById<Spinner>(Resource.Id.spinRecurrence);
             EditNote = FindViewById<EditText>(Resource.Id.editNote);
 
             // View logic
@@ -70,10 +72,14 @@ namespace Cashflow9000
             SpinMilestone.Adapter = new MilestoneAdapter(this, GetMilestones());
             SpinMilestone.ItemSelected += SpinMilestoneOnItemSelected;
 
+            SpinRecurrence.Adapter = new RecurrenceAdapter(this);
+            SpinRecurrence.ItemSelected += SpinRecurrenceOnItemSelected;
+
             EditNote.TextChanged += EditNoteOnTextChanged;
             
             UpdateUI();
         }
+
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
@@ -95,6 +101,10 @@ namespace Cashflow9000
         private void SpinCategoryOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Transaction.Category = ((CategoryAdapter)SpinCategory.Adapter)[e.Position];
+        }
+        private void SpinRecurrenceOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Transaction.Recurrence = ((RecurrenceAdapter)SpinRecurrence.Adapter)[e.Position];
         }
 
         private void ButtonSaveOnClick(object sender, EventArgs eventArgs)
@@ -119,7 +129,6 @@ namespace Cashflow9000
         private void UpdateUI()
         {
             ToggleType.SetBackgroundColor(ToggleType.Checked ? Color.DarkGreen : Color.DarkRed);
-            //ButtonSave.Enabled = Transaction.Category != null;
         }
 
         private List<Category> GetCategories()

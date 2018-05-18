@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Adapters\CategoryAdapter.cs" />
     <Compile Include="Adapters\MilestoneAdapter.cs" />
+    <Compile Include="Adapters\RecurrenceAdapter.cs" />
     <Compile Include="Adapters\TransactionAdapter.cs" />
     <Compile Include="CashflowData.cs" />
     <Compile Include="CategoryActivity.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Models\Budget.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Milestone.cs" />
+    <Compile Include="Models\Recurrence.cs" />
     <Compile Include="Views\EditCurrency.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MilestoneActivity.cs" />
@@ -119,6 +121,9 @@
     <AndroidResource Include="Resources\layout\Toolbar.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Budget.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -127,6 +132,7 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Fragments\" />
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\mipmap-hdpi\" />
     <Folder Include="Resources\mipmap-mdpi\" />
