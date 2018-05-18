@@ -21,7 +21,6 @@ namespace Cashflow9000
     [Activity(Label = "CategoryListActivity")]
     public class CategoryListActivity : ListActivity
     {
-        private long Selected = -1;
         private bool SelectionEnabled;
 
         public const string ExtraEnableSelection = "CategoryListActivity.ExtraEnableSelection";
@@ -33,44 +32,50 @@ namespace Cashflow9000
         {
             base.OnCreate(savedInstanceState);
 
+            // Get Intent data
             SelectionEnabled = Intent.GetBooleanExtra(ExtraEnableSelection, false);
             int initialSelection = Intent.GetIntExtra(ExtraInitialSelectionId, -1);
 
-            if (SelectionEnabled)
-            {
-                var saveButton = new Button(this)
-                {
-                    LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent)
-                };
-                saveButton.SetText(Resource.String.save);
-                saveButton.Click += SaveButtonOnClick;
+            // Create header layout
+            var layout = new LinearLayout(this) { Orientation = Orientation.Vertical };
+            layout.SetGravity(GravityFlags.Right);
 
-                var layout = new LinearLayout(this) {Orientation = Orientation.Vertical};
-                layout.SetGravity(GravityFlags.Right);
-                layout.AddView(saveButton);
+            var buttonAdd = new Button(this);
+            buttonAdd.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+            buttonAdd.SetText(Resource.String.add);
+            buttonAdd.Click += AddButtonOnClick;
 
-                ListView.AddHeaderView(layout);
-                ListView.Selector = new ColorDrawable(Color.Gray);
-            }
+            layout.AddView(buttonAdd);
 
+            ListView.AddHeaderView(layout);
+            ListView.Selector = new ColorDrawable(Color.Gray);
             ListView.ItemClick += ListViewOnItemClick;
-            var categories = CashflowData.Categories.OrderBy(x => x.Name).ToList();
-            ListAdapter = new CategoryAdapter(this, categories);
-            ListView.SetSelection(categories.FindIndex(c => c.Id == initialSelection));
+
+            var adapter = new CategoryAdapter(this, TransactionType.Any);
+            ListAdapter = adapter;
+            ListView.SetSelection(adapter.Categories.FindIndex(c => c.Id == initialSelection));
         }
 
-        private void SaveButtonOnClick(object sender, EventArgs eventArgs)
+        protected override void OnResume()
         {
-            var data = new Intent();
-            data.PutExtra(ResultSelected, Selected);
-            SetResult(Result.Ok, data);
-            Finish();
+            base.OnResume();
+            ListAdapter = new CategoryAdapter(this, TransactionType.Any);
+        }
+
+        private void AddButtonOnClick(object sender, EventArgs eventArgs)
+        {
+            StartActivity(new Intent(this, typeof(CategoryActivity)));
         }
 
         private void ListViewOnItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             if (SelectionEnabled)
-                Selected = e.Id;
+            {
+                var data = new Intent();
+                data.PutExtra(ResultSelected, (int)e.Id);
+                SetResult(Result.Ok, data);
+                Finish();
+            }
             else
             {
                 var i = new Intent(this, typeof(CategoryActivity));

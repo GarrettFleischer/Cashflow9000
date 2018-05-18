@@ -16,12 +16,12 @@ namespace Cashflow9000.Adapters
     class MilestoneAdapter : BaseAdapter<Milestone>
     {
         private readonly Activity Context;
-        private readonly List<Milestone> Milestones;
+        public List<Milestone> Milestones { get; }
 
-        public MilestoneAdapter(Activity context, List<Milestone> milestones)
+        public MilestoneAdapter(Activity context)
         {
             Context = context;
-            Milestones = milestones;
+            Milestones = CashflowData.Milestones.OrderBy(x => x.Name).ToList();
         }
 
         public override Milestone this[int position] => Milestones[position];

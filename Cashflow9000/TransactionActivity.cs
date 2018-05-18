@@ -60,21 +60,28 @@ namespace Cashflow9000
             // View logic
             ButtonSave.Click += ButtonSaveOnClick;
 
-            EditAmount.Text = Transaction.Amount.ToString(CultureInfo.CurrentCulture);
+            EditAmount.Value = Transaction.Amount;
             EditAmount.AfterTextChanged += EditAmountOnAfterTextChanged;
 
             ToggleType.Checked = Transaction.Type == TransactionType.Income;
             ToggleType.CheckedChange += ToggleTypeOnCheckedChange;
 
-            SpinCategory.Adapter = new CategoryAdapter(this, GetCategories());
+            var categoryAdapter = new CategoryAdapter(this, GetTransactionType());
+            SpinCategory.Adapter = categoryAdapter;
+            SpinCategory.SetSelection(categoryAdapter.Categories.FindIndex(c => c.Id == Transaction.CategoryId));
             SpinCategory.ItemSelected += SpinCategoryOnItemSelected;
 
-            SpinMilestone.Adapter = new MilestoneAdapter(this, GetMilestones());
+            var milestoneAdapter = new MilestoneAdapter(this);
+            SpinMilestone.Adapter = milestoneAdapter;
+            SpinMilestone.SetSelection(milestoneAdapter.Milestones.FindIndex(c => c.Id == Transaction.MilestoneId));
             SpinMilestone.ItemSelected += SpinMilestoneOnItemSelected;
 
-            SpinRecurrence.Adapter = new RecurrenceAdapter(this);
+            var recurrenceAdapter = new RecurrenceAdapter(this);
+            SpinRecurrence.Adapter = recurrenceAdapter;
+            SpinRecurrence.SetSelection(recurrenceAdapter.Recurrences.FindIndex(c => c.Id == Transaction.RecurrenceId));
             SpinRecurrence.ItemSelected += SpinRecurrenceOnItemSelected;
 
+            EditNote.Text = Transaction.Note;
             EditNote.TextChanged += EditNoteOnTextChanged;
             
             UpdateUI();
@@ -121,7 +128,7 @@ namespace Cashflow9000
         private void ToggleTypeOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs checkedChangeEventArgs)
         {
             Transaction.Type = ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
-            SpinCategory.Adapter = SpinCategory.Adapter = new CategoryAdapter(this, GetCategories());
+            SpinCategory.Adapter = SpinCategory.Adapter = new CategoryAdapter(this, GetTransactionType());
             Transaction.Category = null;
             UpdateUI();
         }
@@ -131,15 +138,6 @@ namespace Cashflow9000
             ToggleType.SetBackgroundColor(ToggleType.Checked ? Color.DarkGreen : Color.DarkRed);
         }
 
-        private List<Category> GetCategories()
-        {
-            TransactionType type = ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
-            return CashflowData.Categories.Where(e => e.Type == type).OrderBy(x => x.Name).ToList();
-        }
-
-        private static List<Milestone> GetMilestones()
-        {
-            return CashflowData.Milestones.OrderBy(x => x.Name).ToList();
-        }
+        private TransactionType GetTransactionType() => ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
     }
 }

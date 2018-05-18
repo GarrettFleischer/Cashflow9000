@@ -16,7 +16,7 @@ namespace Cashflow9000.Adapters
     public class RecurrenceAdapter : BaseAdapter<Recurrence>
     {
         private readonly Activity Context;
-        private readonly List<Recurrence> Recurrences;
+        public List<Recurrence> Recurrences { get; }
 
         public RecurrenceAdapter(Activity context)
         {

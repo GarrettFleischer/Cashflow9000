@@ -18,12 +18,15 @@ namespace Cashflow9000.Adapters
     class CategoryAdapter : BaseAdapter<Category>
     {
         private readonly Activity Context;
-        private readonly List<Category> Categories;
+        public List<Category> Categories { get; }
 
-        public CategoryAdapter(Activity context, List<Category> categories)
+        public CategoryAdapter(Activity context, TransactionType type)
         {
             Context = context;
-            Categories = categories;
+            Categories = CashflowData.Categories
+                .Where(x => x.Type == type || type == TransactionType.Any)
+                .OrderBy(y => y.Type)
+                .ThenBy(z => z.Name).ToList();
         }
 
         public override Category this[int position] => Categories[position];

@@ -19,4 +19,6 @@
   <string name="monthly">Monthly</string>
   <string name="quarterly">Quarterly</string>
   <string name="annually">Annually</string>
+  <string name="add">Add</string>
+  <string name="type">Type</string>
 </resources>

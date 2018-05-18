@@ -25,4 +25,14 @@
         android:layout_gravity="fill_horizontal"
         android:layout_marginTop="20dp"
         android:layout_columnSpan="2" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView2"
+        android:text="@string/type"
+        android:layout_marginTop="20dp" />
+    <Spinner
+        android:id="@+id/spinType"
+        android:layout_marginTop="20dp"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill_horizontal" />
 </GridLayout>

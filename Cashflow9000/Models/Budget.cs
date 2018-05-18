@@ -22,6 +22,8 @@ namespace Cashflow9000.Models
 
         public string Name { get; set; }
 
+        public decimal Amount { get; set; }
+
         [ForeignKey(typeof(Recurrence))]
         public int? RecurrenceId { get; set; }
 

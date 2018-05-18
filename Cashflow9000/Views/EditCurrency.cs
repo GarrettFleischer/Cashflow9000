@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using Android.Content;
 using Android.Text;
@@ -11,7 +12,11 @@ namespace Cashflow9000
 {
     public class EditCurrency : EditText
     {
-        public decimal Value => (decimal)NumberFormat.CurrencyInstance.ParseCurrency(Text, new ParsePosition(0)).Number.DoubleValue();
+        public decimal Value
+        {
+            get => (decimal) NumberFormat.CurrencyInstance.ParseCurrency(Text, new ParsePosition(0)).Number.DoubleValue();
+            set => Text = (value * 100).ToString(CultureInfo.CurrentCulture);
+        }
 
         public EditCurrency(Context context, IAttributeSet attrs) :
             base(context, attrs)

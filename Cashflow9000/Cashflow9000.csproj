@@ -88,13 +88,17 @@
     <Compile Include="Adapters\MilestoneAdapter.cs" />
     <Compile Include="Adapters\RecurrenceAdapter.cs" />
     <Compile Include="Adapters\TransactionAdapter.cs" />
+    <Compile Include="Adapters\TransactionTypeAdapter.cs" />
+    <Compile Include="BudgetActivity.cs" />
     <Compile Include="CashflowData.cs" />
     <Compile Include="CategoryActivity.cs" />
     <Compile Include="CategoryListActivity.cs" />
+    <Compile Include="MilestoneListActivity.cs" />
     <Compile Include="Models\Budget.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Milestone.cs" />
     <Compile Include="Models\Recurrence.cs" />
+    <Compile Include="TransactionListActivity.cs" />
     <Compile Include="Views\EditCurrency.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MilestoneActivity.cs" />

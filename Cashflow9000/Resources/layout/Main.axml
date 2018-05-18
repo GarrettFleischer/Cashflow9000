@@ -5,16 +5,16 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-  <include
-    android:id="@+id/toolbar"
-    layout="@layout/Toolbar" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/Toolbar" />
     <Button
-        android:text="Transaction"
+        android:text="Transactions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonTransaction" />
     <Button
-        android:text="Milestone"
+        android:text="Milestones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonMilestone" />
@@ -23,4 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonCategories" />
+    <Button
+        android:text="Budgets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBudgets" />
 </LinearLayout>

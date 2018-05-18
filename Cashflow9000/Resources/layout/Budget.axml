@@ -16,9 +16,29 @@
         p1:text="@string/save"
         p1:id="@+id/buttonSave" />
     <TextView
-        p1:text="@string/category"
         p1:textAppearance="?android:attr/textAppearanceMedium"
         p1:id="@+id/textView2"
+        p1:text="@string/name"
+        p1:layout_marginTop="20dp" />
+    <EditText
+        p1:id="@+id/editName"
+        p1:layout_gravity="fill_horizontal"
+        p1:layout_marginTop="20dp"
+        p1:layout_columnSpan="2" />
+    <TextView
+        p1:text="@string/amount"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:id="@+id/textView3"
+        p1:layout_marginTop="20dp" />
+    <Cashflow9000.EditCurrency
+        p1:id="@+id/editAmount"
+        p1:layout_marginTop="20dp"
+        p1:layout_gravity="fill_horizontal"
+        p1:layout_columnSpan="2" />
+    <TextView
+        p1:text="@string/category"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:id="@+id/textView4"
         p1:labelFor="@+id/spinCategory"
         p1:layout_columnSpan="1"
         p1:layout_marginTop="20dp" />
@@ -31,7 +51,7 @@
     <TextView
         p1:text="@string/recurrence"
         p1:textAppearance="?android:attr/textAppearanceMedium"
-        p1:id="@+id/textView4"
+        p1:id="@+id/textView5"
         p1:layout_marginTop="20dp" />
     <Spinner
         p1:id="@+id/spinRecurrence"

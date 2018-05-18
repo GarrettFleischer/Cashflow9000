@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Text;
 using Android.Views;
 using Android.Widget;
+using Cashflow9000.Adapters;
 using Cashflow9000.Models;
 
 namespace Cashflow9000
@@ -19,6 +20,7 @@ namespace Cashflow9000
     {
         private Button ButtonSave;
         private EditText EditName;
+        private Spinner SpinType;
 
         private Category Category;
 
@@ -36,6 +38,7 @@ namespace Cashflow9000
             // Find UI views
             ButtonSave = FindViewById<Button>(Resource.Id.buttonSave);
             EditName = FindViewById<EditText>(Resource.Id.editName);
+            SpinType = FindViewById<Spinner>(Resource.Id.spinType);
 
             // View logic
             ButtonSave.Click += ButtonSaveOnClick;
@@ -43,7 +46,17 @@ namespace Cashflow9000
             EditName.Text = Category.Name;
             EditName.TextChanged += EditNameOnTextChanged;
 
+            var adapter = new TransactionTypeAdapter(this);
+            SpinType.Adapter = adapter;
+            SpinType.SetSelection(adapter.TransactionTypes.FindIndex(c => c == Category.Type));
+            SpinType.ItemSelected += SpinTypeOnItemSelected;
+
             UpdateUI();
+        }
+
+        private void SpinTypeOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Category.Type = ((TransactionTypeAdapter) SpinType.Adapter).TransactionTypes[e.Position];
         }
 
         private void ButtonSaveOnClick(object sender, EventArgs eventArgs)

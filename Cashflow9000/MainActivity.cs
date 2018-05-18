@@ -24,14 +24,14 @@ namespace Cashflow9000
             Button transaction = FindViewById<Button>(Resource.Id.buttonTransaction);
             transaction.Click += delegate
             {
-                Intent i = new Intent(this, typeof(TransactionActivity));
+                Intent i = new Intent(this, typeof(TransactionListActivity));
                 StartActivity(i);
             };
 
             Button milestone = FindViewById<Button>(Resource.Id.buttonMilestone);
             milestone.Click += delegate
             {
-                Intent i = new Intent(this, typeof(MilestoneActivity));
+                Intent i = new Intent(this, typeof(MilestoneListActivity));
                 StartActivity(i);
             };
 
@@ -39,6 +39,13 @@ namespace Cashflow9000
             categories.Click += delegate
             {
                 Intent i = new Intent(this, typeof(CategoryListActivity));
+                StartActivity(i);
+            };
+
+            Button budgets = FindViewById<Button>(Resource.Id.buttonBudgets);
+            budgets.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(BudgetActivity));
                 StartActivity(i);
             };
         }

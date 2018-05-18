@@ -8,7 +8,7 @@ using TeixeiraSoftware.Finance;
 
 namespace Cashflow9000.Models
 {
-    public enum TransactionType { Expense, Income }
+    public enum TransactionType { Expense, Income, Any }
     
     public class Transaction
     {
@@ -43,7 +43,7 @@ namespace Cashflow9000.Models
 
         public override string ToString()
         {
-            return $"{Category} {NumberFormat.CurrencyInstance.Format((double)Amount)} : {Note}";
+            return $"{Category} {NumberFormat.CurrencyInstance.Format((double)Amount)}\n\t{Note}";
         }
     }
 }
