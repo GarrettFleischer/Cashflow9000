@@ -37,10 +37,10 @@ namespace Cashflow9000
             int initialSelection = Intent.GetIntExtra(ExtraInitialSelectionId, -1);
 
             // Create header layout
-            var layout = new LinearLayout(this) { Orientation = Orientation.Vertical };
+            LinearLayout layout = new LinearLayout(this) { Orientation = Orientation.Vertical };
             layout.SetGravity(GravityFlags.Right);
 
-            var buttonAdd = new Button(this);
+            Button buttonAdd = new Button(this);
             buttonAdd.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
             buttonAdd.SetText(Resource.String.add);
             buttonAdd.Click += AddButtonOnClick;
@@ -51,7 +51,7 @@ namespace Cashflow9000
             ListView.Selector = new ColorDrawable(Color.Gray);
             ListView.ItemClick += ListViewOnItemClick;
 
-            var adapter = new CategoryAdapter(this, TransactionType.Any);
+            CategoryAdapter adapter = new CategoryAdapter(this, TransactionType.Any);
             ListAdapter = adapter;
             ListView.SetSelection(adapter.Categories.FindIndex(c => c.Id == initialSelection));
         }
@@ -71,14 +71,14 @@ namespace Cashflow9000
         {
             if (SelectionEnabled)
             {
-                var data = new Intent();
+                Intent data = new Intent();
                 data.PutExtra(ResultSelected, (int)e.Id);
                 SetResult(Result.Ok, data);
                 Finish();
             }
             else
             {
-                var i = new Intent(this, typeof(CategoryActivity));
+                Intent i = new Intent(this, typeof(CategoryActivity));
                 i.PutExtra(CategoryActivity.ExtraCategoryId, (int)e.Id);
                 StartActivity(i);
             }

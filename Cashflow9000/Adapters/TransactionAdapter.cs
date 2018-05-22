@@ -13,7 +13,7 @@ using Cashflow9000.Models;
 
 namespace Cashflow9000.Adapters
 {
-    class TransactionAdapter : BaseAdapter<Transaction>
+    public class TransactionAdapter : BaseAdapter<Transaction>
     {
         private readonly Activity Context;
         private readonly List<Transaction> Transactions;
@@ -33,7 +33,7 @@ namespace Cashflow9000.Adapters
             // Get our object for position
             Transaction item = Transactions[position];
 
-            var view = (convertView ??
+            TextView view = (convertView ??
                         Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
             view?.SetText(item.ToString(), TextView.BufferType.Normal);

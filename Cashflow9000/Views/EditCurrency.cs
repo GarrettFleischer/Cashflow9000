@@ -40,8 +40,8 @@ namespace Cashflow9000
         private void OnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
             TextChanged -= OnTextChanged;
-            var cleanString = Regex.Replace(Text, "[^0-9a-zA-Z]+", "");
-            var formatted = NumberFormat.CurrencyInstance.Format(Double.Parse(cleanString) / 100);
+            string cleanString = Regex.Replace(Text, "[^0-9a-zA-Z]+", "");
+            string formatted = NumberFormat.CurrencyInstance.Format(Double.Parse(cleanString) / 100);
             Text = formatted;
             TextChanged += OnTextChanged;
             SetSelection(formatted.Length);

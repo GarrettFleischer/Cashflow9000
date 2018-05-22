@@ -95,6 +95,9 @@
     <Compile Include="CashflowData.cs" />
     <Compile Include="CategoryActivity.cs" />
     <Compile Include="CategoryListActivity.cs" />
+    <Compile Include="Fragments\IModelListener.cs" />
+    <Compile Include="Fragments\TransactionFragment.cs" />
+    <Compile Include="LayoutId.cs" />
     <Compile Include="MilestoneListActivity.cs" />
     <Compile Include="Models\Budget.cs" />
     <Compile Include="Models\Category.cs" />
@@ -138,7 +141,6 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Fragments\" />
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\mipmap-hdpi\" />
     <Folder Include="Resources\mipmap-mdpi\" />

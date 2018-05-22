@@ -23,10 +23,10 @@ namespace Cashflow9000
             base.OnCreate(savedInstanceState);
 
             // Create header layout
-            var layout = new LinearLayout(this) { Orientation = Orientation.Vertical };
+            LinearLayout layout = new LinearLayout(this) { Orientation = Orientation.Vertical };
             layout.SetGravity(GravityFlags.Right);
 
-            var buttonAdd = new Button(this);
+            Button buttonAdd = new Button(this);
             buttonAdd.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
             buttonAdd.SetText(Resource.String.add);
             buttonAdd.Click += AddButtonOnClick;
@@ -52,7 +52,7 @@ namespace Cashflow9000
 
         private void ListViewOnItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var i = new Intent(this, typeof(TransactionActivity));
+            Intent i = new Intent(this, typeof(TransactionActivity));
             i.PutExtra(TransactionActivity.ExtraTransactionId, (int)e.Id);
             StartActivity(i);
         }

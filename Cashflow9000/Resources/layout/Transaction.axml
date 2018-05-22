@@ -1,73 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:p1="http://schemas.android.com/apk/res/android"
     p1:minWidth="25px"
     p1:minHeight="25px"
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
-    p1:columnCount="3"
-    p1:padding="20dp">
-    <TextView
-        p1:textAppearance="?android:attr/textAppearanceLarge"
-        p1:id="@+id/textView1"
-        p1:text="@string/transaction"
-        p1:layout_columnSpan="2"
-        p1:layout_columnWeight="2" />
-    <Button
-        p1:text="@string/save"
-        p1:id="@+id/buttonSave" />
-    <Cashflow9000.EditCurrency
-        p1:id="@+id/editValue"
-        p1:layout_gravity="fill_horizontal"
-        p1:layout_columnSpan="2"
-        p1:layout_marginTop="20dp" />
-    <ToggleButton
-        p1:id="@+id/toggleType"
-        p1:textOff="@string/expense"
-        p1:textOn="@string/income"
-        p1:layout_marginTop="20dp" />
-    <TextView
-        p1:text="@string/category"
-        p1:textAppearance="?android:attr/textAppearanceMedium"
-        p1:id="@+id/textView2"
-        p1:labelFor="@+id/spinCategory"
-        p1:layout_columnSpan="1"
-        p1:layout_marginTop="20dp" />
-    <Spinner
-        p1:id="@+id/spinCategory"
-        p1:layout_gravity="fill_horizontal"
-        p1:layout_columnSpan="2"
-        p1:layout_marginLeft="15dp"
-        p1:layout_marginTop="20dp" />
-    <TextView
-        p1:text="@string/milestone"
-        p1:textAppearance="?android:attr/textAppearanceMedium"
-        p1:id="@+id/textView4"
-        p1:layout_marginTop="20dp" />
-    <Spinner
-        p1:id="@+id/spinMilestone"
-        p1:layout_gravity="fill_horizontal"
-        p1:layout_columnSpan="2"
-        p1:layout_marginLeft="15dp"
-        p1:layout_marginTop="20dp" />
-    <TextView
-        p1:text="@string/recurrence"
-        p1:textAppearance="?android:attr/textAppearanceMedium"
-        p1:id="@+id/textView4"
-        p1:layout_marginTop="20dp" />
-    <Spinner
-        p1:id="@+id/spinRecurrence"
-        p1:layout_gravity="fill_horizontal"
-        p1:layout_columnSpan="2"
-        p1:layout_marginLeft="15dp"
-        p1:layout_marginTop="20dp" />
-    <TextView
-        p1:text="@string/note"
-        p1:textAppearance="?android:attr/textAppearanceMedium"
-        p1:id="@+id/textView3"
-        p1:layout_marginTop="15dp" />
-    <EditText
-        p1:id="@+id/editNote"
-        p1:layout_marginTop="15dp"
-        p1:layout_columnSpan="2"
-        p1:layout_columnWeight="2" />
-</GridLayout>
+    p1:id="@+id/scrollView1">
+    <GridLayout
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="match_parent"
+        p1:columnCount="3"
+        p1:padding="20dp"
+        p1:id="@+id/gridLayout1">
+        <TextView
+            p1:textAppearance="?android:attr/textAppearanceLarge"
+            p1:id="@+id/textView1"
+            p1:text="@string/transaction"
+            p1:layout_columnSpan="2"
+            p1:layout_columnWeight="2" />
+        <Button
+            p1:text="@string/save"
+            p1:id="@+id/buttonSave" />
+        <Cashflow9000.EditCurrency
+            p1:id="@+id/editValue"
+            p1:layout_gravity="fill_horizontal"
+            p1:layout_columnSpan="2"
+            p1:layout_marginTop="20dp" />
+        <ToggleButton
+            p1:id="@+id/toggleType"
+            p1:textOff="@string/expense"
+            p1:textOn="@string/income"
+            p1:layout_marginTop="20dp" />
+        <TextView
+            p1:text="@string/category"
+            p1:textAppearance="?android:attr/textAppearanceMedium"
+            p1:id="@+id/textView2"
+            p1:labelFor="@+id/spinCategory"
+            p1:layout_columnSpan="1"
+            p1:layout_marginTop="20dp" />
+        <Spinner
+            p1:id="@+id/spinCategory"
+            p1:layout_gravity="fill_horizontal"
+            p1:layout_columnSpan="2"
+            p1:layout_marginLeft="15dp"
+            p1:layout_marginTop="20dp" />
+        <TextView
+            p1:text="@string/milestone"
+            p1:textAppearance="?android:attr/textAppearanceMedium"
+            p1:id="@+id/textView4"
+            p1:layout_marginTop="20dp" />
+        <Spinner
+            p1:id="@+id/spinMilestone"
+            p1:layout_gravity="fill_horizontal"
+            p1:layout_columnSpan="2"
+            p1:layout_marginLeft="15dp"
+            p1:layout_marginTop="20dp" />
+        <TextView
+            p1:text="@string/recurrence"
+            p1:textAppearance="?android:attr/textAppearanceMedium"
+            p1:id="@+id/textView4"
+            p1:layout_marginTop="20dp" />
+        <Spinner
+            p1:id="@+id/spinRecurrence"
+            p1:layout_gravity="fill_horizontal"
+            p1:layout_columnSpan="2"
+            p1:layout_marginLeft="15dp"
+            p1:layout_marginTop="20dp" />
+        <TextView
+            p1:text="@string/date"
+            p1:textAppearance="?android:attr/textAppearanceMedium"
+            p1:id="@+id/textView5"
+            p1:layout_marginTop="20dp" />
+        <TextView
+            p1:text="@string/date"
+            p1:textAppearance="?android:attr/textAppearanceMedium"
+            p1:id="@+id/textDate"
+            p1:layout_columnSpan="2"
+            p1:layout_marginTop="20dp"
+            p1:layout_marginLeft="15dp"
+            p1:layout_gravity="fill_horizontal"
+            p1:backgroundTint="#00000000"
+            p1:shadowColor="#00000000" />
+        <TextView
+            p1:text="@string/note"
+            p1:textAppearance="?android:attr/textAppearanceMedium"
+            p1:id="@+id/textView3"
+            p1:layout_marginTop="15dp" />
+        <EditText
+            p1:id="@+id/editNote"
+            p1:layout_marginTop="15dp"
+            p1:layout_columnSpan="2"
+            p1:layout_columnWeight="2" />
+    </GridLayout>
+</ScrollView>

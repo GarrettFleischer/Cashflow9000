@@ -36,7 +36,7 @@ namespace Cashflow9000.Adapters
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var view = (convertView ??
+            TextView view = (convertView ??
                         Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
             // Get our object for position

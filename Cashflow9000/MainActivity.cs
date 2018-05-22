@@ -17,7 +17,7 @@ namespace Cashflow9000
 
             CashflowData.Initialize();
 
-            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
             ActionBar.Title = "My Toolbar";
 

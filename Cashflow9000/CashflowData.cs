@@ -33,6 +33,7 @@ namespace Cashflow9000
             //DB.DropTable<Transaction>();
             //DB.DropTable<Milestone>();
             //DB.DropTable<Category>();
+            //DB.DropTable<Recurrence>();
 
             if (!TableExists<Budget>(DB)) DB.CreateTable<Budget>();
             if (!TableExists<Transaction>(DB)) DB.CreateTable<Transaction>();

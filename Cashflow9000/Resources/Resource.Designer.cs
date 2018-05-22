@@ -65,26 +65,32 @@ namespace Cashflow9000
 			// aapt resource value: 0x7f050003
 			public const int editName = 2131034115;
 			
-			// aapt resource value: 0x7f050014
-			public const int editNote = 2131034132;
+			// aapt resource value: 0x7f050016
+			public const int editNote = 2131034134;
 			
-			// aapt resource value: 0x7f050011
-			public const int editValue = 2131034129;
+			// aapt resource value: 0x7f050012
+			public const int editValue = 2131034130;
 			
 			// aapt resource value: 0x7f05000a
 			public const int gridLayout1 = 2131034122;
 			
+			// aapt resource value: 0x7f050011
+			public const int scrollView1 = 2131034129;
+			
 			// aapt resource value: 0x7f050007
 			public const int spinCategory = 2131034119;
 			
-			// aapt resource value: 0x7f050013
-			public const int spinMilestone = 2131034131;
+			// aapt resource value: 0x7f050014
+			public const int spinMilestone = 2131034132;
 			
 			// aapt resource value: 0x7f050009
 			public const int spinRecurrence = 2131034121;
 			
 			// aapt resource value: 0x7f05000b
 			public const int spinType = 2131034123;
+			
+			// aapt resource value: 0x7f050015
+			public const int textDate = 2131034133;
 			
 			// aapt resource value: 0x7f050000
 			public const int textView1 = 2131034112;
@@ -101,8 +107,8 @@ namespace Cashflow9000
 			// aapt resource value: 0x7f050008
 			public const int textView5 = 2131034120;
 			
-			// aapt resource value: 0x7f050012
-			public const int toggleType = 2131034130;
+			// aapt resource value: 0x7f050013
+			public const int toggleType = 2131034131;
 			
 			// aapt resource value: 0x7f05000c
 			public const int toolbar = 2131034124;
@@ -174,6 +180,9 @@ namespace Cashflow9000
 			
 			// aapt resource value: 0x7f03000d
 			public const int daily = 2130903053;
+			
+			// aapt resource value: 0x7f030015
+			public const int date = 2130903061;
 			
 			// aapt resource value: 0x7f030005
 			public const int expense = 2130903045;

@@ -34,7 +34,7 @@ namespace Cashflow9000.Adapters
             // Get our object for position
             Budget item = Recurrences[position];
 
-            var view = (convertView ??
+            TextView view = (convertView ??
                         Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
             view?.SetText(item.ToString(), TextView.BufferType.Normal);

@@ -46,7 +46,7 @@ namespace Cashflow9000
             EditName.Text = Category.Name;
             EditName.TextChanged += EditNameOnTextChanged;
 
-            var adapter = new TransactionTypeAdapter(this);
+            TransactionTypeAdapter adapter = new TransactionTypeAdapter(this);
             SpinType.Adapter = adapter;
             SpinType.SetSelection(adapter.TransactionTypes.FindIndex(c => c == Category.Type));
             SpinType.ItemSelected += SpinTypeOnItemSelected;

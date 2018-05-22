@@ -33,7 +33,7 @@ namespace Cashflow9000.Adapters
             // Get our object for position
             Recurrence item = Recurrences[position];
 
-            var view = (convertView ??
+            TextView view = (convertView ??
                         Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
             view?.SetText(Context.Resources.GetString(item.StringId), TextView.BufferType.Normal);
