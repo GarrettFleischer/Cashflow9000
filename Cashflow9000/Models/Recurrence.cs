@@ -43,6 +43,6 @@ namespace Cashflow9000.Models
         public List<Budget> Budgets { get; set; }
 
         [OneToMany]
-        public List<Transaction> Transactions { get; set; }
+        public List<PlannedTransaction> PlannedPayments { get; set; }
     }
 }

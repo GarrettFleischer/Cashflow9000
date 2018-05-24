@@ -15,5 +15,9 @@ namespace Cashflow9000
     public static class LayoutId
     {
         public static int TransactionActivity => 1;
+        public static int TransactionListActivity => 2;
+
+        public static int PlannedTransactionActivity => 3;
+        public static int PlannedTransactionListActivity => 4;
     }
 }

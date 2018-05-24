@@ -22,4 +22,5 @@
   <string name="add">Add</string>
   <string name="type">Type</string>
   <string name="date">Date</string>
+  <string name="plannedTransaction">Planned Transaction</string>
 </resources>

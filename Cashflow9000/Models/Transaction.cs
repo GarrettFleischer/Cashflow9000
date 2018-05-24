@@ -34,14 +34,7 @@ namespace Cashflow9000.Models
 
         [ManyToOne]
         public Milestone Milestone { get; set; }
-
-
-        [ForeignKey(typeof(Recurrence))]
-        public int? RecurrenceId { get; set; }
-
-        [ManyToOne]
-        public Recurrence Recurrence { get; set; }
-
+        
         public override string ToString()
         {
             return $"{Category} {NumberFormat.CurrencyInstance.Format((double)Amount)}\n\t{Note}";

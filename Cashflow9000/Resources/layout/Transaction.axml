@@ -15,7 +15,7 @@
         p1:id="@+id/gridLayout1">
         <TextView
             p1:textAppearance="?android:attr/textAppearanceLarge"
-            p1:id="@+id/textView1"
+            p1:id="@+id/textTitle"
             p1:text="@string/transaction"
             p1:layout_columnSpan="2"
             p1:layout_columnWeight="2" />
@@ -56,12 +56,12 @@
             p1:layout_columnSpan="2"
             p1:layout_marginLeft="15dp"
             p1:layout_marginTop="20dp" />
-        <TextView
+        <TextView xmlns:tools="http://schemas.android.com/tools"
             p1:text="@string/recurrence"
             p1:textAppearance="?android:attr/textAppearanceMedium"
-            p1:id="@+id/textView4"
+            p1:id="@+id/textRecurrence"
             p1:layout_marginTop="20dp" />
-        <Spinner
+        <Spinner xmlns:tools="http://schemas.android.com/tools"
             p1:id="@+id/spinRecurrence"
             p1:layout_gravity="fill_horizontal"
             p1:layout_columnSpan="2"

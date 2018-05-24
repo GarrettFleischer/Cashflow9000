@@ -32,12 +32,14 @@ namespace Cashflow9000
             //DB.DropTable<Budget>();
             //DB.DropTable<Transaction>();
             //DB.DropTable<Milestone>();
+            //DB.DropTable<PlannedTransaction>();
             //DB.DropTable<Category>();
             //DB.DropTable<Recurrence>();
 
             if (!TableExists<Budget>(DB)) DB.CreateTable<Budget>();
             if (!TableExists<Transaction>(DB)) DB.CreateTable<Transaction>();
             if (!TableExists<Milestone>(DB)) DB.CreateTable<Milestone>();
+            if (!TableExists<PlannedTransaction>(DB)) DB.CreateTable<PlannedTransaction>();
 
             // ReSharper disable once InvertIf
             if (!TableExists<Category>(DB))
@@ -97,5 +99,8 @@ namespace Cashflow9000
 
         public static List<Recurrence> Recurrences => DB.GetAllWithChildren<Recurrence>(recursive: true);
         public static Recurrence Recurrence(int id) => DB.GetWithChildren<Recurrence>(id, true);
+
+        public static List<PlannedTransaction> PlannedTransactions => DB.GetAllWithChildren<PlannedTransaction>(recursive: true);
+        public static PlannedTransaction PlannedTransaction(int id) => DB.GetWithChildren<PlannedTransaction>(id, true);
     }
 }

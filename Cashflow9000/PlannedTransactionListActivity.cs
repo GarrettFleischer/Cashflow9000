@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
-using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Cashflow9000.Adapters;
-using Cashflow9000.Fragments;
 using ListFragment = Cashflow9000.Fragments.ListFragment;
 
 namespace Cashflow9000
 {
-    [Activity(Label = "TransactionListActivity")]
-    public class TransactionListActivity : Activity, ListFragment.IListListener
+    [Activity(Label = "PlannedTransactionListActivity")]
+    public class PlannedTransactionListActivity : Activity, ListFragment.IListListener
     {
         private ListFragment Fragment;
 
@@ -27,10 +17,10 @@ namespace Cashflow9000
             base.OnCreate(savedInstanceState);
 
             FrameLayout layout = new FrameLayout(this);
-            layout.Id = LayoutId.TransactionListActivity;
+            layout.Id = LayoutId.PlannedTransactionListActivity;
             SetContentView(layout);
 
-            Fragment = new ListFragment(Resource.String.transaction, new TransactionAdapter(this, CashflowData.Transactions));
+            Fragment = new ListFragment(Resource.String.plannedTransaction, new PlannedTransactionAdapter(this));
             FragmentTransaction ft = FragmentManager.BeginTransaction();
             ft.Replace(layout.Id, Fragment);
             ft.SetTransition(FragmentTransit.FragmentFade);
@@ -40,18 +30,18 @@ namespace Cashflow9000
         protected override void OnResume()
         {
             base.OnResume();
-            Fragment.SetAdapter(new TransactionAdapter(this, CashflowData.Transactions));
+            Fragment.SetAdapter(new PlannedTransactionAdapter(this));
         }
-        
+
         public void OnAdd()
         {
-            StartActivity(new Intent(this, typeof(TransactionActivity)));
+            StartActivity(new Intent(this, typeof(PlannedTransactionActivity)));
         }
 
         public void OnSelect(long id)
         {
-            Intent i = new Intent(this, typeof(TransactionActivity));
-            i.PutExtra(TransactionActivity.ExtraTransactionId, (int)id);
+            Intent i = new Intent(this, typeof(PlannedTransactionActivity));
+            i.PutExtra(PlannedTransactionActivity.ExtraPlannedPaymentId, (int)id);
             StartActivity(i);
         }
     }

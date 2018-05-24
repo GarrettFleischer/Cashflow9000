@@ -29,7 +29,6 @@ namespace Cashflow9000.Fragments
         private ToggleButton ToggleType;
         private Spinner SpinCategory;
         private Spinner SpinMilestone;
-        private Spinner SpinRecurrence;
         private EditText EditNote;
         private TextView TextDate;
 
@@ -54,9 +53,11 @@ namespace Cashflow9000.Fragments
             ToggleType = view.FindViewById<ToggleButton>(Resource.Id.toggleType);
             SpinCategory = view.FindViewById<Spinner>(Resource.Id.spinCategory);
             SpinMilestone = view.FindViewById<Spinner>(Resource.Id.spinMilestone);
-            SpinRecurrence = view.FindViewById<Spinner>(Resource.Id.spinRecurrence);
             TextDate = view.FindViewById<TextView>(Resource.Id.textDate);
             EditNote = view.FindViewById<EditText>(Resource.Id.editNote);
+
+            view.FindViewById<Spinner>(Resource.Id.spinRecurrence).Visibility = ViewStates.Gone;
+            view.FindViewById<TextView>(Resource.Id.textRecurrence).Visibility = ViewStates.Gone;
 
             ButtonSave.Click += ButtonSaveOnClick;
 
@@ -75,11 +76,6 @@ namespace Cashflow9000.Fragments
             SpinMilestone.Adapter = milestoneAdapter;
             SpinMilestone.SetSelection(milestoneAdapter.Milestones.FindIndex(c => c.Id == Transaction.MilestoneId));
             SpinMilestone.ItemSelected += SpinMilestoneOnItemSelected;
-
-            RecurrenceAdapter recurrenceAdapter = new RecurrenceAdapter(Activity);
-            SpinRecurrence.Adapter = recurrenceAdapter;
-            SpinRecurrence.SetSelection(recurrenceAdapter.Recurrences.FindIndex(c => c.Id == Transaction.RecurrenceId));
-            SpinRecurrence.ItemSelected += SpinRecurrenceOnItemSelected;
 
             TextDate.Text = Transaction.Date.ToShortDateString();
             TextDate.Clickable = true;
@@ -119,15 +115,10 @@ namespace Cashflow9000.Fragments
         {
             Transaction.Category = ((CategoryAdapter)SpinCategory.Adapter)[e.Position];
         }
-        private void SpinRecurrenceOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            Transaction.Recurrence = ((RecurrenceAdapter)SpinRecurrence.Adapter)[e.Position];
-        }
 
-        private void ButtonSaveOnClick(object sender, EventArgs eventArgs)
+        protected virtual void ButtonSaveOnClick(object sender, EventArgs eventArgs)
         {
-            ITransactionFragmentListener listener = (ITransactionFragmentListener)Activity;
-            listener?.TransactionSaved(Transaction);
+            ((ITransactionFragmentListener)Activity)?.TransactionSaved(Transaction);
         }
 
         private void EditAmountOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)

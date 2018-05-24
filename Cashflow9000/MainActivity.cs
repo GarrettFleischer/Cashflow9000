@@ -48,6 +48,13 @@ namespace Cashflow9000
                 Intent i = new Intent(this, typeof(BudgetListActivity));
                 StartActivity(i);
             };
+
+            Button plannedTransactions = FindViewById<Button>(Resource.Id.buttonPlannedTransactions);
+            plannedTransactions.Click += delegate
+            {
+                Intent i = new Intent(this, typeof(PlannedTransactionListActivity));
+                StartActivity(i);
+            };
         }
     }
 }
