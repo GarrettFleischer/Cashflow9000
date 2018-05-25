@@ -20,30 +20,40 @@ namespace Cashflow9000.Adapters
         private readonly Activity Context;
         public List<Category> Categories { get; }
 
-        public CategoryAdapter(Activity context, TransactionType type)
+        public CategoryAdapter(Activity context, TransactionType type, bool spinner)
         {
             Context = context;
+
             Categories = CashflowData.Categories
-                .Where(x => x.Type == type || type == TransactionType.Any)
+                .Where(x => type == TransactionType.Any || x.Type == type)
                 .OrderBy(y => y.Type)
                 .ThenBy(z => z.Name).ToList();
+
+            if (spinner) Categories.Insert(0, null);
         }
 
         public override Category this[int position] => Categories[position];
-        public override long GetItemId(int position) => Categories[position].Id ?? -1;
+        public override long GetItemId(int position) => Categories[position]?.Id ?? -1;
         public override int Count => Categories.Count;
-        
+
+
+        public override View GetDropDownView(int position, View convertView, ViewGroup parent)
+        {
+            return GetCustomView(position, convertView, parent);
+        }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
+            return GetCustomView(position, convertView, parent);
+        }
+
+        View GetCustomView(int position, View convertView, ViewGroup parent)
+        {
             TextView view = (convertView ??
-                        Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
+                             Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
-            // Get our object for position
-            Category item = Categories[position];
-            view?.SetText(item.ToString(), TextView.BufferType.Normal);
+            view?.SetText(Categories[position]?.ToString() ?? "", TextView.BufferType.Normal);
 
-            //Finally return the view
             return view;
         }
     }

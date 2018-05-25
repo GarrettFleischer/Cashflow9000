@@ -26,15 +26,8 @@ namespace Cashflow9000
         {
             base.OnCreate(savedInstanceState);
 
-            FrameLayout layout = new FrameLayout(this);
-            layout.Id = LayoutId.TransactionListActivity;
-            SetContentView(layout);
-
             Fragment = new ListFragment(Resource.String.transaction, new TransactionAdapter(this, CashflowData.Transactions));
-            FragmentTransaction ft = FragmentManager.BeginTransaction();
-            ft.Replace(layout.Id, Fragment);
-            ft.SetTransition(FragmentTransit.FragmentFade);
-            ft.Commit();
+            FragmentUtil.LoadFragment(this, LayoutId.TransactionListActivity, Fragment);
         }
 
         protected override void OnResume()

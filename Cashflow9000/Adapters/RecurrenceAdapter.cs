@@ -18,10 +18,11 @@ namespace Cashflow9000.Adapters
         private readonly Activity Context;
         public List<Recurrence> Recurrences { get; }
 
-        public RecurrenceAdapter(Activity context)
+        public RecurrenceAdapter(Activity context, bool spinner)
         {
             Context = context;
             Recurrences = CashflowData.Recurrences;
+            if (spinner) Recurrences.Insert(0, null);
         }
 
         public override Recurrence this[int position] => Recurrences[position];
@@ -30,15 +31,11 @@ namespace Cashflow9000.Adapters
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            // Get our object for position
-            Recurrence item = Recurrences[position];
-
             TextView view = (convertView ??
                         Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
-            view?.SetText(Context.Resources.GetString(item.StringId), TextView.BufferType.Normal);
+            view?.SetText(Context.Resources.GetString(Recurrences[position]?.StringId ?? -1), TextView.BufferType.Normal);
 
-            //Finally return the view
             return view;
         }
     }

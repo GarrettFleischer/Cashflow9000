@@ -18,25 +18,23 @@ namespace Cashflow9000.Adapters
         private readonly Activity Context;
         public List<Milestone> Milestones { get; }
 
-        public MilestoneAdapter(Activity context)
+        public MilestoneAdapter(Activity context, bool spinner)
         {
             Context = context;
             Milestones = CashflowData.Milestones.OrderBy(x => x.Name).ToList();
+            if (spinner) Milestones.Insert(0, null);
         }
 
         public override Milestone this[int position] => Milestones[position];
-        public override long GetItemId(int position) => Milestones[position].Id ?? -1;
+        public override long GetItemId(int position) => Milestones[position]?.Id ?? -1;
         public override int Count => Milestones.Count;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            // Get our object for position
-            Milestone item = Milestones[position];
-
             TextView view = (convertView ??
                         Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
-            view?.SetText(item.ToString(), TextView.BufferType.Normal);
+            view?.SetText(Milestones[position]?.ToString() ?? "", TextView.BufferType.Normal);
 
             //Finally return the view
             return view;

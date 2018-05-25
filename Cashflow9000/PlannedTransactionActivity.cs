@@ -22,15 +22,7 @@ namespace Cashflow9000
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            FrameLayout layout = new FrameLayout(this);
-            layout.Id = LayoutId.PlannedTransactionActivity;
-            SetContentView(layout);
-
-            PlannedTransactionFragment fragment = new PlannedTransactionFragment(Intent.GetIntExtra(ExtraPlannedPaymentId, -1));
-            FragmentTransaction ft = FragmentManager.BeginTransaction();
-            ft.Replace(layout.Id, fragment);
-            ft.SetTransition(FragmentTransit.FragmentFade);
-            ft.Commit();
+            FragmentUtil.LoadFragment(this, LayoutId.PlannedTransactionActivity, new PlannedTransactionFragment(Intent.GetIntExtra(ExtraPlannedPaymentId, -1)));
         }
 
         public void PlannedPaymentSaved(PlannedTransaction plannedTransaction)

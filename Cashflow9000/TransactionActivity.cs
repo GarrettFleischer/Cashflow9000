@@ -32,15 +32,8 @@ namespace Cashflow9000
         {
             // Init view
             base.OnCreate(savedInstanceState);
-            FrameLayout layout = new FrameLayout(this);
-            layout.Id = LayoutId.TransactionActivity;
-            SetContentView(layout);
 
-            TransactionFragment fragment = new TransactionFragment(Intent.GetIntExtra(ExtraTransactionId, -1));
-            FragmentTransaction ft = FragmentManager.BeginTransaction();
-            ft.Replace(layout.Id, fragment);
-            ft.SetTransition(FragmentTransit.FragmentFade);
-            ft.Commit();
+            FragmentUtil.LoadFragment(this, LayoutId.TransactionActivity, new TransactionFragment(Intent.GetIntExtra(ExtraTransactionId, -1)));
         }
 
         public void TransactionSaved(Transaction transaction)

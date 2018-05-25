@@ -55,13 +55,17 @@ namespace Cashflow9000
             EditName.Text = Budget.Name;
             EditName.TextChanged += EditNameOnTextChanged;
 
-            EditAmount.Text = Budget.Amount.ToString(CultureInfo.CurrentCulture);
+            EditAmount.Value = Budget.Amount;
             EditAmount.AfterTextChanged += EditAmountOnAfterTextChanged;
 
-            SpinCategory.Adapter = new CategoryAdapter(this, TransactionType.Expense);
+            CategoryAdapter categoryAdapter = new CategoryAdapter(this, TransactionType.Expense, true);
+            SpinCategory.Adapter = categoryAdapter;
+            SpinCategory.SetSelection(categoryAdapter.Categories.FindIndex(c => c?.Id == Budget.CategoryId));
             SpinCategory.ItemSelected += SpinCategoryOnItemSelected;
 
-            SpinRecurrence.Adapter = new RecurrenceAdapter(this);
+            RecurrenceAdapter recurrenceAdapter = new RecurrenceAdapter(this, true);
+            SpinRecurrence.Adapter = recurrenceAdapter;
+            SpinRecurrence.SetSelection(recurrenceAdapter.Recurrences.FindIndex(c => c?.Id == Budget.RecurrenceId));
             SpinRecurrence.ItemSelected += SpinRecurrenceOnItemSelected;
         }
 

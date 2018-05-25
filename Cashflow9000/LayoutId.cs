@@ -9,15 +9,40 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Cashflow9000.Adapters;
 
 namespace Cashflow9000
 {
-    public static class LayoutId
+    public enum LayoutId
     {
-        public static int TransactionActivity => 1;
-        public static int TransactionListActivity => 2;
+        BudgetActivity,
+        BudgetListActivity,
 
-        public static int PlannedTransactionActivity => 3;
-        public static int PlannedTransactionListActivity => 4;
+        CategoryActivity,
+        CategoryListActivity,
+
+        MilestoneActivity,
+        MilestoneListActivity,
+
+        PlannedTransactionActivity,
+        PlannedTransactionListActivity,
+
+        TransactionActivity,
+        TransactionListActivity
+    }
+
+    public static class FragmentUtil
+    {
+        public static void LoadFragment(Activity activity, LayoutId id, Fragment fragment)
+        {
+            FrameLayout layout = new FrameLayout(activity);
+            layout.Id = (int)id;
+            activity.SetContentView(layout);
+
+            FragmentTransaction ft = activity.FragmentManager.BeginTransaction();
+            ft.Replace(layout.Id, fragment);
+            ft.SetTransition(FragmentTransit.FragmentFade);
+            ft.Commit();
+        }
     }
 }

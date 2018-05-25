@@ -67,16 +67,17 @@ namespace Cashflow9000.Fragments
             ToggleType.Checked = Transaction.Type == TransactionType.Income;
             ToggleType.CheckedChange += ToggleTypeOnCheckedChange;
 
-            CategoryAdapter categoryAdapter = new CategoryAdapter(Activity, GetTransactionType());
+            CategoryAdapter categoryAdapter = new CategoryAdapter(Activity, GetTransactionType(), true);
             SpinCategory.Adapter = categoryAdapter;
-            SpinCategory.SetSelection(categoryAdapter.Categories.FindIndex(c => c.Id == Transaction.CategoryId));
+            SpinCategory.SetSelection(categoryAdapter.Categories.FindIndex(c => c?.Id == Transaction.CategoryId));
             SpinCategory.ItemSelected += SpinCategoryOnItemSelected;
 
-            MilestoneAdapter milestoneAdapter = new MilestoneAdapter(Activity);
+            MilestoneAdapter milestoneAdapter = new MilestoneAdapter(Activity, true);
             SpinMilestone.Adapter = milestoneAdapter;
-            SpinMilestone.SetSelection(milestoneAdapter.Milestones.FindIndex(c => c.Id == Transaction.MilestoneId));
+            SpinMilestone.SetSelection(milestoneAdapter.Milestones.FindIndex(c => c?.Id == Transaction.MilestoneId));
             SpinMilestone.ItemSelected += SpinMilestoneOnItemSelected;
 
+            if (Transaction.Date == new DateTime()) Transaction.Date = DateTime.Today;
             TextDate.Text = Transaction.Date.ToShortDateString();
             TextDate.Clickable = true;
             TextDate.Click += TextDateOnClick;
@@ -91,13 +92,12 @@ namespace Cashflow9000.Fragments
 
         private void TextDateOnClick(object sender, EventArgs eventArgs)
         {
-            DateTime today = DateTime.Today;
-            DatePickerDialog picker = new DatePickerDialog(Activity, this, today.Year, today.Month, today.Day);
+            DatePickerDialog picker = new DatePickerDialog(Activity, this, Transaction.Date.Year, Transaction.Date.Month - 1, Transaction.Date.Day);
             picker.Show();
         }
         public void OnDateSet(DatePicker view, int year, int month, int dayOfMonth)
         {
-            Transaction.Date = new DateTime(year, month, dayOfMonth);
+            Transaction.Date = new DateTime(year, month + 1, dayOfMonth);
             TextDate.Text = Transaction.Date.ToShortDateString();
         }
 
@@ -129,7 +129,7 @@ namespace Cashflow9000.Fragments
         private void ToggleTypeOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs checkedChangeEventArgs)
         {
             Transaction.Type = ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
-            SpinCategory.Adapter = SpinCategory.Adapter = new CategoryAdapter(Activity, GetTransactionType());
+            SpinCategory.Adapter = SpinCategory.Adapter = new CategoryAdapter(Activity, GetTransactionType(), true);
             Transaction.Category = null;
             UpdateUI();
         }

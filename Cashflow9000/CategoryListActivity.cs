@@ -51,7 +51,7 @@ namespace Cashflow9000
             ListView.Selector = new ColorDrawable(Color.Gray);
             ListView.ItemClick += ListViewOnItemClick;
 
-            CategoryAdapter adapter = new CategoryAdapter(this, TransactionType.Any);
+            CategoryAdapter adapter = new CategoryAdapter(this, TransactionType.Any, false);
             ListAdapter = adapter;
             ListView.SetSelection(adapter.Categories.FindIndex(c => c.Id == initialSelection));
         }
@@ -59,7 +59,7 @@ namespace Cashflow9000
         protected override void OnResume()
         {
             base.OnResume();
-            ListAdapter = new CategoryAdapter(this, TransactionType.Any);
+            ListAdapter = new CategoryAdapter(this, TransactionType.Any, false);
         }
 
         private void AddButtonOnClick(object sender, EventArgs eventArgs)

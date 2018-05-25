@@ -12,48 +12,38 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cashflow9000.Adapters;
+using ListFragment = Cashflow9000.Fragments.ListFragment;
 
 namespace Cashflow9000
 {
     [Activity(Label = "MilestoneListActivity")]
-    public class MilestoneListActivity : ListActivity
+    public class MilestoneListActivity : Activity, ListFragment.IListListener
     {
+        private ListFragment Fragment;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            // Create header layout
-            LinearLayout layout = new LinearLayout(this) { Orientation = Orientation.Vertical };
-            layout.SetGravity(GravityFlags.Right);
-
-            Button buttonAdd = new Button(this);
-            buttonAdd.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-            buttonAdd.SetText(Resource.String.add);
-            buttonAdd.Click += AddButtonOnClick;
-
-            layout.AddView(buttonAdd);
-
-            ListView.AddHeaderView(layout);
-            ListView.Selector = new ColorDrawable(Color.Gray);
-            ListView.ItemClick += ListViewOnItemClick;
-
-            ListAdapter = new MilestoneAdapter(this);
+            Fragment = new ListFragment(Resource.String.milestone, new MilestoneAdapter(this,false));
+            FragmentUtil.LoadFragment(this, LayoutId.MilestoneListActivity, Fragment);
         }
+
         protected override void OnResume()
         {
             base.OnResume();
-            ListAdapter = new MilestoneAdapter(this);
+            Fragment.SetAdapter(new MilestoneAdapter(this, false));
         }
 
-        private void AddButtonOnClick(object sender, EventArgs eventArgs)
+        public void OnAdd()
         {
-            StartActivity(new Intent(this, typeof(TransactionActivity)));
+            StartActivity(new Intent(this, typeof(MilestoneActivity)));
         }
 
-        private void ListViewOnItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        public void OnSelect(long id)
         {
-            Intent i = new Intent(this, typeof(TransactionActivity));
-            i.PutExtra(TransactionActivity.ExtraTransactionId, (int)e.Id);
+            Intent i = new Intent(this, typeof(MilestoneActivity));
+            i.PutExtra(MilestoneActivity.ExtraMilestoneId, (int)id);
             StartActivity(i);
         }
     }

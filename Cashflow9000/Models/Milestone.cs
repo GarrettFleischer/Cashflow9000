@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Icu.Text;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -33,7 +34,7 @@ namespace Cashflow9000.Models
 
         public override string ToString()
         {
-            return Name;
+            return $"{Name} {NumberFormat.CurrencyInstance.Format((double)Amount)}";
         }
     }
 }

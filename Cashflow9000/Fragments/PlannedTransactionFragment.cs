@@ -36,7 +36,7 @@ namespace Cashflow9000.Fragments
             view.FindViewById<TextView>(Resource.Id.textTitle).SetText(Resource.String.plannedTransaction);
             view.FindViewById<TextView>(Resource.Id.textRecurrence).Visibility = ViewStates.Visible;
 
-            RecurrenceAdapter recurrenceAdapter = new RecurrenceAdapter(Activity);
+            RecurrenceAdapter recurrenceAdapter = new RecurrenceAdapter(Activity, true);
             SpinRecurrence = view.FindViewById<Spinner>(Resource.Id.spinRecurrence);
             SpinRecurrence.Visibility = ViewStates.Visible;
             SpinRecurrence.Adapter = recurrenceAdapter;

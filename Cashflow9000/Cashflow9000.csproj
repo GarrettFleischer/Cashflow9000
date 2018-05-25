@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Adapters\BudgetAdapter.cs" />
     <Compile Include="Adapters\CategoryAdapter.cs" />
+    <Compile Include="Adapters\SpinnerAdapter.cs" />
     <Compile Include="Adapters\MilestoneAdapter.cs" />
     <Compile Include="Adapters\PlannedTransactionAdapter.cs" />
     <Compile Include="Adapters\RecurrenceAdapter.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="CashflowData.cs" />
     <Compile Include="CategoryActivity.cs" />
     <Compile Include="CategoryListActivity.cs" />
+    <Compile Include="Fragments\MilestoneFragment.cs" />
     <Compile Include="Fragments\PlannedTransactionFragment.cs" />
     <Compile Include="Fragments\TransactionFragment.cs" />
     <Compile Include="Fragments\ListFragment.cs" />
