@@ -33,14 +33,10 @@ namespace Cashflow9000
 
     public static class FragmentUtil
     {
-        public static void LoadFragment(Activity activity, LayoutId id, Fragment fragment)
+        public static void LoadFragment(Activity activity, int id, Fragment fragment)
         {
-            FrameLayout layout = new FrameLayout(activity);
-            layout.Id = (int)id;
-            activity.SetContentView(layout);
-
             FragmentTransaction ft = activity.FragmentManager.BeginTransaction();
-            ft.Replace(layout.Id, fragment);
+            ft.Replace(id, fragment);
             ft.SetTransition(FragmentTransit.FragmentFade);
             ft.Commit();
         }

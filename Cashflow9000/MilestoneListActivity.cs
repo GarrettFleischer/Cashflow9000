@@ -26,7 +26,7 @@ namespace Cashflow9000
             base.OnCreate(savedInstanceState);
 
             Fragment = new ListFragment(Resource.String.milestone, new MilestoneAdapter(this,false));
-            FragmentUtil.LoadFragment(this, LayoutId.MilestoneListActivity, Fragment);
+            //FragmentUtil.LoadFragment(this, LayoutId.MilestoneListActivity, Fragment);
         }
 
         protected override void OnResume()

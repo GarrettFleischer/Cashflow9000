@@ -86,7 +86,6 @@
   <ItemGroup>
     <Compile Include="Adapters\BudgetAdapter.cs" />
     <Compile Include="Adapters\CategoryAdapter.cs" />
-    <Compile Include="Adapters\SpinnerAdapter.cs" />
     <Compile Include="Adapters\MilestoneAdapter.cs" />
     <Compile Include="Adapters\PlannedTransactionAdapter.cs" />
     <Compile Include="Adapters\RecurrenceAdapter.cs" />
@@ -143,6 +142,15 @@
     <AndroidResource Include="Resources\layout\ModelList.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\TransactionActivity.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ListActivity.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout-large\ListActivity.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -154,7 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\layout-large\" />
     <Folder Include="Resources\mipmap-hdpi\" />
     <Folder Include="Resources\mipmap-mdpi\" />
     <Folder Include="Resources\mipmap-xhdpi\" />

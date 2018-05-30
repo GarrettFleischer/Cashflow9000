@@ -22,7 +22,7 @@ namespace Cashflow9000
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            FragmentUtil.LoadFragment(this, LayoutId.PlannedTransactionActivity, new PlannedTransactionFragment(Intent.GetIntExtra(ExtraPlannedPaymentId, -1)));
+            //FragmentUtil.LoadFragment(this, LayoutId.PlannedTransactionActivity, new PlannedTransactionFragment(Intent.GetIntExtra(ExtraPlannedPaymentId, -1)));
         }
 
         public void PlannedPaymentSaved(PlannedTransaction plannedTransaction)

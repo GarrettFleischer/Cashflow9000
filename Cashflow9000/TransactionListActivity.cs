@@ -13,21 +13,26 @@ using Android.Views;
 using Android.Widget;
 using Cashflow9000.Adapters;
 using Cashflow9000.Fragments;
+using Cashflow9000.Models;
 using ListFragment = Cashflow9000.Fragments.ListFragment;
 
 namespace Cashflow9000
 {
     [Activity(Label = "TransactionListActivity")]
-    public class TransactionListActivity : Activity, ListFragment.IListListener
+    public class TransactionListActivity : Activity, ListFragment.IListListener, TransactionFragment.ITransactionFragmentListener
     {
         private ListFragment Fragment;
+        private bool ItemExists;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.ListActivity);
 
             Fragment = new ListFragment(Resource.String.transaction, new TransactionAdapter(this, CashflowData.Transactions));
-            FragmentUtil.LoadFragment(this, LayoutId.TransactionListActivity, Fragment);
+            FragmentUtil.LoadFragment(this, Resource.Id.containerList, Fragment);
+
+            ItemExists = FindViewById(Resource.Id.containerItem) != null;
         }
 
         protected override void OnResume()
@@ -38,14 +43,34 @@ namespace Cashflow9000
         
         public void OnAdd()
         {
-            StartActivity(new Intent(this, typeof(TransactionActivity)));
+            if (ItemExists)
+            {
+                FragmentUtil.LoadFragment(this, Resource.Id.containerItem, new TransactionFragment());
+            }
+            else
+            {
+                StartActivity(new Intent(this, typeof(TransactionActivity)));
+            }
         }
 
         public void OnSelect(long id)
         {
-            Intent i = new Intent(this, typeof(TransactionActivity));
-            i.PutExtra(TransactionActivity.ExtraTransactionId, (int)id);
-            StartActivity(i);
+            if (ItemExists)
+            {
+                FragmentUtil.LoadFragment(this, Resource.Id.containerItem, new TransactionFragment((int)id));
+            }
+            else
+            {
+                Intent i = new Intent(this, typeof(TransactionActivity));
+                i.PutExtra(TransactionActivity.ExtraTransactionId, (int)id);
+                StartActivity(i);
+            }
+        }
+
+        public void TransactionSaved(Transaction transaction)
+        {
+            CashflowData.InsertOrReplace(transaction);
+            Fragment.SetAdapter(new TransactionAdapter(this, CashflowData.Transactions));
         }
     }
 }

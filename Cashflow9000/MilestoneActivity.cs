@@ -26,7 +26,7 @@ namespace Cashflow9000
         {
             base.OnCreate(savedInstanceState);
 
-            FragmentUtil.LoadFragment(this, LayoutId.MilestoneActivity, new MilestoneFragment(Intent.GetIntExtra(ExtraMilestoneId, -1)));
+            //FragmentUtil.LoadFragment(this, LayoutId.MilestoneActivity, new MilestoneFragment(Intent.GetIntExtra(ExtraMilestoneId, -1)));
         }
 
         public void OnSave(Milestone milestone)

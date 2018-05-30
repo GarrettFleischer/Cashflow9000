@@ -33,11 +33,7 @@ namespace Cashflow9000.Fragments
         private TextView TextDate;
 
         protected Transaction Transaction;
-
-        //private ICollection<Category> Categories;
-
-        public const string ExtraTransactionId = "TransactionActivity.TransactionId";
-
+        
         // use case for both category and milestone is paying off a mortgage, it is both a recurring budget item and a long term goal
 
         public TransactionFragment(int transactionId = -1)

@@ -17,7 +17,7 @@ namespace Cashflow9000
             base.OnCreate(savedInstanceState);
 
             Fragment = new ListFragment(Resource.String.plannedTransaction, new PlannedTransactionAdapter(this));
-            FragmentUtil.LoadFragment(this, LayoutId.PlannedTransactionListActivity, Fragment);
+            //FragmentUtil.LoadFragment(this, LayoutId.PlannedTransactionListActivity, Fragment);
         }
 
         protected override void OnResume()

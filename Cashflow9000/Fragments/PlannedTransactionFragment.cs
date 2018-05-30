@@ -23,7 +23,7 @@ namespace Cashflow9000.Fragments
 
         private Spinner SpinRecurrence;
 
-        public PlannedTransactionFragment(int plannedPaymentId = -1)
+        public PlannedTransactionFragment(int plannedPaymentId)
         {
             Transaction = ((plannedPaymentId == -1) ? new PlannedTransaction() : CashflowData.PlannedTransaction(plannedPaymentId));
         }
@@ -31,7 +31,6 @@ namespace Cashflow9000.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = base.OnCreateView(inflater, container, savedInstanceState);
-
 
             view.FindViewById<TextView>(Resource.Id.textTitle).SetText(Resource.String.plannedTransaction);
             view.FindViewById<TextView>(Resource.Id.textRecurrence).Visibility = ViewStates.Visible;
