@@ -142,13 +142,13 @@
     <AndroidResource Include="Resources\layout\ModelList.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\TransactionActivity.axml">
+    <AndroidResource Include="Resources\layout\ItemActivity.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ListActivity.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout-large\ListActivity.axml">
+    <AndroidResource Include="Resources\layout-xlarge\ListActivity.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

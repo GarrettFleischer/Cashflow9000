@@ -32,7 +32,7 @@ namespace Cashflow9000
         {
             // Init view
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.TransactionActivity);
+            SetContentView(Resource.Layout.ItemActivity);
 
             int transactionId = Intent.GetIntExtra(ExtraTransactionId, -1);
             FragmentUtil.LoadFragment(this, Resource.Id.container, new TransactionFragment(transactionId));

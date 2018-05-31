@@ -12,10 +12,21 @@ namespace Cashflow9000
 {
     public class EditCurrency : EditText
     {
+        public event EventHandler ValueChanged;
+
         public decimal Value
         {
-            get => (decimal) NumberFormat.CurrencyInstance.ParseCurrency(Text, new ParsePosition(0)).Number.DoubleValue();
-            set => Text = (value * 100).ToString(CultureInfo.CurrentCulture);
+            get => (decimal)NumberFormat.CurrencyInstance.ParseCurrency(Text, new ParsePosition(0)).Number.DoubleValue();
+            set
+            {
+                TextChanged -= OnTextChanged;
+                string cleanString = Regex.Replace(value.ToString(CultureInfo.CurrentCulture), @"[^0-9a-zA-Z\.]+", "");
+                string formatted = NumberFormat.CurrencyInstance.Format(Double.Parse(cleanString));
+                Text = formatted;
+                TextChanged += OnTextChanged;
+                SetSelection(formatted.Length);
+                ValueChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public EditCurrency(Context context, IAttributeSet attrs) :
@@ -45,6 +56,7 @@ namespace Cashflow9000
             Text = formatted;
             TextChanged += OnTextChanged;
             SetSelection(formatted.Length);
+            ValueChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

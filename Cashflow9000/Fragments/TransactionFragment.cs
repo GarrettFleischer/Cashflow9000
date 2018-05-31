@@ -58,7 +58,7 @@ namespace Cashflow9000.Fragments
             ButtonSave.Click += ButtonSaveOnClick;
 
             EditAmount.Value = Transaction.Amount;
-            EditAmount.AfterTextChanged += EditAmountOnAfterTextChanged;
+            EditAmount.ValueChanged += EditAmountOnValueChanged;
 
             ToggleType.Checked = Transaction.Type == TransactionType.Income;
             ToggleType.CheckedChange += ToggleTypeOnCheckedChange;
@@ -84,6 +84,11 @@ namespace Cashflow9000.Fragments
             UpdateUI();
 
             return view;
+        }
+
+        private void EditAmountOnValueChanged(object sender, EventArgs eventArgs)
+        {
+            Transaction.Amount = EditAmount.Value;
         }
 
         private void TextDateOnClick(object sender, EventArgs eventArgs)
@@ -115,11 +120,6 @@ namespace Cashflow9000.Fragments
         protected virtual void ButtonSaveOnClick(object sender, EventArgs eventArgs)
         {
             ((ITransactionFragmentListener)Activity)?.TransactionSaved(Transaction);
-        }
-
-        private void EditAmountOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
-        {
-            Transaction.Amount = EditAmount.Value;
         }
 
         private void ToggleTypeOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs checkedChangeEventArgs)

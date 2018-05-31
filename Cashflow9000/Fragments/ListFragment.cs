@@ -41,6 +41,7 @@ namespace Cashflow9000.Fragments
             TextTitle = view.FindViewById<TextView>(Resource.Id.textTitle);
             ButtonAdd = view.FindViewById<Button>(Resource.Id.buttonAdd);
             ListView = view.FindViewById<ListView>(Resource.Id.listView);
+            //ListView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.MatchParent);
 
             TextTitle.SetText(TitleId);
 
