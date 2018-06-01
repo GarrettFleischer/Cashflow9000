@@ -12,6 +12,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cashflow9000.Adapters;
+using Cashflow9000.Models;
 
 namespace Cashflow9000
 {
@@ -37,12 +38,12 @@ namespace Cashflow9000
             ListView.Selector = new ColorDrawable(Color.Gray);
             ListView.ItemClick += ListViewOnItemClick;
 
-            ListAdapter = new BudgetAdapter(this);
+            ListAdapter = new BudgetAdapter(this, CashflowData.Recurrences.Single(r => r.Type == RecurrenceType.Monthly));
         }
         protected override void OnResume()
         {
             base.OnResume();
-            ListAdapter = new BudgetAdapter(this);
+            ListAdapter = new BudgetAdapter(this, CashflowData.Recurrences.Single(r => r.Type == RecurrenceType.Monthly));
         }
 
         private void AddButtonOnClick(object sender, EventArgs eventArgs)

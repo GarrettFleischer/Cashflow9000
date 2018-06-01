@@ -19,11 +19,13 @@ namespace Cashflow9000.Adapters
 
         private readonly Activity Context;
         public List<Budget> Budgets { get; }
-        private IEnumerable<Transaction> Transactions;
+        private readonly IEnumerable<Transaction> Transactions;
 
-        public BudgetAdapter(Activity context)
+        public BudgetAdapter(Activity context, Recurrence recurrence)
         {
             Context = context;
+
+            // TODO switch based on recurrence type
             Budgets = CashflowData.Budgets;
             Transactions = CashflowData.Transactions.Where(t => t.Date.Month == DateTime.Today.Month);
         }
@@ -37,8 +39,7 @@ namespace Cashflow9000.Adapters
             // Get our object for position
             Budget item = Budgets[position];
             double total = (double) item.Amount;
-            // TODO switch based on recurrence type
-            IEnumerable<Transaction> transactions = Transactions.Where(t => t.CategoryId == item.CategoryId);
+            var transactions = Transactions.Where(t => t.CategoryId == item.CategoryId);
 
             double balance = (double)transactions.Sum(t => t.Amount);
 
@@ -53,9 +54,6 @@ namespace Cashflow9000.Adapters
             textRatio.Text = $"{NumberFormat.CurrencyInstance.Format(balance)}/{NumberFormat.CurrencyInstance.Format(total)}";
             progressTotal.Progress = (int)((balance / total) * 100);
 
-            //view?.SetText(item.ToString(), TextView.BufferType.Normal);
-
-            //Finally return the view
             return view;
         }
     }
