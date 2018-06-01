@@ -26,15 +26,17 @@ namespace Cashflow9000.Adapters
         }
 
         public override Recurrence this[int position] => Recurrences[position];
-        public override long GetItemId(int position) => Recurrences[position].Id ?? -1;
+        public override long GetItemId(int position) => Recurrences[position]?.Id ?? -1;
         public override int Count => Recurrences.Count;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
+            Recurrence item = Recurrences[position];
+
             TextView view = (convertView ??
                         Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
-            view?.SetText(Context.Resources.GetString(Recurrences[position]?.StringId ?? -1), TextView.BufferType.Normal);
+            view?.SetText(item == null ? "" : Context.Resources.GetString(item.StringId), TextView.BufferType.Normal);
 
             return view;
         }

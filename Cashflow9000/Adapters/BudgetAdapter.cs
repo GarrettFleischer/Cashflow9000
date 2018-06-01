@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Icu.Text;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -17,27 +18,42 @@ namespace Cashflow9000.Adapters
     {
 
         private readonly Activity Context;
-        public List<Budget> Recurrences { get; }
+        public List<Budget> Budgets { get; }
+        private IEnumerable<Transaction> Transactions;
 
         public BudgetAdapter(Activity context)
         {
             Context = context;
-            Recurrences = CashflowData.Budgets;
+            Budgets = CashflowData.Budgets;
+            Transactions = CashflowData.Transactions.Where(t => t.Date.Month == DateTime.Today.Month);
         }
 
-        public override Budget this[int position] => Recurrences[position];
-        public override long GetItemId(int position) => Recurrences[position].Id ?? -1;
-        public override int Count => Recurrences.Count;
+        public override Budget this[int position] => Budgets[position];
+        public override long GetItemId(int position) => Budgets[position].Id ?? -1;
+        public override int Count => Budgets.Count;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             // Get our object for position
-            Budget item = Recurrences[position];
+            Budget item = Budgets[position];
+            double total = (double) item.Amount;
+            // TODO switch based on recurrence type
+            IEnumerable<Transaction> transactions = Transactions.Where(t => t.CategoryId == item.CategoryId);
 
-            TextView view = (convertView ??
-                        Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
+            double balance = (double)transactions.Sum(t => t.Amount);
 
-            view?.SetText(item.ToString(), TextView.BufferType.Normal);
+            View view = convertView ??
+                        Context.LayoutInflater.Inflate(Resource.Layout.BudgetListItem, parent, false);
+
+            TextView textName = view.FindViewById<TextView>(Resource.Id.textName);
+            TextView textRatio = view.FindViewById<TextView>(Resource.Id.textRatio);
+            ProgressBar progressTotal = view.FindViewById<ProgressBar>(Resource.Id.progressTotal);
+
+            textName.Text = item.Name;
+            textRatio.Text = $"{NumberFormat.CurrencyInstance.Format(balance)}/{NumberFormat.CurrencyInstance.Format(total)}";
+            progressTotal.Progress = (int)((balance / total) * 100);
+
+            //view?.SetText(item.ToString(), TextView.BufferType.Normal);
 
             //Finally return the view
             return view;
