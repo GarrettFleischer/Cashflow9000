@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Android.App;
 using Android.Content;
+using Android.Icu.Text;
 using Android.Widget;
 using Android.OS;
 using Android.Views;
@@ -21,40 +23,40 @@ namespace Cashflow9000
             //SetActionBar(toolbar);
             //ActionBar.Title = "My Toolbar";
 
+            UpdateBalance();
+
             Button transaction = FindViewById<Button>(Resource.Id.buttonTransaction);
-            transaction.Click += delegate
-            {
-                Intent i = new Intent(this, typeof(TransactionListActivity));
-                StartActivity(i);
-            };
-
-            Button milestone = FindViewById<Button>(Resource.Id.buttonMilestone);
-            milestone.Click += delegate
-            {
-                Intent i = new Intent(this, typeof(MilestoneListActivity));
-                StartActivity(i);
-            };
-
-            Button categories = FindViewById<Button>(Resource.Id.buttonCategories);
-            categories.Click += delegate
-            {
-                Intent i = new Intent(this, typeof(CategoryListActivity));
-                StartActivity(i);
-            };
-
-            Button budgets = FindViewById<Button>(Resource.Id.buttonBudgets);
-            budgets.Click += delegate
-            {
-                Intent i = new Intent(this, typeof(BudgetListActivity));
-                StartActivity(i);
-            };
+            transaction.Click += delegate { StartActivityType(typeof(TransactionListActivity)); };
 
             Button plannedTransactions = FindViewById<Button>(Resource.Id.buttonPlannedTransactions);
-            plannedTransactions.Click += delegate
-            {
-                Intent i = new Intent(this, typeof(PlannedTransactionListActivity));
-                StartActivity(i);
-            };
+            plannedTransactions.Click += delegate { StartActivityType(typeof(PlannedTransactionListActivity)); };
+
+            Button budgets = FindViewById<Button>(Resource.Id.buttonBudgets);
+            budgets.Click += delegate { StartActivityType(typeof(BudgetListActivity)); };
+
+            Button milestone = FindViewById<Button>(Resource.Id.buttonMilestone);
+            milestone.Click += delegate { StartActivityType(typeof(MilestoneListActivity)); };
+
+            Button categories = FindViewById<Button>(Resource.Id.buttonCategories);
+            categories.Click += delegate { StartActivityType(typeof(CategoryListActivity)); };
+        }
+
+        void StartActivityType(Type type)
+        {
+            Intent i = new Intent(this, type);
+            StartActivity(i);
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            UpdateBalance();
+        }
+
+        void UpdateBalance()
+        {
+            TextView balance = FindViewById<TextView>(Resource.Id.textBalance);
+            balance.Text = NumberFormat.CurrencyInstance.Format((double)CashflowData.Transactions.Sum(x => x.Value));
         }
     }
 }

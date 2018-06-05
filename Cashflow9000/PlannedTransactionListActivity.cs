@@ -3,39 +3,34 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using Cashflow9000.Adapters;
+using Cashflow9000.Fragments;
+using Cashflow9000.Models;
 using ListFragment = Cashflow9000.Fragments.ListFragment;
 
 namespace Cashflow9000
 {
     [Activity(Label = "PlannedTransactionListActivity")]
-    public class PlannedTransactionListActivity : Activity, ListFragment.IListListener
+    public class PlannedTransactionListActivity : ListActivity<PlannedTransactionActivity>, PlannedTransactionFragment.IPlannedTransactionListener
     {
-        private ListFragment Fragment;
-
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override IListAdapter GetListAdapter()
         {
-            base.OnCreate(savedInstanceState);
-
-            Fragment = new ListFragment(Resource.String.plannedTransaction, new PlannedTransactionAdapter(this));
-            //FragmentUtil.LoadFragment(this, LayoutId.PlannedTransactionListActivity, Fragment);
+            return new PlannedTransactionAdapter(this);
         }
 
-        protected override void OnResume()
+        protected override Fragment GetItemFragment(int id = -1)
         {
-            base.OnResume();
-            Fragment.SetAdapter(new PlannedTransactionAdapter(this));
+            return new PlannedTransactionFragment(id);
         }
 
-        public void OnAdd()
+        protected override string GetExtraId()
         {
-            StartActivity(new Intent(this, typeof(PlannedTransactionActivity)));
+            return PlannedTransactionActivity.ExtraPlannedPaymentId;
         }
 
-        public void OnSelect(long id)
+        public void PlannedPaymentSaved(PlannedTransaction plannedTransaction)
         {
-            Intent i = new Intent(this, typeof(PlannedTransactionActivity));
-            i.PutExtra(PlannedTransactionActivity.ExtraPlannedPaymentId, (int)id);
-            StartActivity(i);
+            CashflowData.InsertOrReplace(plannedTransaction);
+            UpdateListAdapter();
         }
     }
 }

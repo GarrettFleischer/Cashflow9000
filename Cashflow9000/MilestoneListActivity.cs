@@ -12,39 +12,35 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cashflow9000.Adapters;
+using Cashflow9000.Fragments;
+using Cashflow9000.Models;
 using ListFragment = Cashflow9000.Fragments.ListFragment;
 
 namespace Cashflow9000
 {
     [Activity(Label = "MilestoneListActivity")]
-    public class MilestoneListActivity : Activity, ListFragment.IListListener
+    public class MilestoneListActivity : ListActivity<MilestoneActivity>, MilestoneFragment.IMilestoneFragmentListener
     {
-        private ListFragment Fragment;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override IListAdapter GetListAdapter()
         {
-            base.OnCreate(savedInstanceState);
-
-            Fragment = new ListFragment(Resource.String.milestone, new MilestoneAdapter(this,false));
-            //FragmentUtil.LoadFragment(this, LayoutId.MilestoneListActivity, Fragment);
+            return new MilestoneAdapter(this, false);
         }
 
-        protected override void OnResume()
+        protected override Fragment GetItemFragment(int id = -1)
         {
-            base.OnResume();
-            Fragment.SetAdapter(new MilestoneAdapter(this, false));
+            return new MilestoneFragment(id);
         }
 
-        public void OnAdd()
+        protected override string GetExtraId()
         {
-            StartActivity(new Intent(this, typeof(MilestoneActivity)));
+            return MilestoneActivity.ExtraMilestoneId;
         }
 
-        public void OnSelect(long id)
+        public void MilestoneSaved(Milestone milestone)
         {
-            Intent i = new Intent(this, typeof(MilestoneActivity));
-            i.PutExtra(MilestoneActivity.ExtraMilestoneId, (int)id);
-            StartActivity(i);
+            CashflowData.InsertOrReplace(milestone);
+            UpdateListAdapter();
         }
     }
 }

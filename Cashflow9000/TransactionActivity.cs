@@ -22,20 +22,18 @@ namespace Cashflow9000
 {
 
     [Activity(Label = "Transaction")]
-    public class TransactionActivity : Activity, TransactionFragment.ITransactionFragmentListener
+    public class TransactionActivity : ItemActivity, TransactionFragment.ITransactionFragmentListener
     {
         public const string ExtraTransactionId = "TransactionActivity.TransactionId";
-
-        // use case for both category and milestone is paying off a mortgage, it is both a recurring budget item and a long term goal
-
-        protected override void OnCreate(Bundle savedInstanceState)
+        
+        protected override Fragment GetFragment(int id)
         {
-            // Init view
-            base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.ItemActivity);
+            return new TransactionFragment(id);
+        }
 
-            int transactionId = Intent.GetIntExtra(ExtraTransactionId, -1);
-            FragmentUtil.LoadFragment(this, Resource.Id.container, new TransactionFragment(transactionId));
+        protected override string GetExtraId()
+        {
+            return ExtraTransactionId;
         }
 
         public void TransactionSaved(Transaction transaction)

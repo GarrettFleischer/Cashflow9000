@@ -12,50 +12,33 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cashflow9000.Adapters;
+using Cashflow9000.Fragments;
 using Cashflow9000.Models;
 
 namespace Cashflow9000
 {
     [Activity(Label = "BudgetListActivity")]
-    public class BudgetListActivity : ListActivity
+    public class BudgetListActivity : ListActivity<BudgetActivity>, BudgetFragment.IBudgetFragmentListener
     {
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override IListAdapter GetListAdapter()
         {
-            base.OnCreate(savedInstanceState);
-
-            // Create header layout
-            LinearLayout layout = new LinearLayout(this) { Orientation = Orientation.Vertical };
-            layout.SetGravity(GravityFlags.Right);
-
-            Button buttonAdd = new Button(this);
-            buttonAdd.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-            buttonAdd.SetText(Resource.String.add);
-            buttonAdd.Click += AddButtonOnClick;
-
-            layout.AddView(buttonAdd);
-
-            ListView.AddHeaderView(layout);
-            ListView.Selector = new ColorDrawable(Color.Gray);
-            ListView.ItemClick += ListViewOnItemClick;
-
-            ListAdapter = new BudgetAdapter(this, CashflowData.Recurrences.Single(r => r.Type == RecurrenceType.Monthly));
-        }
-        protected override void OnResume()
-        {
-            base.OnResume();
-            ListAdapter = new BudgetAdapter(this, CashflowData.Recurrences.Single(r => r.Type == RecurrenceType.Monthly));
+            return new BudgetAdapter(this, CashflowData.Recurrences.Single(r => r.Type == RecurrenceType.Monthly));
         }
 
-        private void AddButtonOnClick(object sender, EventArgs eventArgs)
+        protected override Fragment GetItemFragment(int id = -1)
         {
-            StartActivity(new Intent(this, typeof(BudgetActivity)));
+            return new BudgetFragment(id);
         }
 
-        private void ListViewOnItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        protected override string GetExtraId()
         {
-            Intent i = new Intent(this, typeof(BudgetActivity));
-            i.PutExtra(BudgetActivity.ExtraBudgetId, (int)e.Id);
-            StartActivity(i);
+            return BudgetActivity.ExtraBudgetId;
+        }
+
+        public void BudgetSaved(Budget budget)
+        {
+            CashflowData.InsertOrReplace(budget);
+            UpdateListAdapter();
         }
     }
 }

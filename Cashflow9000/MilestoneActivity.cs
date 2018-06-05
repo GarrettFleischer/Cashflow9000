@@ -18,18 +18,21 @@ using Cashflow9000.Models;
 namespace Cashflow9000
 {
     [Activity(Label = "MilestoneActivity")]
-    public class MilestoneActivity : Activity, MilestoneFragment.IMilestoneFragmentListener
+    public class MilestoneActivity : ItemActivity, MilestoneFragment.IMilestoneFragmentListener
     {
         public const string ExtraMilestoneId = "MilestoneActivity.ExtraMilestoneId";
-
-        protected override void OnCreate(Bundle savedInstanceState)
+        
+        protected override Fragment GetFragment(int id)
         {
-            base.OnCreate(savedInstanceState);
-
-            //FragmentUtil.LoadFragment(this, LayoutId.MilestoneActivity, new MilestoneFragment(Intent.GetIntExtra(ExtraMilestoneId, -1)));
+            return new MilestoneFragment(id);
         }
 
-        public void OnSave(Milestone milestone)
+        protected override string GetExtraId()
+        {
+            return ExtraMilestoneId;
+        }
+
+        public void MilestoneSaved(Milestone milestone)
         {
             CashflowData.InsertOrReplace(milestone);
             Finish();

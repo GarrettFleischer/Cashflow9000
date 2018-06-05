@@ -96,11 +96,15 @@
     <Compile Include="CashflowData.cs" />
     <Compile Include="CategoryActivity.cs" />
     <Compile Include="CategoryListActivity.cs" />
+    <Compile Include="Fragments\BudgetFragment.cs" />
+    <Compile Include="Fragments\CategoryFragment.cs" />
     <Compile Include="Fragments\MilestoneFragment.cs" />
     <Compile Include="Fragments\PlannedTransactionFragment.cs" />
     <Compile Include="Fragments\TransactionFragment.cs" />
     <Compile Include="Fragments\ListFragment.cs" />
+    <Compile Include="ItemActivity.cs" />
     <Compile Include="LayoutId.cs" />
+    <Compile Include="ListActivity.cs" />
     <Compile Include="MilestoneListActivity.cs" />
     <Compile Include="Models\Budget.cs" />
     <Compile Include="Models\Category.cs" />

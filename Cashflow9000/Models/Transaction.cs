@@ -19,6 +19,9 @@ namespace Cashflow9000.Models
 
         public decimal Amount { get; set; }
 
+        [Ignore]
+        public decimal Value => Amount * (Type == TransactionType.Expense ? -1 : 1);
+
         public DateTime Date { get; set; }
 
         public string Note { get; set; }

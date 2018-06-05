@@ -19,58 +19,27 @@ using ListFragment = Cashflow9000.Fragments.ListFragment;
 namespace Cashflow9000
 {
     [Activity(Label = "TransactionListActivity")]
-    public class TransactionListActivity : Activity, ListFragment.IListListener, TransactionFragment.ITransactionFragmentListener
+    public class TransactionListActivity : ListActivity<TransactionActivity>, TransactionFragment.ITransactionFragmentListener
     {
-        private ListFragment Fragment;
-        private bool ItemExists;
-
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override IListAdapter GetListAdapter()
         {
-            base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.ListActivity);
-
-            Fragment = new ListFragment(Resource.String.transaction, new TransactionAdapter(this, CashflowData.Transactions));
-            FragmentUtil.LoadFragment(this, Resource.Id.containerList, Fragment);
-
-            ItemExists = FindViewById(Resource.Id.containerItem) != null;
+            return new TransactionAdapter(this, CashflowData.Transactions);
         }
 
-        protected override void OnResume()
+        protected override Fragment GetItemFragment(int id = -1)
         {
-            base.OnResume();
-            Fragment.SetAdapter(new TransactionAdapter(this, CashflowData.Transactions));
-        }
-        
-        public void OnAdd()
-        {
-            if (ItemExists)
-            {
-                FragmentUtil.LoadFragment(this, Resource.Id.containerItem, new TransactionFragment());
-            }
-            else
-            {
-                StartActivity(new Intent(this, typeof(TransactionActivity)));
-            }
+            return new TransactionFragment(id);
         }
 
-        public void OnSelect(long id)
+        protected override string GetExtraId()
         {
-            if (ItemExists)
-            {
-                FragmentUtil.LoadFragment(this, Resource.Id.containerItem, new TransactionFragment((int)id));
-            }
-            else
-            {
-                Intent i = new Intent(this, typeof(TransactionActivity));
-                i.PutExtra(TransactionActivity.ExtraTransactionId, (int)id);
-                StartActivity(i);
-            }
+            return TransactionActivity.ExtraTransactionId;
         }
 
         public void TransactionSaved(Transaction transaction)
         {
             CashflowData.InsertOrReplace(transaction);
-            Fragment.SetAdapter(new TransactionAdapter(this, CashflowData.Transactions));
+            UpdateListAdapter();
         }
     }
 }

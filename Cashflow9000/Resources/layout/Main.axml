@@ -8,17 +8,41 @@
 <!--<include
         android:id="@+id/toolbar"
         layout="@layout/Toolbar" />-->
-    <TextView
-        android:text="Balance"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textBalance" />
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="@string/balance"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:text="$0.00"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginLeft="15dp" />
+    </LinearLayout>
     <Button
         android:text="Transactions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonTransaction" />
+    <Button
+        android:text="Planned Transactions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonPlannedTransactions" />
+    <Button
+        android:text="Budgets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBudgets" />
     <Button
         android:text="Milestones"
         android:layout_width="match_parent"
@@ -29,14 +53,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonCategories" />
-    <Button
-        android:text="Budgets"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonBudgets" />
-    <Button
-        android:text="Planned Transactions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonPlannedTransactions" />
 </LinearLayout>

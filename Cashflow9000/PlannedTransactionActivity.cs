@@ -15,14 +15,18 @@ using Cashflow9000.Models;
 namespace Cashflow9000
 {
     [Activity(Label = "PlannedTransactionActivity")]
-    public class PlannedTransactionActivity : Activity, PlannedTransactionFragment.IPlannedTransactionListener
+    public class PlannedTransactionActivity : ItemActivity, PlannedTransactionFragment.IPlannedTransactionListener
     {
         public const string ExtraPlannedPaymentId = "PlannedTransactionActivity.ExtraPlannedPaymentId";
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override Fragment GetFragment(int id)
         {
-            base.OnCreate(savedInstanceState);
-            //FragmentUtil.LoadFragment(this, LayoutId.PlannedTransactionActivity, new PlannedTransactionFragment(Intent.GetIntExtra(ExtraPlannedPaymentId, -1)));
+            return new PlannedTransactionFragment(id);
+        }
+
+        protected override string GetExtraId()
+        {
+            return ExtraPlannedPaymentId;
         }
 
         public void PlannedPaymentSaved(PlannedTransaction plannedTransaction)
