@@ -21,6 +21,10 @@ namespace Cashflow9000
     [Activity(Label = "MilestoneListActivity")]
     public class MilestoneListActivity : ListActivity<MilestoneActivity>, MilestoneFragment.IMilestoneFragmentListener
     {
+        protected override int GetTitleId()
+        {
+            return Resource.String.milestone;
+        }
 
         protected override IListAdapter GetListAdapter()
         {

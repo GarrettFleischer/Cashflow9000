@@ -26,9 +26,11 @@ namespace Cashflow9000.Fragments
         private EditText EditName;
         private Spinner SpinType;
 
-        private Category Category;
+        private readonly Category Category;
+        
+        public CategoryFragment() : this(-1) {}
 
-        public CategoryFragment(int categoryId = -1)
+        public CategoryFragment(int categoryId)
         {
             Category = ((categoryId == -1) ? new Category() : CashflowData.Category(categoryId));
         }

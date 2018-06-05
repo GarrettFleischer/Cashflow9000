@@ -58,14 +58,14 @@
             p1:layout_marginTop="20dp" />
         <TextView xmlns:tools="http://schemas.android.com/tools"
             p1:text="@string/recurrence"
-            p1:textAppearance="?android:attr/textAppearanceMedium"
+            p1:textAppearance="?android:attr/textAppearanceSmall"
             p1:id="@+id/textRecurrence"
             p1:layout_marginTop="20dp" />
         <Spinner xmlns:tools="http://schemas.android.com/tools"
             p1:id="@+id/spinRecurrence"
             p1:layout_gravity="fill_horizontal"
             p1:layout_columnSpan="2"
-            p1:layout_marginLeft="15dp"
+            p1:layout_marginLeft="5dp"
             p1:layout_marginTop="20dp" />
         <TextView
             p1:text="@string/date"

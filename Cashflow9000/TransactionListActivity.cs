@@ -21,6 +21,11 @@ namespace Cashflow9000
     [Activity(Label = "TransactionListActivity")]
     public class TransactionListActivity : ListActivity<TransactionActivity>, TransactionFragment.ITransactionFragmentListener
     {
+        protected override int GetTitleId()
+        {
+            return Resource.String.transaction;
+        }
+
         protected override IListAdapter GetListAdapter()
         {
             return new TransactionAdapter(this, CashflowData.Transactions);

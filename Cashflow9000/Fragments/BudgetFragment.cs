@@ -30,7 +30,9 @@ namespace Cashflow9000.Fragments
 
         private Budget Budget;
 
-        public BudgetFragment(int id = -1)
+        public BudgetFragment() : this(-1) {}
+
+        public BudgetFragment(int id)
         {
             Budget = ((id == -1) ? new Budget() : CashflowData.Budget(id));
         }

@@ -22,6 +22,11 @@ namespace Cashflow9000
     [Activity(Label = "CategoryListActivity")]
     public class CategoryListActivity : ListActivity<CategoryActivity>, CategoryFragment.ICategoryFragmentListener
     {
+        protected override int GetTitleId()
+        {
+            return Resource.String.category;
+        }
+
         protected override IListAdapter GetListAdapter()
         {
             return new CategoryAdapter(this, TransactionType.Any, false);

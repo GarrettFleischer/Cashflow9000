@@ -37,7 +37,8 @@
         android:text="Planned Transactions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonPlannedTransactions" />
+        android:id="@+id/buttonPlannedTransactions"
+        android:visibility="gone" />
     <Button
         android:text="Budgets"
         android:layout_width="match_parent"

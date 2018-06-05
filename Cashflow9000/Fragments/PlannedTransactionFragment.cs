@@ -23,6 +23,8 @@ namespace Cashflow9000.Fragments
 
         private Spinner SpinRecurrence;
 
+        public PlannedTransactionFragment() : this(-1) {}
+
         public PlannedTransactionFragment(int plannedPaymentId)
         {
             Transaction = ((plannedPaymentId == -1) ? new PlannedTransaction() : CashflowData.PlannedTransaction(plannedPaymentId));
@@ -35,11 +37,12 @@ namespace Cashflow9000.Fragments
             view.FindViewById<TextView>(Resource.Id.textTitle).SetText(Resource.String.plannedTransaction);
             view.FindViewById<TextView>(Resource.Id.textRecurrence).Visibility = ViewStates.Visible;
 
-            RecurrenceAdapter recurrenceAdapter = new RecurrenceAdapter(Activity, true);
+            RecurrenceAdapter recurrenceAdapter = new RecurrenceAdapter(Activity, false);
             SpinRecurrence = view.FindViewById<Spinner>(Resource.Id.spinRecurrence);
             SpinRecurrence.Visibility = ViewStates.Visible;
             SpinRecurrence.Adapter = recurrenceAdapter;
-            SpinRecurrence.SetSelection(recurrenceAdapter.Recurrences.FindIndex(c => c.Id == ((PlannedTransaction)Transaction).RecurrenceId));
+            int index = recurrenceAdapter.Recurrences.FindIndex(c => c.Id == ((PlannedTransaction) Transaction).RecurrenceId);
+            SpinRecurrence.SetSelection(index);
             SpinRecurrence.ItemSelected += SpinRecurrenceOnItemSelected;
 
             return view;

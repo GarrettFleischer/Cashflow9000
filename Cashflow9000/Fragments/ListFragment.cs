@@ -29,6 +29,8 @@ namespace Cashflow9000.Fragments
         private readonly int TitleId;
         private readonly IListAdapter Adapter;
 
+        public ListFragment() : this(-1, null) { }
+
         public ListFragment(int titleId, IListAdapter adapter)
         {
             TitleId = titleId;
@@ -42,10 +44,10 @@ namespace Cashflow9000.Fragments
             ButtonAdd = view.FindViewById<Button>(Resource.Id.buttonAdd);
             ListView = view.FindViewById<ListView>(Resource.Id.listView);
 
+            if (TitleId == -1) return view;
+
             TextTitle.SetText(TitleId);
-
             ButtonAdd.Click += ButtonAddOnClick;
-
             ListView.Adapter = Adapter;
             ListView.ItemClick += ListViewOnItemClick;
 

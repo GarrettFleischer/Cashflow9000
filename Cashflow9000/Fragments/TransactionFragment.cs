@@ -33,8 +33,10 @@ namespace Cashflow9000.Fragments
         private TextView TextDate;
 
         protected Transaction Transaction;
-        
+
         // use case for both category and milestone is paying off a mortgage, it is both a recurring budget item and a long term goal
+
+        public TransactionFragment() : this(-1) {}
 
         public TransactionFragment(int transactionId = -1)
         {
@@ -52,8 +54,8 @@ namespace Cashflow9000.Fragments
             TextDate = view.FindViewById<TextView>(Resource.Id.textDate);
             EditNote = view.FindViewById<EditText>(Resource.Id.editNote);
 
-            view.FindViewById<Spinner>(Resource.Id.spinRecurrence).Visibility = ViewStates.Gone;
-            view.FindViewById<TextView>(Resource.Id.textRecurrence).Visibility = ViewStates.Gone;
+            view.FindViewById<Spinner>(Resource.Id.spinRecurrence).Visibility = ViewStates.Invisible;
+            view.FindViewById<TextView>(Resource.Id.textRecurrence).Visibility = ViewStates.Invisible;
 
             ButtonSave.Click += ButtonSaveOnClick;
 

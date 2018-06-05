@@ -12,6 +12,11 @@ namespace Cashflow9000
     [Activity(Label = "PlannedTransactionListActivity")]
     public class PlannedTransactionListActivity : ListActivity<PlannedTransactionActivity>, PlannedTransactionFragment.IPlannedTransactionListener
     {
+        protected override int GetTitleId()
+        {
+            return Resource.String.plannedTransaction;
+        }
+
         protected override IListAdapter GetListAdapter()
         {
             return new PlannedTransactionAdapter(this);

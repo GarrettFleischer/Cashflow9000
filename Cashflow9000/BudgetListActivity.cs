@@ -20,6 +20,11 @@ namespace Cashflow9000
     [Activity(Label = "BudgetListActivity")]
     public class BudgetListActivity : ListActivity<BudgetActivity>, BudgetFragment.IBudgetFragmentListener
     {
+        protected override int GetTitleId()
+        {
+            return Resource.String.budget;
+        }
+
         protected override IListAdapter GetListAdapter()
         {
             return new BudgetAdapter(this, CashflowData.Recurrences.Single(r => r.Type == RecurrenceType.Monthly));

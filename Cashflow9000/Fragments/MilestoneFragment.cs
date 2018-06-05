@@ -29,7 +29,9 @@ namespace Cashflow9000.Fragments
 
         private readonly Milestone Milestone;
 
-        public MilestoneFragment(int milestoneId = -1)
+        public MilestoneFragment() : this(-1) {}
+
+        public MilestoneFragment(int milestoneId)
         {
             Milestone = ((milestoneId == -1) ? new Milestone() : CashflowData.Milestone(milestoneId));
         }

@@ -26,7 +26,7 @@ namespace Cashflow9000
 
             Tablet = FindViewById(Resource.Id.containerItem) != null;
 
-            ListFragment = new ListFragment(Resource.String.plannedTransaction, GetListAdapter());
+            ListFragment = new ListFragment(GetTitleId(), GetListAdapter());
             FragmentUtil.LoadFragment(this, Resource.Id.containerList, ListFragment);
         }
 
@@ -62,6 +62,8 @@ namespace Cashflow9000
         {
            ListFragment.SetAdapter(GetListAdapter());
         }
+
+        protected abstract int GetTitleId();
 
         protected abstract IListAdapter GetListAdapter();
 
