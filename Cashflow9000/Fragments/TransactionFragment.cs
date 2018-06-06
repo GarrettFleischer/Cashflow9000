@@ -14,10 +14,11 @@ using Android.Views;
 using Android.Widget;
 using Cashflow9000.Adapters;
 using Cashflow9000.Models;
+using DatePicker = Cashflow9000.Views.DatePicker;
 
 namespace Cashflow9000.Fragments
 {
-    public class TransactionFragment : Fragment, DatePickerDialog.IOnDateSetListener
+    public class TransactionFragment : Fragment
     {
         public interface ITransactionFragmentListener
         {
@@ -30,7 +31,7 @@ namespace Cashflow9000.Fragments
         private Spinner SpinCategory;
         private Spinner SpinMilestone;
         private EditText EditNote;
-        private TextView TextDate;
+        private DatePicker DatePicker;
 
         protected Transaction Transaction;
 
@@ -51,7 +52,7 @@ namespace Cashflow9000.Fragments
             ToggleType = view.FindViewById<ToggleButton>(Resource.Id.toggleType);
             SpinCategory = view.FindViewById<Spinner>(Resource.Id.spinCategory);
             SpinMilestone = view.FindViewById<Spinner>(Resource.Id.spinMilestone);
-            TextDate = view.FindViewById<TextView>(Resource.Id.textDate);
+            DatePicker = view.FindViewById<DatePicker>(Resource.Id.datePicker);
             EditNote = view.FindViewById<EditText>(Resource.Id.editNote);
 
             view.FindViewById<Spinner>(Resource.Id.spinRecurrence).Visibility = ViewStates.Invisible;
@@ -75,10 +76,9 @@ namespace Cashflow9000.Fragments
             SpinMilestone.SetSelection(milestoneAdapter.Milestones.FindIndex(c => c?.Id == Transaction.MilestoneId));
             SpinMilestone.ItemSelected += SpinMilestoneOnItemSelected;
 
-            if (Transaction.Date == new DateTime()) Transaction.Date = DateTime.Today;
-            TextDate.Text = Transaction.Date.ToShortDateString();
-            TextDate.Clickable = true;
-            TextDate.Click += TextDateOnClick;
+            if (Transaction.Date == new DateTime()) Transaction.Date = DateTime.Now;
+            DatePicker.Date = Transaction.Date;
+            DatePicker.DateChanged += DatePickerOnDateChanged;
 
             EditNote.Text = Transaction.Note;
             EditNote.TextChanged += EditNoteOnTextChanged;
@@ -88,20 +88,14 @@ namespace Cashflow9000.Fragments
             return view;
         }
 
+        private void DatePickerOnDateChanged(object sender, EventArgs eventArgs)
+        {
+            Transaction.Date = DatePicker.Date;
+        }
+
         private void EditAmountOnValueChanged(object sender, EventArgs eventArgs)
         {
             Transaction.Amount = EditAmount.Value;
-        }
-
-        private void TextDateOnClick(object sender, EventArgs eventArgs)
-        {
-            DatePickerDialog picker = new DatePickerDialog(Activity, this, Transaction.Date.Year, Transaction.Date.Month - 1, Transaction.Date.Day);
-            picker.Show();
-        }
-        public void OnDateSet(DatePicker view, int year, int month, int dayOfMonth)
-        {
-            Transaction.Date = new DateTime(year, month + 1, dayOfMonth);
-            TextDate.Text = Transaction.Date.ToShortDateString();
         }
 
         private void EditNoteOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)

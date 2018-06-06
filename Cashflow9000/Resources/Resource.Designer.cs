@@ -86,8 +86,8 @@ namespace Cashflow9000
 			// aapt resource value: 0x7f050003
 			public const int editName = 2131034115;
 			
-			// aapt resource value: 0x7f050025
-			public const int editNote = 2131034149;
+			// aapt resource value: 0x7f050024
+			public const int editNote = 2131034148;
 			
 			// aapt resource value: 0x7f050020
 			public const int editValue = 2131034144;
@@ -121,9 +121,6 @@ namespace Cashflow9000
 			
 			// aapt resource value: 0x7f050011
 			public const int textBalance = 2131034129;
-			
-			// aapt resource value: 0x7f050024
-			public const int textDate = 2131034148;
 			
 			// aapt resource value: 0x7f05001b
 			public const int textName = 2131034139;

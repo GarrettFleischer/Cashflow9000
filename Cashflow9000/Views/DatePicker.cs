@@ -39,46 +39,48 @@ namespace Cashflow9000.Views
             }
         }
 
-    public DatePicker(Context context, IAttributeSet attrs) :
-        base(context, attrs)
-    {
-        Initialize();
-    }
+        public DatePicker(Context context, IAttributeSet attrs) :
+            base(context, attrs)
+        {
+            Initialize();
+        }
 
-    public DatePicker(Context context, IAttributeSet attrs, int defStyle) :
-        base(context, attrs, defStyle)
-    {
-        Initialize();
-    }
+        public DatePicker(Context context, IAttributeSet attrs, int defStyle) :
+            base(context, attrs, defStyle)
+        {
+            Initialize();
+        }
 
-    private void Initialize()
-    {
-        ShowTime = true;
-        Date = DateTime.Today;
-        Clickable = true;
-        Click += OnClick;
-    }
+        private void Initialize()
+        {
+            ShowTime = true;
+            Date = DateTime.Today;
+            Clickable = true;
+            Click += OnClick;
+        }
 
-    private void OnClick(object sender, EventArgs eventArgs)
-    {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(Context, this, _Date.Year, _Date.Month - 1, _Date.Day);
-        datePickerDialog.Show();
+        private void OnClick(object sender, EventArgs eventArgs)
+        {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(Context, this, _Date.Year, _Date.Month - 1, _Date.Day);
+            datePickerDialog.Show();
+        }
 
-        if (!ShowTime) return;
-        TimePickerDialog timePickerDialog = new TimePickerDialog(Context, this, _Date.Hour, _Date.Minute, false);
-        timePickerDialog.Show();
-    }
+        public void OnDateSet(Android.Widget.DatePicker view, int year, int month, int dayOfMonth)
+        {
+            Date = new DateTime(year, month + 1, dayOfMonth, _Date.Hour, _Date.Minute, _Date.Second);
+            if (!ShowTime)
+                DateChanged?.Invoke(this, EventArgs.Empty);
+            else
+            {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(Context, this, _Date.Hour, _Date.Minute, false);
+                timePickerDialog.Show();
+            }
+        }
 
-    public void OnDateSet(Android.Widget.DatePicker view, int year, int month, int dayOfMonth)
-    {
-        Date = new DateTime(year, month + 1, dayOfMonth, _Date.Hour, _Date.Minute, _Date.Second);
-        if (!ShowTime) DateChanged?.Invoke(this, EventArgs.Empty);
+        public void OnTimeSet(TimePicker view, int hourOfDay, int minute)
+        {
+            Date = new DateTime(_Date.Year, _Date.Month, _Date.Day, hourOfDay, minute, 0);
+            DateChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
-
-    public void OnTimeSet(TimePicker view, int hourOfDay, int minute)
-    {
-        Date = new DateTime(_Date.Year, _Date.Month, _Date.Day, hourOfDay, minute, 0);
-        DateChanged?.Invoke(this, EventArgs.Empty);
-    }
-}
 }

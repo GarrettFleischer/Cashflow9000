@@ -73,16 +73,11 @@
             p1:textAppearance="?android:attr/textAppearanceMedium"
             p1:id="@+id/textView5"
             p1:layout_marginTop="20dp" />
-        <TextView
-            p1:text="@string/date"
-            p1:textAppearance="?android:attr/textAppearanceMedium"
-            p1:id="@+id/textDate"
-            p1:layout_columnSpan="2"
+        <Cashflow9000.Views.DatePicker
+            p1:id="@+id/datePicker"
             p1:layout_marginTop="20dp"
-            p1:layout_marginLeft="15dp"
-            p1:layout_gravity="fill_horizontal"
-            p1:backgroundTint="#00000000"
-            p1:shadowColor="#00000000" />
+            p1:layout_columnSpan="2"
+            p1:layout_gravity="fill_horizontal" />
         <TextView
             p1:text="@string/note"
             p1:textAppearance="?android:attr/textAppearanceMedium"
