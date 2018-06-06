@@ -155,9 +155,10 @@
     <AndroidResource Include="Resources\layout-xlarge\ListActivity.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\BudgetListItem.axml">
+    <AndroidResource Include="Resources\layout\RatioListItem.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\BudgetHeader.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

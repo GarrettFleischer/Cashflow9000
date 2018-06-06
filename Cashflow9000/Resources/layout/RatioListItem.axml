@@ -21,7 +21,5 @@
         android:id="@+id/progressTotal"
         android:layout_columnSpan="2"
         android:layout_gravity="fill_horizontal"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:layout_marginTop="10dp" />
 </GridLayout>

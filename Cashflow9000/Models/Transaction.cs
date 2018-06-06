@@ -40,7 +40,10 @@ namespace Cashflow9000.Models
         
         public override string ToString()
         {
-            return $"{Category} {NumberFormat.CurrencyInstance.Format((double)Amount)}\n\t{Note}";
+            string description = $"{Milestone?.Name}";
+            if (Category != null && Milestone != null) description = $"{Category.Name}, {Milestone.Name}";
+            else if (Category != null) description = $"{Category.Name}";
+            return $"{NumberFormat.CurrencyInstance.Format((double)Value)} {description}\n\t{Note}";
         }
     }
 }

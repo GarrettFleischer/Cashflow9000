@@ -55,7 +55,7 @@ namespace Cashflow9000.Fragments
 
         protected override void ButtonSaveOnClick(object sender, EventArgs eventArgs)
         {
-            ((IPlannedTransactionListener)Activity)?.PlannedPaymentSaved((PlannedTransaction)Transaction);
+            (Activity as IPlannedTransactionListener)?.PlannedPaymentSaved((PlannedTransaction)Transaction);
         }
     }
 }

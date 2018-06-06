@@ -26,19 +26,19 @@ namespace Cashflow9000
             UpdateBalance();
 
             Button transaction = FindViewById<Button>(Resource.Id.buttonTransaction);
-            transaction.Click += delegate { StartActivityType(typeof(TransactionListActivity)); };
+            transaction.Click += delegate { StartActivityType(typeof(TransactionListFragmentActivity)); };
 
             Button plannedTransactions = FindViewById<Button>(Resource.Id.buttonPlannedTransactions);
-            plannedTransactions.Click += delegate { StartActivityType(typeof(PlannedTransactionListActivity)); };
+            plannedTransactions.Click += delegate { StartActivityType(typeof(PlannedTransactionListFragmentActivity)); };
 
             Button budgets = FindViewById<Button>(Resource.Id.buttonBudgets);
-            budgets.Click += delegate { StartActivityType(typeof(BudgetListActivity)); };
+            budgets.Click += delegate { StartActivityType(typeof(BudgetListFragmentActivity)); };
 
             Button milestone = FindViewById<Button>(Resource.Id.buttonMilestone);
-            milestone.Click += delegate { StartActivityType(typeof(MilestoneListActivity)); };
+            milestone.Click += delegate { StartActivityType(typeof(MilestoneListFragmentActivity)); };
 
             Button categories = FindViewById<Button>(Resource.Id.buttonCategories);
-            categories.Click += delegate { StartActivityType(typeof(CategoryListActivity)); };
+            categories.Click += delegate { StartActivityType(typeof(CategoryListFragmentActivity)); };
         }
 
         void StartActivityType(Type type)

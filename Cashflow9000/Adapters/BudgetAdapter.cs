@@ -38,13 +38,11 @@ namespace Cashflow9000.Adapters
         {
             // Get our object for position
             Budget item = Budgets[position];
-            double total = (double) item.Amount;
-            var transactions = Transactions.Where(t => t.CategoryId == item.CategoryId);
-
-            double balance = (double)transactions.Sum(t => t.Amount);
+            double total = (double)item.Amount;
+            double balance = -(double)Transactions.Where(t => t.CategoryId == item.CategoryId).Sum(t => t.Value);
 
             View view = convertView ??
-                        Context.LayoutInflater.Inflate(Resource.Layout.BudgetListItem, parent, false);
+                        Context.LayoutInflater.Inflate(Resource.Layout.RatioListItem, parent, false);
 
             TextView textName = view.FindViewById<TextView>(Resource.Id.textName);
             TextView textRatio = view.FindViewById<TextView>(Resource.Id.textRatio);

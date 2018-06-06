@@ -44,7 +44,8 @@
             p1:layout_gravity="fill_horizontal"
             p1:layout_columnSpan="2"
             p1:layout_marginLeft="15dp"
-            p1:layout_marginTop="20dp" />
+            p1:layout_marginTop="20dp"
+            p1:requiresFadingEdge="vertical" />
         <TextView
             p1:text="@string/milestone"
             p1:textAppearance="?android:attr/textAppearanceMedium"

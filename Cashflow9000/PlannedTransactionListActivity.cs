@@ -9,8 +9,8 @@ using ListFragment = Cashflow9000.Fragments.ListFragment;
 
 namespace Cashflow9000
 {
-    [Activity(Label = "PlannedTransactionListActivity")]
-    public class PlannedTransactionListActivity : ListActivity<PlannedTransactionActivity>, PlannedTransactionFragment.IPlannedTransactionListener
+    [Activity(Label = "PlannedTransactionListFragmentActivity")]
+    public class PlannedTransactionListFragmentActivity : ListFragmentActivity<PlannedTransactionActivity>, PlannedTransactionFragment.IPlannedTransactionListener
     {
         protected override int GetTitleId()
         {

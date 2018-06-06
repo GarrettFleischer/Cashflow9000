@@ -91,7 +91,7 @@ namespace Cashflow9000.Fragments
 
         private void ButtonSaveOnClick(object sender, EventArgs eventArgs)
         {
-            ((IBudgetFragmentListener)Activity)?.BudgetSaved(Budget);
+            (Activity as IBudgetFragmentListener)?.BudgetSaved(Budget);
         }
     }
 }

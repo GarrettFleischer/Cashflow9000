@@ -34,7 +34,7 @@ namespace Cashflow9000.Models
 
         public override string ToString()
         {
-            return $"{Name} {NumberFormat.CurrencyInstance.Format((double)Amount)}";
+            return Name;
         }
     }
 }

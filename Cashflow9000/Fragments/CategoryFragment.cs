@@ -73,7 +73,7 @@ namespace Cashflow9000.Fragments
 
         private void ButtonSaveOnClick(object sender, EventArgs eventArgs)
         {
-            ((ICategoryFragmentListener)Activity)?.CategorySaved(Category);
+            (Activity as ICategoryFragmentListener)?.CategorySaved(Category);
         }
 
         private void UpdateUI()

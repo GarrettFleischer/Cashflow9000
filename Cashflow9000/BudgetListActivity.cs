@@ -17,8 +17,8 @@ using Cashflow9000.Models;
 
 namespace Cashflow9000
 {
-    [Activity(Label = "BudgetListActivity")]
-    public class BudgetListActivity : ListActivity<BudgetActivity>, BudgetFragment.IBudgetFragmentListener
+    [Activity(Label = "BudgetListFragmentActivity")]
+    public class BudgetListFragmentActivity : ListFragmentActivity<BudgetActivity>, BudgetFragment.IBudgetFragmentListener
     {
         protected override int GetTitleId()
         {

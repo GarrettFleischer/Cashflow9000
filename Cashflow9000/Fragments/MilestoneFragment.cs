@@ -68,7 +68,7 @@ namespace Cashflow9000.Fragments
 
         private void ButtonSaveOnClick(object sender, EventArgs eventArgs)
         {
-            ((IMilestoneFragmentListener) Activity)?.MilestoneSaved(Milestone);
+            (Activity as IMilestoneFragmentListener)?.MilestoneSaved(Milestone);
         }
     }
 }

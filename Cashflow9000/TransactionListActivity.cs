@@ -18,8 +18,8 @@ using ListFragment = Cashflow9000.Fragments.ListFragment;
 
 namespace Cashflow9000
 {
-    [Activity(Label = "TransactionListActivity")]
-    public class TransactionListActivity : ListActivity<TransactionActivity>, TransactionFragment.ITransactionFragmentListener
+    [Activity(Label = "TransactionListFragmentActivity")]
+    public class TransactionListFragmentActivity : ListFragmentActivity<TransactionActivity>, TransactionFragment.ITransactionFragmentListener
     {
         protected override int GetTitleId()
         {
@@ -28,7 +28,7 @@ namespace Cashflow9000
 
         protected override IListAdapter GetListAdapter()
         {
-            return new TransactionAdapter(this, CashflowData.Transactions);
+            return new TransactionAdapter(this, CashflowData.Transactions.OrderBy(t => t.Date).Reverse().ToList());
         }
 
         protected override Fragment GetItemFragment(int id = -1)

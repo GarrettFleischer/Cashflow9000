@@ -121,7 +121,7 @@ namespace Cashflow9000.Fragments
 
         protected virtual void ButtonSaveOnClick(object sender, EventArgs eventArgs)
         {
-            ((ITransactionFragmentListener)Activity)?.TransactionSaved(Transaction);
+            (Activity as ITransactionFragmentListener)?.TransactionSaved(Transaction);
         }
 
         private void ToggleTypeOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs checkedChangeEventArgs)

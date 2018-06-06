@@ -19,8 +19,8 @@ using Cashflow9000.Models;
 
 namespace Cashflow9000
 {
-    [Activity(Label = "CategoryListActivity")]
-    public class CategoryListActivity : ListActivity<CategoryActivity>, CategoryFragment.ICategoryFragmentListener
+    [Activity(Label = "CategoryListFragmentActivity")]
+    public class CategoryListFragmentActivity : ListFragmentActivity<CategoryActivity>, CategoryFragment.ICategoryFragmentListener
     {
         protected override int GetTitleId()
         {

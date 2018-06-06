@@ -14,7 +14,7 @@ using ListFragment = Cashflow9000.Fragments.ListFragment;
 
 namespace Cashflow9000
 {
-    public abstract class ListActivity<T> : Activity, ListFragment.IListListener
+    public abstract class ListFragmentActivity<T> : Activity, ListFragment.IListFragmentListener
     {
         private ListFragment ListFragment;
         private bool Tablet;
@@ -28,6 +28,9 @@ namespace Cashflow9000
 
             ListFragment = new ListFragment(GetTitleId(), GetListAdapter());
             FragmentUtil.LoadFragment(this, Resource.Id.containerList, ListFragment);
+
+            //Fragment header = GetHeaderFragment();
+            ListFragment.SetHeaderFragment(GetHeaderFragment());
         }
 
         protected override void OnResume()
@@ -61,6 +64,11 @@ namespace Cashflow9000
         protected void UpdateListAdapter()
         {
            ListFragment.SetAdapter(GetListAdapter());
+        }
+
+        protected virtual Fragment GetHeaderFragment()
+        {
+            return null;
         }
 
         protected abstract int GetTitleId();

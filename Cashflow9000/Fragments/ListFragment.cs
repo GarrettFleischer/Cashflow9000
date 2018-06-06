@@ -16,7 +16,7 @@ namespace Cashflow9000.Fragments
 {
     public class ListFragment : Fragment
     {
-        public interface IListListener
+        public interface IListFragmentListener
         {
             void OnAdd();
             void OnSelect(long id);
@@ -54,6 +54,10 @@ namespace Cashflow9000.Fragments
             return view;
         }
 
+        public void SetHeaderFragment(Fragment header)
+        {
+            if (header != null) FragmentUtil.LoadFragment(Activity, Resource.Id.containerHeader, header);
+        }
 
         public void SetAdapter(IListAdapter adapter)
         {
@@ -62,12 +66,12 @@ namespace Cashflow9000.Fragments
         
         private void ButtonAddOnClick(object sender, EventArgs eventArgs)
         {
-            ((IListListener)Activity)?.OnAdd();
+            (Activity as IListFragmentListener)?.OnAdd();
         }
 
         private void ListViewOnItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            ((IListListener)Activity)?.OnSelect(e.Id);
+            (Activity as IListFragmentListener)?.OnSelect(e.Id);
         }
     }
 }
