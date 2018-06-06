@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</LinearLayout>
+    android:layout_height="wrap_content"
+    android:id="@+id/gridLayout1"
+    android:padding="10dp"
+    android:columnCount="3">
+    <TextView
+        android:text="@string/date"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView1" />
+    <Cashflow9000.Views.DatePicker
+        android:id="@+id/datePicker"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_columnWeight="1" />
+    <Spinner
+        android:id="@+id/spinRecurrence"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_columnWeight="3" />
+</GridLayout>

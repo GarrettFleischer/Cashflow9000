@@ -18,8 +18,21 @@ using Cashflow9000.Models;
 namespace Cashflow9000
 {
     [Activity(Label = "BudgetListFragmentActivity")]
-    public class BudgetListFragmentActivity : ListFragmentActivity<BudgetActivity>, BudgetFragment.IBudgetFragmentListener
+    public class BudgetListFragmentActivity : ListFragmentActivity<BudgetActivity>, BudgetFragment.IBudgetFragmentListener, BudgetHeaderFragment.IBudgetHeaderFragmentListener
     {
+        private BudgetHeaderFragment Header;
+
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            Header = new BudgetHeaderFragment();
+        }
+        
+        protected override Fragment GetHeaderFragment()
+        {
+            return Header;
+        }
+
         protected override int GetTitleId()
         {
             return Resource.String.budget;
@@ -27,7 +40,7 @@ namespace Cashflow9000
 
         protected override IListAdapter GetListAdapter()
         {
-            return new BudgetAdapter(this, CashflowData.Recurrences.Single(r => r.Type == RecurrenceType.Monthly));
+            return new BudgetAdapter(this, Header?.Type ?? RecurrenceType.None, Header?.Date ?? DateTime.Today);
         }
 
         protected override Fragment GetItemFragment(int id = -1)
@@ -43,6 +56,16 @@ namespace Cashflow9000
         public void BudgetSaved(Budget budget)
         {
             CashflowData.InsertOrReplace(budget);
+            UpdateListAdapter();
+        }
+
+        public void OnDateChanged()
+        {
+            UpdateListAdapter();
+        }
+
+        public void OnRecurrenceChanged()
+        {
             UpdateListAdapter();
         }
     }

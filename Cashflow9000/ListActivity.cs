@@ -28,8 +28,11 @@ namespace Cashflow9000
 
             ListFragment = new ListFragment(GetTitleId(), GetListAdapter());
             FragmentUtil.LoadFragment(this, Resource.Id.containerList, ListFragment);
+        }
 
-            //Fragment header = GetHeaderFragment();
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
             ListFragment.SetHeaderFragment(GetHeaderFragment());
         }
 
