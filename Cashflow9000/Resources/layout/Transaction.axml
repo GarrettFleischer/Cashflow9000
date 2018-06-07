@@ -18,12 +18,12 @@
             p1:id="@+id/textTitle"
             p1:text="@string/transaction" />
         <Button
-            p1:text="@string/save"
-            p1:id="@+id/buttonSave"
+            p1:text="@string/delete"
+            p1:id="@+id/buttonDelete"
             p1:layout_gravity="right" />
         <Button
-            p1:text="@string/delete"
-            p1:id="@+id/button1"
+            p1:text="@string/save"
+            p1:id="@+id/buttonSave"
             p1:layout_gravity="right" />
         <Cashflow9000.EditCurrency
             p1:id="@+id/editValue"

@@ -44,9 +44,6 @@ namespace Cashflow9000
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050020
-			public const int button1 = 2131034144;
-			
 			// aapt resource value: 0x7f050018
 			public const int buttonAdd = 2131034136;
 			
@@ -55,6 +52,9 @@ namespace Cashflow9000
 			
 			// aapt resource value: 0x7f050016
 			public const int buttonCategories = 2131034134;
+			
+			// aapt resource value: 0x7f050020
+			public const int buttonDelete = 2131034144;
 			
 			// aapt resource value: 0x7f050015
 			public const int buttonMilestone = 2131034133;

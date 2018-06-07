@@ -51,6 +51,8 @@ namespace Cashflow9000.Adapters
         public override Transaction this[int position] => GetTransaction(position);
         public override long GetItemId(int position) => GetTransaction(position)?.Id ?? -1;
         public override int Count => WithSeparators.Count;
+        //public override bool IsEnabled(int position) => !IsSeparator(position);
+        //public override bool AreAllItemsEnabled() => true;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
@@ -66,6 +68,8 @@ namespace Cashflow9000.Adapters
                 item = GetTransaction(position + 1);
                 view.Text = item?.Date.ToShortDateString() ?? "";
                 view.SetTextColor(Color.White);
+                view.Clickable = false;
+                view.Focusable = true;
             }
             else
             {

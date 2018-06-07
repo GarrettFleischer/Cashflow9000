@@ -18,14 +18,16 @@ using DatePicker = Cashflow9000.Views.DatePicker;
 
 namespace Cashflow9000.Fragments
 {
-    public class TransactionFragment : Fragment
+    public class TransactionFragment : DeleteHandlerFragment
     {
         public interface ITransactionFragmentListener
         {
             void TransactionSaved(Transaction transaction);
+            void TransactionDeleted(Transaction transaction);
         }
 
         private Button ButtonSave;
+        private Button ButtonDelete;
         private EditCurrency EditAmount;
         private ToggleButton ToggleType;
         private Spinner SpinCategory;
@@ -48,6 +50,7 @@ namespace Cashflow9000.Fragments
         {
             View view = inflater.Inflate(Resource.Layout.Transaction, container, false);
             ButtonSave = view.FindViewById<Button>(Resource.Id.buttonSave);
+            ButtonDelete = view.FindViewById<Button>(Resource.Id.buttonDelete);
             EditAmount = view.FindViewById<EditCurrency>(Resource.Id.editValue);
             ToggleType = view.FindViewById<ToggleButton>(Resource.Id.toggleType);
             SpinCategory = view.FindViewById<Spinner>(Resource.Id.spinCategory);
@@ -59,6 +62,7 @@ namespace Cashflow9000.Fragments
             view.FindViewById<TextView>(Resource.Id.textRecurrence).Visibility = ViewStates.Invisible;
 
             ButtonSave.Click += ButtonSaveOnClick;
+            ButtonDelete.Click += ButtonDeleteOnClick;
 
             EditAmount.Value = Transaction.Amount;
             EditAmount.ValueChanged += EditAmountOnValueChanged;
@@ -118,6 +122,11 @@ namespace Cashflow9000.Fragments
             (Activity as ITransactionFragmentListener)?.TransactionSaved(Transaction);
         }
 
+        private void ButtonDeleteOnClick(object sender, EventArgs eventArgs)
+        {
+            ShowDeleteAlert();
+        }
+
         private void ToggleTypeOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs checkedChangeEventArgs)
         {
             Transaction.Type = ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
@@ -132,5 +141,10 @@ namespace Cashflow9000.Fragments
         }
 
         private TransactionType GetTransactionType() => ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
+
+        protected override void OnDelete()
+        {
+            (Activity as ITransactionFragmentListener)?.TransactionDeleted(Transaction);
+        }
     }
 }

@@ -41,5 +41,11 @@ namespace Cashflow9000
             CashflowData.InsertOrReplace(transaction);
             Finish();
         }
+
+        public void TransactionDeleted(Transaction transaction)
+        {
+            CashflowData.Delete(transaction);
+            Finish();
+        }
     }
 }
