@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:padding="10dp">
 <!--<include
         android:id="@+id/toolbar"
         layout="@layout/Toolbar" />-->
@@ -18,21 +19,24 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_weight="1" />
         <TextView
             android:text="$0.00"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/textBalance"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1" />
     </LinearLayout>
     <Button
         android:text="Transactions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonTransaction" />
+        android:id="@+id/buttonTransaction"
+        android:layout_marginTop="20dp" />
     <Button
         android:text="Planned Transactions"
         android:layout_width="match_parent"

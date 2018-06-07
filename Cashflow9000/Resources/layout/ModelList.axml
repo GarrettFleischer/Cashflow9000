@@ -26,5 +26,8 @@
         p1:id="@+id/listView"
         p1:layout_columnSpan="2"
         p1:layout_gravity="fill_horizontal"
-        p1:layout_marginTop="20dp" />
+        p1:layout_marginTop="20dp"
+        p1:layout_height="match_parent"
+        p1:layout_width="match_parent"
+        p1:layout_marginBottom="70dp" />
 </GridLayout>

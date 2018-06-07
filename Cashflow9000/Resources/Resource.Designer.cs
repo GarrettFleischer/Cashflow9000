@@ -44,6 +44,9 @@ namespace Cashflow9000
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f050020
+			public const int button1 = 2131034144;
+			
 			// aapt resource value: 0x7f050018
 			public const int buttonAdd = 2131034136;
 			
@@ -86,11 +89,11 @@ namespace Cashflow9000
 			// aapt resource value: 0x7f050003
 			public const int editName = 2131034115;
 			
-			// aapt resource value: 0x7f050024
-			public const int editNote = 2131034148;
+			// aapt resource value: 0x7f050025
+			public const int editNote = 2131034149;
 			
-			// aapt resource value: 0x7f050020
-			public const int editValue = 2131034144;
+			// aapt resource value: 0x7f050021
+			public const int editValue = 2131034145;
 			
 			// aapt resource value: 0x7f05000a
 			public const int gridLayout1 = 2131034122;
@@ -110,8 +113,8 @@ namespace Cashflow9000
 			// aapt resource value: 0x7f050007
 			public const int spinCategory = 2131034119;
 			
-			// aapt resource value: 0x7f050022
-			public const int spinMilestone = 2131034146;
+			// aapt resource value: 0x7f050023
+			public const int spinMilestone = 2131034147;
 			
 			// aapt resource value: 0x7f050009
 			public const int spinRecurrence = 2131034121;
@@ -128,8 +131,8 @@ namespace Cashflow9000
 			// aapt resource value: 0x7f05001c
 			public const int textRatio = 2131034140;
 			
-			// aapt resource value: 0x7f050023
-			public const int textRecurrence = 2131034147;
+			// aapt resource value: 0x7f050024
+			public const int textRecurrence = 2131034148;
 			
 			// aapt resource value: 0x7f050017
 			public const int textTitle = 2131034135;
@@ -149,8 +152,8 @@ namespace Cashflow9000
 			// aapt resource value: 0x7f050008
 			public const int textView5 = 2131034120;
 			
-			// aapt resource value: 0x7f050021
-			public const int toggleType = 2131034145;
+			// aapt resource value: 0x7f050022
+			public const int toggleType = 2131034146;
 			
 			// aapt resource value: 0x7f05001e
 			public const int toolbar = 2131034142;
@@ -243,6 +246,9 @@ namespace Cashflow9000
 			
 			// aapt resource value: 0x7f030015
 			public const int date = 2130903061;
+			
+			// aapt resource value: 0x7f030018
+			public const int delete = 2130903064;
 			
 			// aapt resource value: 0x7f030005
 			public const int expense = 2130903045;

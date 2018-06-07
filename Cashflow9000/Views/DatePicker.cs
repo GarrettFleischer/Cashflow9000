@@ -24,7 +24,7 @@ namespace Cashflow9000.Views
             set
             {
                 _Date = value;
-                Text = value.ToString($"MM/dd/yyyy {(ShowTime ? "hh:mm" : "")}", null);
+                Text = value.ToString($"MM/dd/yyyy {(ShowTime ? "hh:mm tt" : "")}", null);
             }
         }
 
