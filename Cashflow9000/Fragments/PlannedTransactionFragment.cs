@@ -27,7 +27,7 @@ namespace Cashflow9000.Fragments
 
         public PlannedTransactionFragment(int plannedPaymentId)
         {
-            Transaction = ((plannedPaymentId == -1) ? new PlannedTransaction() : CashflowData.PlannedTransaction(plannedPaymentId));
+            Item = ((plannedPaymentId == -1) ? new PlannedTransaction() : CashflowData.PlannedTransaction(plannedPaymentId));
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -41,7 +41,7 @@ namespace Cashflow9000.Fragments
             SpinRecurrence = view.FindViewById<Spinner>(Resource.Id.spinRecurrence);
             SpinRecurrence.Visibility = ViewStates.Visible;
             SpinRecurrence.Adapter = recurrenceAdapter;
-            int index = recurrenceAdapter.Recurrences.FindIndex(c => c.Id == ((PlannedTransaction)Transaction).RecurrenceId);
+            int index = recurrenceAdapter.Recurrences.FindIndex(c => c.Id == ((PlannedTransaction)Item).RecurrenceId);
             SpinRecurrence.SetSelection(index);
             SpinRecurrence.ItemSelected += SpinRecurrenceOnItemSelected;
 
@@ -50,12 +50,7 @@ namespace Cashflow9000.Fragments
 
         protected void SpinRecurrenceOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            ((PlannedTransaction)Transaction).Recurrence = ((RecurrenceAdapter)SpinRecurrence.Adapter)[e.Position];
-        }
-
-        protected override void ButtonSaveOnClick(object sender, EventArgs eventArgs)
-        {
-            (Activity as IPlannedTransactionListener)?.PlannedPaymentSaved((PlannedTransaction)Transaction);
+            ((PlannedTransaction)Item).Recurrence = ((RecurrenceAdapter)SpinRecurrence.Adapter)[e.Position];
         }
     }
 }

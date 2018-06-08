@@ -16,24 +16,18 @@ using Cashflow9000.Models;
 
 namespace Cashflow9000.Fragments
 {
-    public class MilestoneFragment : Fragment
+    public class MilestoneFragment : ItemHandlerFragment<Milestone>
     {
-        public interface IMilestoneFragmentListener
-        {
-            void MilestoneSaved(Milestone milestone);
-        }
-
         private Button ButtonSave;
+        private Button ButtonDelete;
         private EditText EditName;
         private EditCurrency EditAmount;
-
-        private readonly Milestone Milestone;
 
         public MilestoneFragment() : this(-1) {}
 
         public MilestoneFragment(int milestoneId)
         {
-            Milestone = ((milestoneId == -1) ? new Milestone() : CashflowData.Milestone(milestoneId));
+            Item = ((milestoneId == -1) ? new Milestone() : CashflowData.Milestone(milestoneId));
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -42,15 +36,17 @@ namespace Cashflow9000.Fragments
 
             // Find UI views
             ButtonSave = view.FindViewById<Button>(Resource.Id.buttonSave);
+            ButtonDelete = view.FindViewById<Button>(Resource.Id.buttonDelete);
             EditName = view.FindViewById<EditText>(Resource.Id.editName);
             EditAmount = view.FindViewById<EditCurrency>(Resource.Id.editAmount);
 
-            ButtonSave.Click += ButtonSaveOnClick;
+            ButtonSave.Click += SaveItem;
+            ButtonDelete.Click += DeleteItem;
 
-            EditName.Text = Milestone.Name;
+            EditName.Text = Item.Name;
             EditName.TextChanged += EditNameOnTextChanged;
 
-            EditAmount.Value = Milestone.Amount;
+            EditAmount.Value = Item.Amount;
             EditAmount.TextChanged += EditAmountOnTextChanged;
             
             return view;
@@ -58,17 +54,13 @@ namespace Cashflow9000.Fragments
 
         private void EditAmountOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            Milestone.Amount = EditAmount.Value;
+            Item.Amount = EditAmount.Value;
         }
 
         private void EditNameOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            Milestone.Name = EditName.Text;
+            Item.Name = EditName.Text;
         }
 
-        private void ButtonSaveOnClick(object sender, EventArgs eventArgs)
-        {
-            (Activity as IMilestoneFragmentListener)?.MilestoneSaved(Milestone);
-        }
     }
 }

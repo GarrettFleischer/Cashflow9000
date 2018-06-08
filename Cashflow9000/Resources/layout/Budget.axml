@@ -10,11 +10,16 @@
         p1:textAppearance="?android:attr/textAppearanceLarge"
         p1:id="@+id/textView1"
         p1:text="@string/budget"
-        p1:layout_columnSpan="2"
-        p1:layout_columnWeight="2" />
+        p1:layout_gravity="left" />
+    <Button
+        p1:text="@string/delete"
+        p1:id="@+id/buttonDelete"
+        p1:layout_gravity="right"
+        p1:layout_columnWeight="1" />
     <Button
         p1:text="@string/save"
-        p1:id="@+id/buttonSave" />
+        p1:id="@+id/buttonSave"
+        p1:layout_gravity="right" />
     <TextView
         p1:textAppearance="?android:attr/textAppearanceMedium"
         p1:id="@+id/textView2"

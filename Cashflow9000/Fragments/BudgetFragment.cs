@@ -15,26 +15,20 @@ using Cashflow9000.Models;
 
 namespace Cashflow9000.Fragments
 {
-    public class BudgetFragment : Fragment
+    public class BudgetFragment : ItemHandlerFragment<Budget>
     {
-        public interface IBudgetFragmentListener
-        {
-            void BudgetSaved(Budget budget);
-        }
-
         private Button ButtonSave;
+        private Button ButtonDelete;
         private EditText EditName;
         private EditCurrency EditAmount;
         private Spinner SpinCategory;
         private Spinner SpinRecurrence;
-
-        private Budget Budget;
-
+        
         public BudgetFragment() : this(-1) {}
 
         public BudgetFragment(int id)
         {
-            Budget = ((id == -1) ? new Budget() : CashflowData.Budget(id));
+            Item = ((id == -1) ? new Budget() : CashflowData.Budget(id));
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -43,28 +37,30 @@ namespace Cashflow9000.Fragments
 
             // Find UI views
             ButtonSave = view.FindViewById<Button>(Resource.Id.buttonSave);
+            ButtonDelete = view.FindViewById<Button>(Resource.Id.buttonDelete);
             EditName = view.FindViewById<EditText>(Resource.Id.editName);
             EditAmount = view.FindViewById<EditCurrency>(Resource.Id.editAmount);
             SpinCategory = view.FindViewById<Spinner>(Resource.Id.spinCategory);
             SpinRecurrence = view.FindViewById<Spinner>(Resource.Id.spinRecurrence);
 
             // View logic
-            ButtonSave.Click += ButtonSaveOnClick;
+            ButtonSave.Click += SaveItem;
+            ButtonDelete.Click += DeleteItem;
 
-            EditName.Text = Budget.Name;
+            EditName.Text = Item.Name;
             EditName.TextChanged += EditNameOnTextChanged;
 
-            EditAmount.Value = Budget.Amount;
+            EditAmount.Value = Item.Amount;
             EditAmount.AfterTextChanged += EditAmountOnAfterTextChanged;
 
             CategoryAdapter categoryAdapter = new CategoryAdapter(Activity, TransactionType.Expense, true);
             SpinCategory.Adapter = categoryAdapter;
-            SpinCategory.SetSelection(categoryAdapter.Categories.FindIndex(c => c?.Id == Budget.CategoryId));
+            SpinCategory.SetSelection(categoryAdapter.Categories.FindIndex(c => c?.Id == Item.CategoryId));
             SpinCategory.ItemSelected += SpinCategoryOnItemSelected;
 
             RecurrenceAdapter recurrenceAdapter = new RecurrenceAdapter(Activity, true);
             SpinRecurrence.Adapter = recurrenceAdapter;
-            SpinRecurrence.SetSelection(recurrenceAdapter.Recurrences.FindIndex(c => c?.Id == Budget.RecurrenceId));
+            SpinRecurrence.SetSelection(recurrenceAdapter.Recurrences.FindIndex(c => c?.Id == Item.RecurrenceId));
             SpinRecurrence.ItemSelected += SpinRecurrenceOnItemSelected;
 
             return view;
@@ -72,26 +68,21 @@ namespace Cashflow9000.Fragments
 
         private void EditNameOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            Budget.Name = EditName.Text;
+            Item.Name = EditName.Text;
         }
 
         private void SpinCategoryOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            Budget.Category = ((CategoryAdapter)SpinCategory.Adapter)[e.Position];
+            Item.Category = ((CategoryAdapter)SpinCategory.Adapter)[e.Position];
         }
         private void SpinRecurrenceOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            Budget.Recurrence = ((RecurrenceAdapter)SpinRecurrence.Adapter)[e.Position];
+            Item.Recurrence = ((RecurrenceAdapter)SpinRecurrence.Adapter)[e.Position];
         }
         
         private void EditAmountOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
         {
-            Budget.Amount = EditAmount.Value;
-        }
-
-        private void ButtonSaveOnClick(object sender, EventArgs eventArgs)
-        {
-            (Activity as IBudgetFragmentListener)?.BudgetSaved(Budget);
+            Item.Amount = EditAmount.Value;
         }
     }
 }

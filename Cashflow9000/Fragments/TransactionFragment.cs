@@ -18,14 +18,8 @@ using DatePicker = Cashflow9000.Views.DatePicker;
 
 namespace Cashflow9000.Fragments
 {
-    public class TransactionFragment : DeleteHandlerFragment
+    public class TransactionFragment : ItemHandlerFragment<Transaction>
     {
-        public interface ITransactionFragmentListener
-        {
-            void TransactionSaved(Transaction transaction);
-            void TransactionDeleted(Transaction transaction);
-        }
-
         private Button ButtonSave;
         private Button ButtonDelete;
         private EditCurrency EditAmount;
@@ -34,16 +28,14 @@ namespace Cashflow9000.Fragments
         private Spinner SpinMilestone;
         private EditText EditNote;
         private DatePicker DatePicker;
-
-        protected Transaction Transaction;
-
+        
         // use case for both category and milestone is paying off a mortgage, it is both a recurring budget item and a long term goal
 
         public TransactionFragment() : this(-1) {}
 
         public TransactionFragment(int transactionId = -1)
         {
-            Transaction = ((transactionId == -1) ? new Transaction() : CashflowData.Transaction(transactionId));
+            Item = ((transactionId == -1) ? new Transaction() : CashflowData.Transaction(transactionId));
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -61,30 +53,30 @@ namespace Cashflow9000.Fragments
             view.FindViewById<Spinner>(Resource.Id.spinRecurrence).Visibility = ViewStates.Invisible;
             view.FindViewById<TextView>(Resource.Id.textRecurrence).Visibility = ViewStates.Invisible;
 
-            ButtonSave.Click += ButtonSaveOnClick;
-            ButtonDelete.Click += ButtonDeleteOnClick;
+            ButtonSave.Click += SaveItem;
+            ButtonDelete.Click += DeleteItem;
 
-            EditAmount.Value = Transaction.Amount;
+            EditAmount.Value = Item.Amount;
             EditAmount.ValueChanged += EditAmountOnValueChanged;
 
-            ToggleType.Checked = Transaction.Type == TransactionType.Income;
+            ToggleType.Checked = Item.Type == TransactionType.Income;
             ToggleType.CheckedChange += ToggleTypeOnCheckedChange;
 
             CategoryAdapter categoryAdapter = new CategoryAdapter(Activity, GetTransactionType(), true);
             SpinCategory.Adapter = categoryAdapter;
-            SpinCategory.SetSelection(categoryAdapter.Categories.FindIndex(c => c?.Id == Transaction.CategoryId));
+            SpinCategory.SetSelection(categoryAdapter.Categories.FindIndex(c => c?.Id == Item.CategoryId));
             SpinCategory.ItemSelected += SpinCategoryOnItemSelected;
 
             MilestoneAdapter milestoneAdapter = new MilestoneAdapter(Activity, true);
             SpinMilestone.Adapter = milestoneAdapter;
-            SpinMilestone.SetSelection(milestoneAdapter.Milestones.FindIndex(c => c?.Id == Transaction.MilestoneId));
+            SpinMilestone.SetSelection(milestoneAdapter.Milestones.FindIndex(c => c?.Id == Item.MilestoneId));
             SpinMilestone.ItemSelected += SpinMilestoneOnItemSelected;
 
-            if (Transaction.Date == new DateTime()) Transaction.Date = DateTime.Now;
-            DatePicker.Date = Transaction.Date;
+            if (Item.Date == new DateTime()) Item.Date = DateTime.Now;
+            DatePicker.Date = Item.Date;
             DatePicker.DateChanged += DatePickerOnDateChanged;
 
-            EditNote.Text = Transaction.Note;
+            EditNote.Text = Item.Note;
             EditNote.TextChanged += EditNoteOnTextChanged;
 
             UpdateUI();
@@ -94,44 +86,34 @@ namespace Cashflow9000.Fragments
 
         private void DatePickerOnDateChanged(object sender, EventArgs eventArgs)
         {
-            Transaction.Date = DatePicker.Date;
+            Item.Date = DatePicker.Date;
         }
 
         private void EditAmountOnValueChanged(object sender, EventArgs eventArgs)
         {
-            Transaction.Amount = EditAmount.Value;
+            Item.Amount = EditAmount.Value;
         }
 
         private void EditNoteOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            Transaction.Note = EditNote.Text;
+            Item.Note = EditNote.Text;
         }
 
         private void SpinMilestoneOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            Transaction.Milestone = ((MilestoneAdapter)SpinMilestone.Adapter)[e.Position];
+            Item.Milestone = ((MilestoneAdapter)SpinMilestone.Adapter)[e.Position];
         }
 
         private void SpinCategoryOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            Transaction.Category = ((CategoryAdapter)SpinCategory.Adapter)[e.Position];
+            Item.Category = ((CategoryAdapter)SpinCategory.Adapter)[e.Position];
         }
-
-        protected virtual void ButtonSaveOnClick(object sender, EventArgs eventArgs)
-        {
-            (Activity as ITransactionFragmentListener)?.TransactionSaved(Transaction);
-        }
-
-        private void ButtonDeleteOnClick(object sender, EventArgs eventArgs)
-        {
-            ShowDeleteAlert();
-        }
-
+        
         private void ToggleTypeOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs checkedChangeEventArgs)
         {
-            Transaction.Type = ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
+            Item.Type = ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
             SpinCategory.Adapter = SpinCategory.Adapter = new CategoryAdapter(Activity, GetTransactionType(), true);
-            Transaction.Category = null;
+            Item.Category = null;
             UpdateUI();
         }
 
@@ -142,9 +124,5 @@ namespace Cashflow9000.Fragments
 
         private TransactionType GetTransactionType() => ToggleType.Checked ? TransactionType.Income : TransactionType.Expense;
 
-        protected override void OnDelete()
-        {
-            (Activity as ITransactionFragmentListener)?.TransactionDeleted(Transaction);
-        }
     }
 }

@@ -18,7 +18,7 @@ using Cashflow9000.Models;
 namespace Cashflow9000
 {
     [Activity(Label = "BudgetListFragmentActivity")]
-    public class BudgetListFragmentActivity : ListFragmentActivity<BudgetActivity>, BudgetFragment.IBudgetFragmentListener, BudgetHeaderFragment.IBudgetHeaderFragmentListener
+    public class BudgetListFragmentActivity : ListFragmentActivity<BudgetActivity, Budget>, BudgetHeaderFragment.IBudgetHeaderFragmentListener
     {
         private BudgetHeaderFragment Header;
 
@@ -52,13 +52,7 @@ namespace Cashflow9000
         {
             return BudgetActivity.ExtraBudgetId;
         }
-
-        public void BudgetSaved(Budget budget)
-        {
-            CashflowData.InsertOrReplace(budget);
-            UpdateListAdapter();
-        }
-
+        
         public void OnDateChanged()
         {
             UpdateListAdapter();

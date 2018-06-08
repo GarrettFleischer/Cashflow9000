@@ -3,7 +3,7 @@
     android:minWidth="25px"
     android:minHeight="25px"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:id="@+id/gridLayout1"
     android:columnCount="3">
     <TextView
@@ -11,10 +11,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textView1" />
     <Button
+        android:text="@string/delete"
+        android:id="@+id/buttonDelete"
+        android:layout_gravity="right"
+        android:layout_columnWeight="1" />
+    <Button
         android:text="@string/save"
         android:id="@+id/buttonSave"
-        android:layout_gravity="right"
-        android:layout_column="2" />
+        android:layout_gravity="right" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textView2"

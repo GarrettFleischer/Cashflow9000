@@ -10,7 +10,7 @@ using ListFragment = Cashflow9000.Fragments.ListFragment;
 namespace Cashflow9000
 {
     [Activity(Label = "PlannedTransactionListFragmentActivity")]
-    public class PlannedTransactionListFragmentActivity : ListFragmentActivity<PlannedTransactionActivity>, PlannedTransactionFragment.IPlannedTransactionListener
+    public class PlannedTransactionListFragmentActivity : ListFragmentActivity<PlannedTransactionActivity, PlannedTransaction>
     {
         protected override int GetTitleId()
         {
@@ -30,12 +30,6 @@ namespace Cashflow9000
         protected override string GetExtraId()
         {
             return PlannedTransactionActivity.ExtraPlannedPaymentId;
-        }
-
-        public void PlannedPaymentSaved(PlannedTransaction plannedTransaction)
-        {
-            CashflowData.InsertOrReplace(plannedTransaction);
-            UpdateListAdapter();
         }
     }
 }

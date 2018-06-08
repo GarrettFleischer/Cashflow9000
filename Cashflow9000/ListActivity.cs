@@ -10,11 +10,12 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cashflow9000.Adapters;
+using Cashflow9000.Fragments;
 using ListFragment = Cashflow9000.Fragments.ListFragment;
 
 namespace Cashflow9000
 {
-    public abstract class ListFragmentActivity<T> : Activity, ListFragment.IListFragmentListener
+    public abstract class ListFragmentActivity<TActivity, TItem> : Activity, ListFragment.IListFragmentListener, IItemFragmentListener<TItem>
     {
         private ListFragment ListFragment;
         private bool Tablet;
@@ -47,7 +48,7 @@ namespace Cashflow9000
             if (Tablet)
                 FragmentUtil.LoadFragment(this, Resource.Id.containerItem, GetItemFragment());
             else
-                StartActivity(typeof(T));
+                StartActivity(typeof(TActivity));
         }
 
         public void OnSelect(long id)
@@ -58,7 +59,7 @@ namespace Cashflow9000
             }
             else
             {
-                Intent i = new Intent(this, typeof(T));
+                Intent i = new Intent(this, typeof(TActivity));
                 i.PutExtra(GetExtraId(), (int)id);
                 StartActivity(i);
             }
@@ -81,5 +82,17 @@ namespace Cashflow9000
         protected abstract Fragment GetItemFragment(int id = -1);
 
         protected abstract string GetExtraId();
+
+        public void ItemSaved(TItem item)
+        {
+            CashflowData.InsertOrReplace(item);
+            UpdateListAdapter();
+        }
+
+        public void ItemDeleted(TItem item)
+        {
+            CashflowData.Delete(item);
+            UpdateListAdapter();
+        }
     }
 }

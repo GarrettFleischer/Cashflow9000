@@ -19,7 +19,7 @@ using ListFragment = Cashflow9000.Fragments.ListFragment;
 namespace Cashflow9000
 {
     [Activity(Label = "TransactionListFragmentActivity")]
-    public class TransactionListFragmentActivity : ListFragmentActivity<TransactionActivity>, TransactionFragment.ITransactionFragmentListener
+    public class TransactionListFragmentActivity : ListFragmentActivity<TransactionActivity, Transaction>
     {
         protected override int GetTitleId()
         {
@@ -39,18 +39,6 @@ namespace Cashflow9000
         protected override string GetExtraId()
         {
             return TransactionActivity.ExtraTransactionId;
-        }
-
-        public void TransactionSaved(Transaction transaction)
-        {
-            CashflowData.InsertOrReplace(transaction);
-            UpdateListAdapter();
-        }
-
-        public void TransactionDeleted(Transaction transaction)
-        {
-            CashflowData.Delete(transaction);
-            UpdateListAdapter();
         }
     }
 }

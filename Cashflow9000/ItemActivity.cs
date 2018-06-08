@@ -9,10 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Cashflow9000.Fragments;
 
 namespace Cashflow9000
 {
-    public abstract class ItemActivity : Activity
+    public abstract class ItemActivity<T> : Activity, IItemFragmentListener<T>
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,5 +26,16 @@ namespace Cashflow9000
         protected abstract Fragment GetFragment(int id);
 
         protected abstract string GetExtraId();
+        public void ItemSaved(T item)
+        {
+            CashflowData.InsertOrReplace(item);
+            Finish();
+        }
+
+        public void ItemDeleted(T item)
+        {
+            CashflowData.Delete(item);
+            Finish();
+        }
     }
 }

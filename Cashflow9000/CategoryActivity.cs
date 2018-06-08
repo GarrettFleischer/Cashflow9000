@@ -17,7 +17,7 @@ using Cashflow9000.Models;
 namespace Cashflow9000
 {
     [Activity(Label = "CategoryActivity")]
-    public class CategoryActivity : ItemActivity, CategoryFragment.ICategoryFragmentListener
+    public class CategoryActivity : ItemActivity<Category>
     {
         public const string ExtraCategoryId = "CategoryActivity.ExtraCategoryId";
         
@@ -31,9 +31,15 @@ namespace Cashflow9000
             return ExtraCategoryId;
         }
 
-        public void CategorySaved(Category category)
+        public void ItemSaved(Category item)
         {
-            CashflowData.InsertOrReplace(category);
+            CashflowData.InsertOrReplace(item);
+            Finish();
+        }
+
+        public void ItemDeleted(Category item)
+        {
+            CashflowData.Delete(item);
             Finish();
         }
     }

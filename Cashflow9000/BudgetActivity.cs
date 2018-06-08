@@ -19,7 +19,7 @@ using Cashflow9000.Models;
 namespace Cashflow9000
 {
     [Activity(Label = "BudgetActivity")]
-    public class BudgetActivity : ItemActivity, BudgetFragment.IBudgetFragmentListener
+    public class BudgetActivity : ItemActivity<Budget>
     {
         public const string ExtraBudgetId = "BudgetActivity.ExtraBudgetId";
         
@@ -31,12 +31,6 @@ namespace Cashflow9000
         protected override string GetExtraId()
         {
             return ExtraBudgetId;
-        }
-
-        public void BudgetSaved(Budget budget)
-        {
-            CashflowData.InsertOrReplace(budget);
-            Finish();
         }
     }
 }

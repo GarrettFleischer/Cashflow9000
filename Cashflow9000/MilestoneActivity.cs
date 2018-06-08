@@ -18,10 +18,10 @@ using Cashflow9000.Models;
 namespace Cashflow9000
 {
     [Activity(Label = "MilestoneActivity")]
-    public class MilestoneActivity : ItemActivity, MilestoneFragment.IMilestoneFragmentListener
+    public class MilestoneActivity : ItemActivity<Milestone>
     {
         public const string ExtraMilestoneId = "MilestoneActivity.ExtraMilestoneId";
-        
+
         protected override Fragment GetFragment(int id)
         {
             return new MilestoneFragment(id);
@@ -30,12 +30,6 @@ namespace Cashflow9000
         protected override string GetExtraId()
         {
             return ExtraMilestoneId;
-        }
-
-        public void MilestoneSaved(Milestone milestone)
-        {
-            CashflowData.InsertOrReplace(milestone);
-            Finish();
         }
     }
 }

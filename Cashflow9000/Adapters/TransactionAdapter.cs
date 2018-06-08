@@ -56,8 +56,7 @@ namespace Cashflow9000.Adapters
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            TextView view = (convertView ??
-                             Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
+            TextView view = (Context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, parent, false)) as TextView;
 
             Debug.Assert(view != null, nameof(view) + " != null");
 

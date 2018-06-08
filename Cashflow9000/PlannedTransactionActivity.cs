@@ -15,7 +15,7 @@ using Cashflow9000.Models;
 namespace Cashflow9000
 {
     [Activity(Label = "PlannedTransactionActivity")]
-    public class PlannedTransactionActivity : ItemActivity, PlannedTransactionFragment.IPlannedTransactionListener
+    public class PlannedTransactionActivity : ItemActivity<PlannedTransaction>
     {
         public const string ExtraPlannedPaymentId = "PlannedTransactionActivity.ExtraPlannedPaymentId";
 
@@ -27,12 +27,6 @@ namespace Cashflow9000
         protected override string GetExtraId()
         {
             return ExtraPlannedPaymentId;
-        }
-
-        public void PlannedPaymentSaved(PlannedTransaction plannedTransaction)
-        {
-            CashflowData.InsertOrReplace(plannedTransaction);
-            Finish();
         }
     }
 }

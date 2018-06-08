@@ -20,7 +20,7 @@ using Cashflow9000.Models;
 namespace Cashflow9000
 {
     [Activity(Label = "CategoryListFragmentActivity")]
-    public class CategoryListFragmentActivity : ListFragmentActivity<CategoryActivity>, CategoryFragment.ICategoryFragmentListener
+    public class CategoryListFragmentActivity : ListFragmentActivity<CategoryActivity, Category>
     {
         protected override int GetTitleId()
         {
@@ -40,12 +40,6 @@ namespace Cashflow9000
         protected override string GetExtraId()
         {
             return CategoryActivity.ExtraCategoryId;
-        }
-
-        public void CategorySaved(Category category)
-        {
-            CashflowData.InsertOrReplace(category);
-            UpdateListAdapter();
         }
     }
 }

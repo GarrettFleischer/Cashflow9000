@@ -20,7 +20,7 @@ namespace Cashflow9000.Adapters
         {
             Context = context;
 
-            Budgets = CashflowData.Budgets.Where(b => b.Recurrence.Type == type).ToList();
+            Budgets = CashflowData.Budgets.Where(b => b.Recurrence?.Type == type).ToList();
 
             switch (type)
             {

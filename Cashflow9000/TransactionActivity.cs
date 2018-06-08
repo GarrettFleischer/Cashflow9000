@@ -22,10 +22,10 @@ namespace Cashflow9000
 {
 
     [Activity(Label = "Transaction")]
-    public class TransactionActivity : ItemActivity, TransactionFragment.ITransactionFragmentListener
+    public class TransactionActivity : ItemActivity<Transaction>
     {
         public const string ExtraTransactionId = "TransactionActivity.TransactionId";
-        
+
         protected override Fragment GetFragment(int id)
         {
             return new TransactionFragment(id);
@@ -34,18 +34,6 @@ namespace Cashflow9000
         protected override string GetExtraId()
         {
             return ExtraTransactionId;
-        }
-
-        public void TransactionSaved(Transaction transaction)
-        {
-            CashflowData.InsertOrReplace(transaction);
-            Finish();
-        }
-
-        public void TransactionDeleted(Transaction transaction)
-        {
-            CashflowData.Delete(transaction);
-            Finish();
         }
     }
 }

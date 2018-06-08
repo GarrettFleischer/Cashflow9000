@@ -19,7 +19,7 @@ using ListFragment = Cashflow9000.Fragments.ListFragment;
 namespace Cashflow9000
 {
     [Activity(Label = "MilestoneListFragmentActivity")]
-    public class MilestoneListFragmentActivity : ListFragmentActivity<MilestoneActivity>, MilestoneFragment.IMilestoneFragmentListener
+    public class MilestoneListFragmentActivity : ListFragmentActivity<MilestoneActivity, Milestone>
     {
         protected override int GetTitleId()
         {
@@ -39,12 +39,6 @@ namespace Cashflow9000
         protected override string GetExtraId()
         {
             return MilestoneActivity.ExtraMilestoneId;
-        }
-
-        public void MilestoneSaved(Milestone milestone)
-        {
-            CashflowData.InsertOrReplace(milestone);
-            UpdateListAdapter();
         }
     }
 }

@@ -99,7 +99,8 @@
     <Compile Include="Fragments\BudgetFragment.cs" />
     <Compile Include="Fragments\BudgetHeaderFragment.cs" />
     <Compile Include="Fragments\CategoryFragment.cs" />
-    <Compile Include="Fragments\DeleteHandlerFragment.cs" />
+    <Compile Include="Fragments\ItemHandlerFragment.cs" />
+    <Compile Include="Fragments\IItemFragmentListener.cs" />
     <Compile Include="Fragments\MilestoneFragment.cs" />
     <Compile Include="Fragments\PlannedTransactionFragment.cs" />
     <Compile Include="Fragments\TransactionFragment.cs" />
