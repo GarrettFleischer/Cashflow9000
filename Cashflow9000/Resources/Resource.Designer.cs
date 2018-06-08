@@ -65,6 +65,9 @@ namespace Cashflow9000
 			// aapt resource value: 0x7f050002
 			public const int buttonSave = 2131034114;
 			
+			// aapt resource value: 0x7f050026
+			public const int buttonShare = 2131034150;
+			
 			// aapt resource value: 0x7f050013
 			public const int buttonTransaction = 2131034131;
 			

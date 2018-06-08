@@ -91,5 +91,12 @@
             p1:layout_marginTop="15dp"
             p1:layout_columnSpan="2"
             p1:layout_columnWeight="2" />
+        <Button
+            p1:text="Share"
+            p1:id="@+id/buttonShare"
+            p1:layout_column="1"
+            p1:layout_columnWeight="1"
+            p1:layout_gravity="center"
+            p1:layout_marginTop="20dp" />
     </GridLayout>
 </ScrollView>

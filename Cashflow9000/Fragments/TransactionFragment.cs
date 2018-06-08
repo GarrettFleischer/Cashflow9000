@@ -28,6 +28,7 @@ namespace Cashflow9000.Fragments
         private Spinner SpinMilestone;
         private EditText EditNote;
         private DatePicker DatePicker;
+        private Button ButtonShare;
         
         // use case for both category and milestone is paying off a mortgage, it is both a recurring budget item and a long term goal
 
@@ -49,6 +50,7 @@ namespace Cashflow9000.Fragments
             SpinMilestone = view.FindViewById<Spinner>(Resource.Id.spinMilestone);
             DatePicker = view.FindViewById<DatePicker>(Resource.Id.datePicker);
             EditNote = view.FindViewById<EditText>(Resource.Id.editNote);
+            ButtonShare = view.FindViewById<Button>(Resource.Id.buttonShare);
 
             view.FindViewById<Spinner>(Resource.Id.spinRecurrence).Visibility = ViewStates.Invisible;
             view.FindViewById<TextView>(Resource.Id.textRecurrence).Visibility = ViewStates.Invisible;
@@ -79,9 +81,19 @@ namespace Cashflow9000.Fragments
             EditNote.Text = Item.Note;
             EditNote.TextChanged += EditNoteOnTextChanged;
 
+            ButtonShare.Click += ButtonShareOnClick;
+
             UpdateUI();
 
             return view;
+        }
+
+        private void ButtonShareOnClick(object sender, EventArgs eventArgs)
+        {
+            Intent share = new Intent(Android.Content.Intent.ActionSend);
+            share.SetType("text/plain");
+            share.PutExtra(Android.Content.Intent.ExtraText, Item.ToString());
+            StartActivity(share);
         }
 
         private void DatePickerOnDateChanged(object sender, EventArgs eventArgs)

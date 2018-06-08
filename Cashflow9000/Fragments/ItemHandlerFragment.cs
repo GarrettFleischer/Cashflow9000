@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 
@@ -15,6 +16,9 @@ namespace Cashflow9000.Fragments
     public abstract class ItemHandlerFragment<T> : Fragment, IDialogInterfaceOnClickListener
     {
         protected T Item;
+
+        private const string TagSave = "ItemHandlerFragment.TagSave";
+        private const string TagDelete = "ItemHandlerFragment.TagDelete";
 
         protected void DeleteItem(object sender, EventArgs eventArgs)
         {
@@ -28,8 +32,9 @@ namespace Cashflow9000.Fragments
 
         protected void SaveItem(object sender, EventArgs eventArgs)
         {
-            (Activity as IItemFragmentListener<T>)?.ItemSaved(Item);
+            Log.Debug(TagSave, $"\"{Item}\" Saved");
             OnSave();
+            (Activity as IItemFragmentListener<T>)?.ItemSaved(Item);
         }
 
         protected virtual void OnDelete() { }
@@ -40,8 +45,9 @@ namespace Cashflow9000.Fragments
             dialog.Dismiss();
             if (which == -1)
             {
-                (Activity as IItemFragmentListener<T>)?.ItemDeleted(Item);
+                Log.Debug(TagDelete, $"\"{Item}\" Deleted");
                 OnDelete();
+                (Activity as IItemFragmentListener<T>)?.ItemDeleted(Item);
             }
         }
     }
